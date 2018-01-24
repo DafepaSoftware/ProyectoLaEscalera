@@ -1,4 +1,4 @@
-package dafepa.software.com.proyectolaescalera;
+package com.software.dafepa.proyectolaescalera;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

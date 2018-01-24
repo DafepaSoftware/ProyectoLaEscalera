@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "146914983265",
+    "firebase_url": "https://proyectolaescalera-7d7ac.firebaseio.com",
+    "project_id": "proyectolaescalera-7d7ac",
+    "storage_bucket": "proyectolaescalera-7d7ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146914983265:android:8c593d9f5e4707dd",
+        "android_client_info": {
+          "package_name": "com.software.dafepa.proyectolaescalera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146914983265-difj5ha1t7dm097me6ls3urvlgsm6lq9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlDJa3SLEQXXmi-QQUlmY-gquqCpLS_mU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-package dafepa.software.com.proyectolaescalera;
+package com.software.dafepa.proyectolaescalera;
 
 import org.junit.Test;
 

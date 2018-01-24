@@ -1,4 +1,4 @@
-package dafepa.software.com.proyectolaescalera;
+package com.software.dafepa.proyectolaescalera;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
