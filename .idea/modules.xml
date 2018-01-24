@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ProyectoLaEscalera.iml" filepath="$PROJECT_DIR$/ProyectoLaEscalera.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ProyectoLaEscalera.iml" filepath="$PROJECT_DIR$/.idea/ProyectoLaEscalera.iml" />
+      <module fileurl="file://C:\Users\Ripley\AndroidStudioProjects\ProyectoLaEscalera\ProyectoLaEscalera.iml" filepath="C:\Users\Ripley\AndroidStudioProjects\ProyectoLaEscalera\ProyectoLaEscalera.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Ripley\AndroidStudioProjects\ProyectoLaEscalera\app\app.iml" filepath="C:\Users\Ripley\AndroidStudioProjects\ProyectoLaEscalera\app\app.iml" />
     </modules>
   </component>
 </project>
