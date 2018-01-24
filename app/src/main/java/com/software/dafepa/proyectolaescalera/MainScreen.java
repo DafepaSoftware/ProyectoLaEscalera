@@ -7,7 +7,6 @@ public class MainScreen extends AppCompatActivity {
 
     int a = 100;
     String b = "Contigo Pipo";
-    int c = 20;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
