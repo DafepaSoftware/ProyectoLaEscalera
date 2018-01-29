@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.software.dafepa.proyectolaescalera">
 
+
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="com.software.dafepa.proyectolaescalera.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -20,8 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainScreen" />
-        <activity android:name=".Login.LoginActivity"></activity>
+        <activity android:theme="@style/StyleATheme_Toolbar" android:name=".PantallaPrincipal"/>
+        <activity android:name=".Login.LoginActivity"/>
     </application>
 
-</manifest>
+</manifest>  

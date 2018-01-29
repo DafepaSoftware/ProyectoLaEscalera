@@ -3,8 +3,11 @@ package com.software.dafepa.proyectolaescalera.Login;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-import com.software.dafepa.proyectolaescalera.MainScreen;
+
+import com.software.dafepa.proyectolaescalera.PantallaPrincipal;
 import com.software.dafepa.proyectolaescalera.R;
 
 import java.util.Timer;
@@ -17,12 +20,17 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+
+
        new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
             }
         }, 4000);
+
+
 
     }
 }
