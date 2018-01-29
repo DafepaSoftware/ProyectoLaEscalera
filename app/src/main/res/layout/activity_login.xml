@@ -12,7 +12,8 @@
         android:background="@color/moradete"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
@@ -48,14 +49,24 @@
             android:inputType="textPassword"
             android:hint="Contraseña"
             android:textStyle="italic"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blanco"
+            android:layout_gravity="center"
+            android:text="Recuerdame"/>
+
         <TextView
+            android:id="@+id/tvRegistrarse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/registrate"
-            android:textStyle="italic"
-            android:layout_marginTop="20dp"
             android:layout_gravity="center"
-            android:textColor="#100"/>
+            android:layout_marginTop="20dp"
+            android:text="@string/registrate"
+            android:textColor="#100"
+            android:textStyle="italic" />
+
 
         <Button
             android:id="@+id/btn_entrar"
