@@ -7,7 +7,7 @@
     tools:context="com.software.dafepa.proyectolaescalera.Login.RegistroActivity">
 
     <LinearLayout
-        android:layout_width="384dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/moradete"
         android:orientation="vertical"
@@ -23,10 +23,10 @@
 
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#40FFFFFF">
+            android:background="#40FFFFFF"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -35,9 +35,9 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
-                android:paddingBottom="20dp"
                 android:background="#30FFFFFF"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="20dp">
 
 
                 <TextView
@@ -49,6 +49,7 @@
                     android:textColor="@color/blanco"
                     android:textSize="20dp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -56,7 +57,7 @@
                     android:layout_marginTop="5dp"
                     android:text="Juts a few detail to get you started"
                     android:textColor="@color/blanco"
-                    android:textSize="12dp"/>
+                    android:textSize="12dp" />
 
 
                 <EditText
@@ -66,9 +67,9 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/blanco"
+                    android:drawableLeft="@drawable/user"
                     android:hint="Memepolice"
                     android:inputType="textPassword" />
-
 
 
                 <EditText
@@ -81,6 +82,15 @@
                     android:hint="halfonso@pipo.com"
                     android:inputType="textPassword" />
 
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/blanco"
+                    android:hint="********"
+                    android:inputType="textPassword" />
 
                 <EditText
                     android:id="@+id/et_contrasena1"
@@ -94,15 +104,14 @@
                     android:inputType="textPassword" />
 
                 <TextView
-                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
                     android:text="I agree to the Term and Conditions"
                     android:textColor="@color/blanco"
                     android:textSize="10dp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
+                    android:textStyle="bold" />
 
 
                 <Button
@@ -117,17 +126,15 @@
 
             </LinearLayout>
 
-               <TextView
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:text="Click here to read the Termns and Conditions about the use of this Dafepa Software's application"
-                   android:gravity="center"
-                   android:layout_marginRight="20dp"
-                   android:layout_marginLeft="20dp"
-                   android:textSize="10dp"
-                   android:textColor="@color/blanco"/>
-
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:text="Click here to read the Termns and Conditions about the use of this Dafepa Software's application"
+                android:textColor="@color/blanco"
+                android:textSize="10dp" />
 
 
         </LinearLayout>

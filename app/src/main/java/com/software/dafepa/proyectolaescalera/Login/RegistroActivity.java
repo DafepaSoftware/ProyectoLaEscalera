@@ -26,7 +26,6 @@ public class RegistroActivity extends AppCompatActivity {
 
         btn_registrarse =  (Button) findViewById(R.id.btn_registrame);
         contrasena1 = (EditText) findViewById(R.id.et_contrasena1);
-        contrasena2 = (EditText) findViewById(R.id.et_contrasena2);
 
         btn_registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
