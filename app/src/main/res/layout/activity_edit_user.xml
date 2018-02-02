@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
-                    android:text="Get Started"
+                    android:text="Editar Usuario"
                     android:textColor="@color/blanco"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="5dp"
-                    android:text="Juts a few detail to get you started"
+                    android:text="Pulse el boton para aplicar los cambios."
                     android:textColor="@color/blanco"
                     android:textSize="12dp" />
 
@@ -69,7 +69,7 @@
                     android:background="@drawable/edittextstyle"
                     android:drawableLeft="@drawable/user"
                     android:drawablePadding="6dp"
-                    android:hint="Memepolice"
+                    android:hint="Nuevo nombre Usuario"
                     android:paddingLeft="10dp" />
 
 
@@ -82,7 +82,7 @@
                     android:background="@drawable/edittextstyle"
                     android:drawableLeft="@drawable/mail"
                     android:drawablePadding="6dp"
-                    android:hint="halfonso@pipo.com"
+                    android:hint="Nuevo correo electronico"
                     android:paddingLeft="10dp" />
 
                 <EditText
@@ -92,7 +92,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/edittextstyle"
-                    android:hint="********"
+                    android:hint="Nueva contraseña"
                     android:drawableLeft="@drawable/password"
                     android:drawablePadding="6dp"
                     android:inputType="textPassword"
@@ -106,22 +106,14 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/edittextstyle"
-                    android:hint="********"
+                    android:hint="Repita nueva contraseña"
                     android:drawablePadding="6dp"
                     android:drawableLeft="@drawable/password"
                     android:paddingLeft="10dp"
 
                     android:inputType="textPassword" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:text="I agree to the Term and Conditions"
-                    android:textColor="@color/blanco"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
+
 
 
                 <Button
@@ -131,20 +123,11 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/buttonstyle"
-                    android:text="Register"
+                    android:text="Aplicar"
                     android:textColor="@color/blanco" />
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:gravity="center"
-                android:text="Click here to read the Termns and Conditions about the use of this Dafepa Software's application"
-                android:textColor="@color/blanco"
-                android:textSize="10dp" />
 
 
         </LinearLayout>
