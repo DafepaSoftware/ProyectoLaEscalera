@@ -32,6 +32,12 @@ dependencies {
     compile 'com.google.android.gms:play-services:9.6.1'
 
     compile 'com.android.support:design:26.1.0'
+
+    //Animations
+    //noinspection GradleCompatible
+    compile 'com.android.support:support-compat:25.3.1'
+    compile 'com.daimajia.easing:library:2.0@aar'
+    compile 'com.daimajia.androidanimations:library:2.3@aar'
 }
 
 // ADD THIS AT THE BOTTOM

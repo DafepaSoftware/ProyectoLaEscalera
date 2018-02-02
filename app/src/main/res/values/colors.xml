@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#7C6CD0</color>
+    <color name="colorPrimaryDark">#5D4CB9</color>
+    <color name="colorAccent">#01ddb1</color>
     <color name="moradete">#7C6CD0</color>
     <color name="blanco">#ffff</color>
     <color name="moradeteClaro">#bab1e7</color>
     <color name="verdeBoton">#01ddb1</color>
     <color name="blancoransparente">#40FFFFFF</color>
+    <color name="color_fondo">#EAEAEA</color>
 
 
 
