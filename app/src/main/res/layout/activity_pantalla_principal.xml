@@ -31,7 +31,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pe-ne" />
+            android:text="Hello World" />
 
 
     </LinearLayout>
@@ -44,12 +44,20 @@
         android:layout_marginTop="@dimen/tool_bar_top_padding"
         android:background="#F00"
         android:scrollbars="vertical">
+        <Button
+            android:id="@+id/btn_editarUsuario"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Usuario"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Haber si me muero" />
+            android:text="" />
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>
