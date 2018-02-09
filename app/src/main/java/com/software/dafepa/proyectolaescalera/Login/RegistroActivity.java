@@ -30,7 +30,7 @@ public class RegistroActivity extends AppCompatActivity {
         btn_registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //comprobar que hay datos en contraseña
                 if(contrasena1.length()!=contrasena2.length()){
                     Toast toast = Toast.makeText(getApplicationContext(), "Las contraseñas deben coincidir", Toast.LENGTH_SHORT);
                     toast.show();

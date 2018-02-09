@@ -11,7 +11,15 @@ import com.software.dafepa.proyectolaescalera.PantallaPrincipal;
 import com.software.dafepa.proyectolaescalera.R;
 
 import org.w3c.dom.Text;
-
+/**
+ *
+ *
+ *
+ *  ESTO YA NO VALE AJAJ
+ *
+ *
+ *
+ * **/
 public class LoginActivity extends AppCompatActivity {
 
     Button btn_entrar;

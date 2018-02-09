@@ -37,30 +37,47 @@ public class SplashActivity extends AppCompatActivity {
     private int a = 0;
     private LinearLayout ly_menu;
     private TextView img_titulo;
+    private TextView tvRegistrarse2;
+    private LinearLayout ly_main;
+    private Activity activity;
+    private Button btn_entrar2;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        activity = this;
         ly_logo_contenedor = (LinearLayout) findViewById(R.id.ly_logo_contenedor);
         ly_menu = (LinearLayout) findViewById(R.id.ly_menu);
         ly_menu.setVisibility(View.GONE);
         img_titulo = (TextView) findViewById(R.id.img_titulo);
         Typeface font = Typeface.createFromAsset(this.getAssets(),"fonts/Pacifico-Regular.ttf");
         img_titulo.setTypeface(font);
-
+        ly_main = (LinearLayout) findViewById(R.id.ly_main);
+        tvRegistrarse2 = (TextView) findViewById(R.id.tvRegistrarse2);
+        btn_entrar2 = (Button) findViewById(R.id.btn_entrar2);
 
 
         animacion();
 
-       /*new Timer().schedule(new TimerTask() {
+        tvRegistrarse2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                finish();
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, RegistroActivity.class);
+                startActivity(intent);
             }
-        }, 4000);*/
+        });
+
+        btn_entrar2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, PantallaPrincipal.class);
+                startActivity(intent);
+            }
+        });
+
+
 
 
 
@@ -103,17 +120,17 @@ public class SplashActivity extends AppCompatActivity {
                             set.setDuration(duracion_desplazamiento);
                             set.start();
 
-
-
+                            //ly_main.setBackground(activity.getDrawable(R.drawable.bcklogin));
+                            //ly_main.setBackgroundColor(Color.argb(0,255,255,255));
 
                             new CountDownTimer(duracion_desplazamiento, 1 ){
 
                                 public void onTick(long millisUntilFinished) {
                                     a+=5;
                                     if(a >255){
-                                        a = 255;
+                                        //ly_main.setBackgroundColor(Color.argb(a,255,255,255));
                                     }
-                                    //ly_logo_contenedor.setBackgroundColor(Color.argb(a, 145, 132, 214));
+
                                 }
 
                                 @Override
