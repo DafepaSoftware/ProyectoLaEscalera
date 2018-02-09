@@ -4,14 +4,10 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.os.Build;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,7 +38,6 @@ public class SplashActivity extends AppCompatActivity {
 
     //variables para las animaciones
     private int desplazamiento_y;
-    private int a = 0;
 
     //Copia de activity para su fácil uso
     private Activity activity;

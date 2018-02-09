@@ -25,7 +25,10 @@ public class PantallaPrincipal extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_principal);
 
         activity=this;
+
         btn_editUser = (Button) findViewById(R.id.btn_editarUsuario);
+
+
         btn_editUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,6 +36,7 @@ public class PantallaPrincipal extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
 
         toolbarCode();
