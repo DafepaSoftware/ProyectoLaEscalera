@@ -4,9 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.media.Image;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -15,8 +13,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,42 +21,52 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.daimajia.easing.Glider;
 import com.daimajia.easing.Skill;
+import com.software.dafepa.proyectolaescalera.HalpFuncs;
 import com.software.dafepa.proyectolaescalera.PantallaPrincipal;
 import com.software.dafepa.proyectolaescalera.R;
 import com.software.dafepa.proyectolaescalera.Singletones.AplicacionManager;
 
-import java.util.Timer;
-import java.util.TimerTask;
+
 
 public class SplashActivity extends AppCompatActivity {
 
+    //Interfaz
     private LinearLayout ly_logo_contenedor;
-    private int desplazamiento_y;
-    private boolean show_menu = true;
-    private int a = 0;
     private LinearLayout ly_menu;
     private TextView img_titulo;
     private TextView tvRegistrarse2;
-    private LinearLayout ly_main;
-    private Activity activity;
     private Button btn_entrar2;
 
+    //Si es verdadero sacará el menu de login en pantalla, si no pasará a PantallaPrincipal
+    private boolean show_menu = true;
+
+    //variables para las animaciones
+    private int desplazamiento_y;
+    private int a = 0;
+
+    //Copia de activity para su fácil uso
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        translucentStatusBar();
         activity = this;
+        HalpFuncs.translucentStatusBar(activity);
+
+        HalpFuncs.init(activity);
+
         ly_logo_contenedor = (LinearLayout) findViewById(R.id.ly_logo_contenedor);
         ly_menu = (LinearLayout) findViewById(R.id.ly_menu);
-        ly_menu.setVisibility(View.GONE);
         img_titulo = (TextView) findViewById(R.id.img_titulo);
-        Typeface font = Typeface.createFromAsset(this.getAssets(),"fonts/Pacifico-Regular.ttf");
-        img_titulo.setTypeface(font);
-        ly_main = (LinearLayout) findViewById(R.id.ly_main);
         tvRegistrarse2 = (TextView) findViewById(R.id.tvRegistrarse2);
         btn_entrar2 = (Button) findViewById(R.id.btn_entrar2);
+
+        //oculta el menu de login
+        ly_menu.setVisibility(View.GONE);
+
+        //Setea la fuente
+        img_titulo.setTypeface(HalpFuncs.getFontHalpMe());
 
 
         animacion();
@@ -89,6 +95,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
 
+    //animación de la pantalla
     private void animacion(){
         final long duracion_fadein = 800;
         final int duracion_desplazamiento = 500;
@@ -114,6 +121,8 @@ public class SplashActivity extends AppCompatActivity {
                     }
 
                     public void onFinish() {
+
+                        //TODO Comprobación si el usuario está logeado
                         if (show_menu) {
                             AnimatorSet set = new AnimatorSet();
                             set.playTogether(
@@ -124,32 +133,9 @@ public class SplashActivity extends AppCompatActivity {
 
                             set.setDuration(duracion_desplazamiento);
                             set.start();
-
-                            //ly_main.setBackground(activity.getDrawable(R.drawable.bcklogin));
-                            //ly_main.setBackgroundColor(Color.argb(0,255,255,255));
-
-                            new CountDownTimer(duracion_desplazamiento, 1 ){
-
-                                public void onTick(long millisUntilFinished) {
-                                    a+=5;
-                                    if(a >255){
-                                        //ly_main.setBackgroundColor(Color.argb(a,255,255,255));
-                                    }
-
-                                }
-
-                                @Override
-                                public void onFinish() {
-
-                                }
-                            }.start();
                             showMenu();
                         }else{
-
-
-
-
-
+                            //TODO iniciar PantallaPrincipal
                         }
                     }
                 }.start();
@@ -158,30 +144,14 @@ public class SplashActivity extends AppCompatActivity {
         }.start();
     }
 
-    public void showMenu(){
-
+    //Función de la animación del menu de login
+    private void showMenu(){
         ly_menu.setVisibility(View.VISIBLE);
         ly_menu.setAlpha(0);
         final int duracion_fade = 500;
         YoYo.with(Techniques.FadeIn).duration(duracion_fade).repeat(0).playOn(ly_menu);
-        new CountDownTimer(duracion_fade+100, duracion_fade + 100) {
-
-            public void onTick(long millisUntilFinished) {
-
-            }
-
-            public void onFinish() {
-                /*btn_registro.setEnabled(true);
-                btn_iniciosesion.setEnabled(true);
-                btn_ayuda.setEnabled(true);*/
-            }
-        }.start();
     }
 
-    private void translucentStatusBar(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow(); // in Activity's onCreate() for instance
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
-    }
+
+
 }

@@ -23,7 +23,6 @@
         <activity
             android:name=".PantallaPrincipal"
             android:theme="@style/StyleATheme_Toolbar_statusTrans" />
-        <activity android:name=".Login.LoginActivity" />
         <activity android:name=".Login.RegistroActivity" />
         <activity android:name=".EditUser"></activity>
     </application>
