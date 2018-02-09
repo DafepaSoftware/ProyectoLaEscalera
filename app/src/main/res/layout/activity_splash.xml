@@ -27,6 +27,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:background="#30FFFFFF"
         android:id="@+id/ly_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,6 +45,10 @@
             android:textSize="40sp" />
 
         <EditText
+            android:background="@drawable/edittextstyle"
+
+            android:drawableLeft="@drawable/user"
+            android:drawablePadding="6dp"
             android:id="@+id/edtxt_usuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,12 +56,15 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:background="@color/blanco"
             android:hint="Usuario"
             android:paddingLeft="20dp"
             android:textStyle="italic" />
 
         <EditText
+            android:background="@drawable/edittextstyle"
+            android:drawablePadding="6dp"
+            android:drawableLeft="@drawable/password"
+            android:paddingLeft="20dp"
             android:id="@+id/editText2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,10 +72,8 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:background="@color/blanco"
             android:hint="Contraseña"
             android:inputType="textPassword"
-            android:paddingLeft="20dp"
             android:textStyle="italic" />
 
         <CheckBox

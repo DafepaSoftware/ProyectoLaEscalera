@@ -24,7 +24,7 @@
             android:name=".PantallaPrincipal"
             android:theme="@style/StyleATheme_Toolbar" />
         <activity android:name=".Login.LoginActivity" />
-        <activity android:name=".Login.RegistroActivity"></activity>
+        <activity android:name=".Login.RegistroActivity" />
         <activity android:name=".EditUser"></activity>
     </application>
 

@@ -7,76 +7,114 @@
     tools:context="com.software.dafepa.proyectolaescalera.Login.LoginActivity">
 
     <LinearLayout
+        android:id="@+id/ly_logo_contenedor"
+        android:background="@drawable/bcklogin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/moradete"
         android:orientation="vertical"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:ignore="MissingConstraints">
+        tools:layout_editor_absoluteY="0dp">
+
         <ImageView
+            android:id="@+id/img_titulo"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_marginTop="60dp"
-            android:src="@drawable/recortebueno"/>
+            android:src="@drawable/recortebueno" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="@string/slogan"
-            android:textStyle="bold"
             android:textColor="@color/blanco"
             android:textSize="23dp"
-            android:layout_gravity="center"/>
+            android:textStyle="bold" />
 
-        <EditText
+        <LinearLayout
+            android:id="@+id/ly_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="60dp"
-            android:background="@color/blanco"
-            android:textStyle="italic"
-            android:hint="Usuario"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
-            android:background="@color/blanco"
-            android:inputType="textPassword"
-            android:hint="Contraseña"
-            android:textStyle="italic"/>
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/blanco"
-            android:layout_gravity="center"
-            android:text="Recuerdame"/>
-
-        <TextView
-            android:id="@+id/tvRegistrarse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:text="@string/registrate"
-            android:textColor="#100"
-            android:textStyle="italic" />
+            android:background="#30FFFFFF"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
 
 
-        <Button
-            android:id="@+id/btn_entrar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/buttonstyle"
-            android:text="@string/btnEntrar"
-            android:textColor="@color/blanco" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:text="Welcome to Halp.me"
+                android:textColor="@color/blanco"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edtxt_usuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittextstyle"
+                android:drawableLeft="@drawable/user"
+                android:drawablePadding="6dp"
+                android:hint="Memepolice"
+                android:paddingLeft="10dp" />
+
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittextstyle"
+                android:hint="********"
+                android:drawablePadding="6dp"
+                android:drawableLeft="@drawable/password"
+                android:paddingLeft="10dp"
+                android:inputType="textPassword" />
+            <CheckBox
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Recuerdame"
+                android:textColor="@color/blanco" />
+
+            <EditText
+                android:id="@+id/tvRegistrarse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="No tienes cuenta? Registrate!"
+                android:textColor="@color/blanco"
+                android:textSize="10dp" />
+            <Button
+                android:id="@+id/btn_entrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/buttonstyle"
+                android:text="@string/btnEntrar"
+                android:textColor="@color/blanco" />
+
+
+
+
+        </LinearLayout>
+
+
 
 
     </LinearLayout>
