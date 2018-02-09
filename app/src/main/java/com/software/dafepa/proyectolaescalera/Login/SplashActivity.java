@@ -78,6 +78,7 @@ public class SplashActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(activity, PantallaPrincipal.class);
                 startActivity(intent);
+                finish();
             }
         });
 

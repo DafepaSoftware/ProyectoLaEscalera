@@ -42,17 +42,17 @@
         android:layout_width="320dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:layout_marginTop="@dimen/tool_bar_top_padding"
-        android:background="#F00"
+        android:background="@color/moradeteClaro"
         android:scrollbars="vertical">
+
         <Button
             android:id="@+id/btn_editarUsuario"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Editar Usuario"
+            android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="Editar Usuario" />
 
         <TextView
             android:id="@+id/textView"
