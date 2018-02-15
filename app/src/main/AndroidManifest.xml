@@ -24,7 +24,8 @@
             android:name=".PantallaPrincipal"
             android:theme="@style/StyleATheme_Toolbar_statusTrans" />
         <activity android:name=".Login.RegistroActivity" />
-        <activity android:name=".EditUser"></activity>
+        <activity android:name=".EditUser" />
+        <activity android:name=".NuevoEvento"></activity>
     </application>
 
 </manifest>
