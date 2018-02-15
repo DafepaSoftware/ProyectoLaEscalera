@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.software.dafepa.proyectolaescalera.Login.RegistroActivity">
-
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bcklogin"
@@ -16,132 +12,155 @@
         tools:layout_editor_absoluteY="0dp">
 
         <ImageView
-            android:layout_width="140dp"
-            android:layout_height="140dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:src="@drawable/recortebueno"/>
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="4"
+            android:src="@drawable/recortebueno" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="#40FFFFFF"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
+                android:layout_weight="1"
                 android:background="#30FFFFFF"
+                android:gravity="left|center"
                 android:orientation="vertical"
                 android:paddingBottom="20dp">
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Get Started"
-                    android:textColor="@color/blanco"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Juts a few detail to get you started"
-                    android:textColor="@color/blanco"
-                    android:textSize="12dp" />
-
-
-                <EditText
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/edittextstyle"
-                    android:drawableLeft="@drawable/user"
-                    android:drawablePadding="6dp"
-                    android:hint="Memepolice"
-                    android:paddingLeft="10dp" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="top|left"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="25dp"
+                        android:text="Get Started"
+                        android:textColor="@color/blanco"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Juts a few detail to get you started"
+                        android:textColor="@color/blanco"
+                        android:textSize="12dp" />
+                </LinearLayout>
 
 
-                <EditText
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/edittextstyle"
-                    android:drawableLeft="@drawable/mail"
-                    android:drawablePadding="6dp"
-                    android:hint="halfonso@pipo.com"
-                    android:paddingLeft="10dp" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/contrasena1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/edittextstyle"
-                    android:drawableLeft="@drawable/password"
-                    android:drawablePadding="6dp"
-                    android:hint="********"
-                    android:inputType="textPassword"
-                    android:paddingLeft="10dp" />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/edittextstyle"
+                        android:drawableLeft="@drawable/user"
+                        android:drawablePadding="6dp"
+                        android:hint="Memepolice"
+                        android:paddingLeft="10dp" />
 
-                <EditText
-                    android:id="@+id/et_contrasena1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/edittextstyle"
-                    android:hint="********"
-                    android:drawablePadding="6dp"
-                    android:drawableLeft="@drawable/password"
-                    android:paddingLeft="10dp"
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/edittextstyle"
+                        android:drawableLeft="@drawable/mail"
+                        android:drawablePadding="6dp"
+                        android:hint="halfonso@pipo.com"
+                        android:paddingLeft="10dp" />
 
-                    android:inputType="textPassword" />
+                    <EditText
+                        android:id="@+id/contrasena1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/edittextstyle"
+                        android:drawableLeft="@drawable/password"
+                        android:drawablePadding="6dp"
+                        android:hint="********"
+                        android:inputType="textPassword"
+                        android:paddingLeft="10dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:text="I agree to the Term and Conditions"
-                    android:textColor="@color/blanco"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
+                    <EditText
+                        android:id="@+id/et_contrasena1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/edittextstyle"
+                        android:drawableLeft="@drawable/password"
+                        android:drawablePadding="6dp"
+                        android:hint="********"
+                        android:inputType="textPassword"
 
+                        android:paddingLeft="10dp" />
 
-                <Button
-                    android:id="@+id/btn_registrame"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/buttonstyle"
-                    android:text="Register"
-                    android:textColor="@color/blanco" />
+                    <Button
+                        android:id="@+id/btn_registrame"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/buttonstyle"
+                        android:text="Register"
+                        android:textColor="@color/blanco" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:text="I agree to the Term and Conditions"
+                        android:textColor="@color/blanco"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
 
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:layout_weight="4"
                 android:gravity="center"
                 android:text="Click here to read the Termns and Conditions about the use of this Dafepa Software's application"
                 android:textColor="@color/blanco"
@@ -151,5 +170,5 @@
         </LinearLayout>
 
 
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
+
