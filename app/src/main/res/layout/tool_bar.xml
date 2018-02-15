@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:background="@android:color/darker_gray"
     android:elevation="12dp"
-    android:paddingTop="@dimen/tool_bar_top_padding"
     app:theme="@style/ThemeToolbar"
     app:titleTextColor="@android:color/white">
 
