@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.software.dafepa.proyectolaescalera.Adapters.Adapter_NavDrawer;
@@ -123,6 +124,15 @@ public class PantallaPrincipal extends AppCompatActivity {
         Adapter_NavDrawer adpter = new Adapter_NavDrawer(activity, title, img_id );
         lv_navdrawer = findViewById(R.id.lv_navdrawer);
         lv_navdrawer.setAdapter(adpter);
+
+        LinearLayout ly_perfil = findViewById(R.id.ly_perfil);
+        ly_perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, PantallaPerfil.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //Función necesaria para desplegar el navigation drawer
