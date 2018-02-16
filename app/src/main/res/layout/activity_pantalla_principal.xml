@@ -65,24 +65,26 @@
         android:layout_width="320dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/moradeteClaro"
+        android:background="@color/color_fondo"
+        android:orientation="vertical"
         android:scrollbars="vertical">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="250dp"
             android:background="@drawable/bg_profile"
             android:orientation="vertical"
             android:paddingTop="25dp"
-            android:paddingBottom="25dp">
+            android:paddingBottom="20dp"
+            android:layout_marginBottom="15dp">
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/user_sample" />
 
@@ -90,7 +92,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="3"
                 android:text="Nombre Apellido Apellido"
                 android:textAlignment="center"
                 android:textColor="@color/blanco"
@@ -100,27 +102,20 @@
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="3"
                 android:text="correo@correo.com"
                 android:textAlignment="center"
                 android:textColor="@color/blanco"
+                android:layout_marginTop="2dp"
                 android:textSize="18sp" />
 
         </LinearLayout>
-        <Button
-            android:id="@+id/btn_editarUsuario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:text="Editar Usuario" />
+       <ListView
+           android:id="@+id/lv_navdrawer"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:divider="@null">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="" />
+       </ListView>
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

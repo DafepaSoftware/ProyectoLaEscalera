@@ -24,18 +24,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 
+import com.software.dafepa.proyectolaescalera.Adapters.Adapter_NavDrawer;
 import com.software.dafepa.proyectolaescalera.Login.RegistroActivity;
+
+import java.util.ArrayList;
 
 public class PantallaPrincipal extends AppCompatActivity {
 
     private Toolbar myToolbar;
     private DrawerLayout myDrawer;
-    private Button btn_editUser;
     private Activity activity;
     private static int tabstart = 0;
     private ViewPager mViewPager;
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    private ListView lv_navdrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +47,6 @@ public class PantallaPrincipal extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_principal);
 
         activity=this;
-
-        btn_editUser = (Button) findViewById(R.id.btn_editarUsuario);
-
-
-        btn_editUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, EditUser.class);
-                startActivity(intent);
-            }
-        });
 
         //Botón flotante
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -104,6 +97,32 @@ public class PantallaPrincipal extends AppCompatActivity {
         myDrawer.addDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
         mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
 
+        crearNavDrawer();
+    }
+
+    //Función para crear los elementos del navdrawer
+    private void crearNavDrawer(){
+        ArrayList<String> title = new ArrayList<>();
+        ArrayList<Integer> img_id = new ArrayList<>();
+
+        title.add("Nuevo evento");
+        title.add("Mis eventos");
+
+
+        title.add("Ayuda");
+        title.add("Desconectar");
+
+
+
+
+        img_id.add(R.drawable.add_icon);
+        img_id.add(R.drawable.add_icon);
+        img_id.add(R.drawable.add_icon);
+        img_id.add(R.drawable.add_icon);
+
+        Adapter_NavDrawer adpter = new Adapter_NavDrawer(activity, title, img_id );
+        lv_navdrawer = findViewById(R.id.lv_navdrawer);
+        lv_navdrawer.setAdapter(adpter);
     }
 
     //Función necesaria para desplegar el navigation drawer
@@ -206,9 +225,9 @@ public class PantallaPrincipal extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Contigo";
+                    return "BUSCO";
                 case 1:
-                    return "Pipo";
+                    return "OFREZCO";
             }
             return null;
         }
