@@ -8,12 +8,13 @@ public class Evento {
     String titulo;
     String descripcion;
     String mail;
+    Boolean busco;
 
-
-    public Evento(String titulo, String descripcion, String mail) {
+    public Evento(String titulo, String descripcion, String mail, Boolean busco) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.mail = mail;
+        this.busco = busco;
     }
 
     public String getTitulo() {
@@ -39,4 +40,14 @@ public class Evento {
     public void setMail(String mail) {
         this.mail = mail;
     }
+
+    public Boolean getBusco() {
+        return busco;
+    }
+
+    public void setBusco(Boolean busco) {
+        this.busco = busco;
+    }
 }
+
+
