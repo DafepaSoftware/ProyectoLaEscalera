@@ -5,16 +5,26 @@ package com.software.dafepa.proyectolaescalera.Objects;
  */
 
 public class Usuario {
+    int id;
     String mail;
     String nombre;
     String apellido;
     String contrasena;
 
-    public Usuario(String mail, String nombre, String apellido, String contrasena) {
+    public Usuario(int id, String mail, String nombre, String apellido, String contrasena) {
+        this.id = id;
         this.mail = mail;
         this.nombre = nombre;
         this.apellido = apellido;
         this.contrasena = contrasena;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getMail() {
