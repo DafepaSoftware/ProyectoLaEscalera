@@ -55,6 +55,25 @@
             android:textSize="18sp" />
 
     </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apellido"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Correo@correo.com"
+            android:gravity="center_horizontal"/>
+
     <!---  Con esto salen las imagenes redondas directamente, no hace falta
     que la imagen sea redonda para que se vea asi
 
@@ -68,5 +87,12 @@
     app:civ_shadow_radius="10"
     app:civ_shadow_color="#8BC34A"/>
     -->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ok!"
+        android:background="@drawable/buttonstyle"
+        android:textColor="@color/blanco"
+        android:layout_gravity="bottom"/>
 
 </LinearLayout>
