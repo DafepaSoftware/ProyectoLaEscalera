@@ -26,7 +26,8 @@
         <activity android:name=".Login.RegistroActivity" />
         <activity android:name=".EditUser" />
         <activity android:name=".NuevoEvento" />
-        <activity android:name=".PantallaPerfil"></activity>
+        <activity android:name=".PantallaPerfil" />
+        <activity android:name=".InfoElemeneto"></activity>
     </application>
 
 </manifest>
