@@ -117,9 +117,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
     <Button
+        android:id="@+id/btn_cancelar"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="Cancelar"
+        android:text="@string/cancelar"
         android:textSize="15dp"
         android:layout_gravity="right"
         android:layout_marginRight="10dp"
@@ -136,7 +137,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Aceptar"
+            android:text="@string/aceptar"
             android:textSize="15dp"
             android:textColor="@color/blanco"
             android:background="@drawable/buttonstyle"/>

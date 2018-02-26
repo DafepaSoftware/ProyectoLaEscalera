@@ -41,13 +41,24 @@ public class PantallaPrincipal extends AppCompatActivity {
     private ViewPager mViewPager;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ListView lv_navdrawer;
+    private Button btn_caballo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_principal);
 
+        btn_caballo = (Button) findViewById(R.id.btn_pene);
         activity=this;
+
+        btn_caballo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent inte = new Intent(activity,InfoElemeneto.class);
+                startActivity(inte);
+            }
+        });
+
 
         //Botón flotante
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
