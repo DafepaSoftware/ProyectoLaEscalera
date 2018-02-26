@@ -12,6 +12,18 @@
         layout="@layout/tool_bar"
         app:layout_scrollFlags="scroll|enterAlways" />
 
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_fondo">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_fondo"
+            android:orientation="vertical"
+            tools:context="com.software.dafepa.proyectolaescalera.NuevoEvento">
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/ly_perfil"
@@ -80,7 +92,7 @@
         android:paddingLeft="10dp"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
-        android:text="Esto es una descripcion mazo de larga para que sirva de ejemplo y ver como se ve el coso este siendo mazo de largo y si es posobile meter una movida para que la oantalla suba y baje conforme sea de largo el texto este. blablabalbalbalbalalbalbalbalbalblablablalbalbalbalblablalbalbalblablablalbalblabla"
+        android:text="Esto es una descripcion mazo de adskjnsfdhgusfugydahiusjoafsgushdijaoskjfshiguhdajoskojfhsighdjoasofshgisidjoaifoshgidsdjoakjosghisjdakfjosghiddifsjdakjosghifsjdakjshgisdjakfoshgidjailarga para que sirva de ejemplo y ver como se ve el coso este siendo mazo de largo y si es posobile meter una movida para que la oantalla suba y baje conforme sea de largo el texto este. blablabalbalbalbalalbalbalbalbalblablablalbalbalbalblablalbalbalblablablalbalblabla"
         android:textSize="15dp"
         android:textColor="@color/blanco"
         />
@@ -107,46 +119,58 @@
             android:textColor="@color/texto_normal"
             />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="horizontal">
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="1.2in"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-    <Button
-        android:id="@+id/btn_cancelar"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="@string/cancelar"
-        android:textSize="15dp"
-        android:layout_gravity="right"
-        android:layout_marginRight="10dp"
-        android:textColor="@color/blanco"
-        android:background="@drawable/buttonstyle"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="25dp"
+                android:layout_weight="1"
+                android:background="@drawable/buttonstyle_cancel"
+                android:drawableLeft="@drawable/cross"
+                android:text="@string/cancelar"
+                android:textColor="@color/blanco" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btn_create"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="25dp"
+                android:layout_weight="1"
+                android:background="@drawable/buttonstyle"
+                android:drawableLeft="@drawable/tick"
+                android:text="@string/crear"
+                android:textColor="@color/blanco" />
+        </LinearLayout>
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="1.25in"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="@string/aceptar"
-            android:textSize="15dp"
-            android:textColor="@color/blanco"
-            android:background="@drawable/buttonstyle"/>
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 
 
 
-
-</LinearLayout>
 </LinearLayout>

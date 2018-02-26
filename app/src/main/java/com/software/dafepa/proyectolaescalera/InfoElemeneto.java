@@ -18,7 +18,7 @@ public class InfoElemeneto extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_elemeneto);
 
-        btnCancelar = (Button) findViewById(R.id.btn_cancelar);
+        btnCancelar = (Button) findViewById(R.id.btn_cancel);
 
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
