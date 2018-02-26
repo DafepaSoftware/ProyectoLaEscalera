@@ -7,4 +7,30 @@
     <string name="btnEntrar">Entrar!</string>
     <string name="Abrir">Abrir</string>
     <string name="Cerrar">Cerrar</string>
+    <string name="editarusuario">Editar Usuario</string>
+    <string name="btncambios">Pulse el boton para aplicar los cambios.</string>
+    <string name="nuevousuario">Nuevo nombre Usuario</string>
+    <string name="nuevocorreo">Nuevo correo electronico</string>
+    <string name="nuevacontrasena">Nueva contraseña</string>
+    <string name="repitacontra">Repita nueva contraseña</string>
+    <string name="aplicar">Aplicar</string>
+    <string name="enriqueces">¿Buscas u Ofreces ayuda?</string>
+    <string name="buscoayuda">¡Busco ayuda!</string>
+    <string name="ofrezcoayuda">¡Ofrezco ayuda!</string>
+    <string name="descripcionNecesitas">¡Describe brevemente qué necesitas!</string>
+    <string name="descripcionOfreces">¡Describe brevemente qué ofreces!</string>
+    <string name="escribeQueNeceistas">Escribe aquí que necesitas</string>
+    <string name="escribeQueOfreces">Escribe aquí que ofreces</string>
+    <string name="descripcionDetallada">¡Añade una descripción más detallada!</string>
+    <string name="escribeDescripcion">Escribe aquí  una descripción lo más detallada posible</string>
+    <string name="cincuentacaracteres">0 / 50 caracteres.</string>
+    <string name="quinientoscaracteres">0 / 500 caracteres.</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="crear">Crear</string>
+    <string name="halp">Halp.me</string>
+    <string name="recuerdame">Recuerdame</string>
+    <string name="busco">Busco</string>
+    <string name="ofrezco">Ofrezco</string>
+
 </resources>

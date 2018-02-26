@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="¿Buscas u Ofreces ayuda?"
+                    android:text="@string/enriqueces"
                     android:textAlignment="center"
                     android:textSize="24sp" />
 
@@ -65,7 +65,7 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="8dp"
                         android:layout_weight="1"
-                        android:text="¡Busco ayuda!"
+                        android:text="@string/buscoayuda"
                         android:textAlignment="center"
                         android:textColor="@color/texto_destacado"
                         android:textSize="18sp" />
@@ -93,7 +93,7 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="8dp"
                         android:layout_weight="1"
-                        android:text="¡Necesito ayuda!"
+                        android:text="@string/ofrezcoayuda"
                         android:textAlignment="center"
                         android:textSize="18sp" />
 
@@ -122,7 +122,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="¡Describe brevemente qué necesitas!"
+                    android:text="@string/descripcionNecesitas"
                     android:textAlignment="center"
                     android:textSize="24sp" />
 
@@ -146,8 +146,7 @@
                     android:background="@android:color/transparent"
                     android:ems="10"
                     android:gravity="top|left"
-                    android:hint="Escribe aquí que necesitas"
-
+                    android:hint="@string/escribeQueNeceistas"
                     android:inputType="textMultiLine"
                     android:maxLength="500"
                     android:paddingLeft="8dp"
@@ -159,7 +158,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginRight="8dp"
-                    android:text="0 / 50 caracteres."
+                    android:text="@string/cincuentacaracteres"
                     android:textAlignment="textEnd"
                     android:textSize="12sp" />
 
@@ -179,7 +178,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="¡Añade una descripción más detallada!"
+                    android:text="@string/descripcionDetallada"
                     android:textAlignment="center"
                     android:textSize="24sp" />
 
@@ -203,8 +202,7 @@
                     android:background="@android:color/transparent"
                     android:ems="10"
                     android:gravity="top|left"
-                    android:hint="Escribe aquí  una descripción lo más detallada posible"
-
+                    android:hint="@string/escribeDescripcion"
                     android:inputType="textMultiLine"
                     android:maxLength="500"
                     android:paddingLeft="8dp"
@@ -216,7 +214,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginRight="8dp"
-                    android:text="0 / 500 caracteres."
+                    android:text="@string/quinientoscaracteres"
                     android:textAlignment="textEnd"
                     android:textSize="12sp" />
 
@@ -237,7 +235,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/buttonstyle_cancel"
                     android:drawableLeft="@drawable/cross"
-                    android:text="Cancelar"
+                    android:text="@string/cancelar"
                     android:textColor="@color/blanco" />
 
                 <Button
@@ -249,7 +247,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/buttonstyle"
                     android:drawableLeft="@drawable/tick"
-                    android:text="Crear"
+                    android:text="@string/crear"
                     android:textColor="@color/blanco" />
             </LinearLayout>
 

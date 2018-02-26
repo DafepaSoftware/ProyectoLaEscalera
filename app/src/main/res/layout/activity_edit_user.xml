@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
-                    android:text="Editar Usuario"
+                    android:text="@string/editarusuario"
                     android:textColor="@color/blanco"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="5dp"
-                    android:text="Pulse el boton para aplicar los cambios."
+                    android:text="@string/btncambios"
                     android:textColor="@color/blanco"
                     android:textSize="12dp" />
 
@@ -69,7 +69,7 @@
                     android:background="@drawable/edittextstyle"
                     android:drawableLeft="@drawable/user"
                     android:drawablePadding="6dp"
-                    android:hint="Nuevo nombre Usuario"
+                    android:hint="@string/nuevousuario"
                     android:paddingLeft="10dp" />
 
 
@@ -82,8 +82,8 @@
                     android:background="@drawable/edittextstyle"
                     android:drawableLeft="@drawable/mail"
                     android:drawablePadding="6dp"
-                    android:hint="Nuevo correo electronico"
-                    android:paddingLeft="10dp" />
+                    android:hint="@string/nuevocorreo"
+                    android:paddingLeft="10dp"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -92,7 +92,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/edittextstyle"
-                    android:hint="Nueva contraseña"
+                    android:hint="@string/nuevacontrasena"
                     android:drawableLeft="@drawable/password"
                     android:drawablePadding="6dp"
                     android:inputType="textPassword"
@@ -106,7 +106,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/edittextstyle"
-                    android:hint="Repita nueva contraseña"
+                    android:hint="@string/repitacontra"
                     android:drawablePadding="6dp"
                     android:drawableLeft="@drawable/password"
                     android:paddingLeft="10dp"
@@ -123,7 +123,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/buttonstyle"
-                    android:text="Aplicar"
+                    android:text="@string/aplicar"
                     android:textColor="@color/blanco" />
 
             </LinearLayout>
