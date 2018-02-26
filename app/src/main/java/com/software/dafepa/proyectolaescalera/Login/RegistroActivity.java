@@ -15,18 +15,27 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.software.dafepa.proyectolaescalera.HalpFuncs;
+import com.software.dafepa.proyectolaescalera.Objects.Usuario;
 import com.software.dafepa.proyectolaescalera.PantallaPrincipal;
 import com.software.dafepa.proyectolaescalera.R;
 
+import java.util.HashMap;
+import java.util.Map;
+
+//TODO deberíamos limitar los campos de alguna manera y hacerla scrollable
 public class RegistroActivity extends AppCompatActivity {
 
     //interfaz
     private Button btn_registrarse;
-    private EditText usuario;
-    private EditText mail;
-    private EditText contrasena1;
-    private EditText contrasena2;
+    private EditText edtxt_nombre;
+    private EditText edtxt_apellido;
+    private EditText edtxt_correo;
+    private EditText edtxt_pass;
+    private EditText edtxt_pass2;
+
 
     //Copia de activity para su fácil uso
     private Activity activity;
@@ -38,8 +47,12 @@ public class RegistroActivity extends AppCompatActivity {
         activity = this;
         HalpFuncs.translucentStatusBar(activity);
 
+        edtxt_nombre = findViewById(R.id.edtxt_nombre);
+        edtxt_apellido = findViewById(R.id.edtxt_apellido);
+        edtxt_correo = findViewById(R.id.edtxt_correo);
+        edtxt_pass = (EditText) findViewById(R.id.edtxt_pass);
+        edtxt_pass2 = (EditText) findViewById(R.id.edtxt_pass2);
         btn_registrarse =  (Button) findViewById(R.id.btn_registrame);
-        contrasena1 = (EditText) findViewById(R.id.et_contrasena1);
 
         (findViewById(R.id.btn_terminos)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,26 +66,13 @@ public class RegistroActivity extends AppCompatActivity {
             }
         });
 
-        //TODO hacer funcionalidad
-        /*btn_registrarse.setOnClickListener(new View.OnClickListener() {
+        btn_registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //comprobar que hay datos en contraseña
-                if(contrasena1.length()!=contrasena2.length()){
-                    Toast toast = Toast.makeText(getApplicationContext(), "Las contraseñas deben coincidir", Toast.LENGTH_SHORT);
-                    toast.show();
-
-                }else {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Registro realizado con exito!", Toast.LENGTH_SHORT);
-                    toast.show();
-
-                    Intent e = new Intent(RegistroActivity.this, PantallaPrincipal.class);
-                    startActivity(e);
-                    finish();
-                }
+                comprobacionesCampos();
 
             }
-        });*/
+        });
 
     }
 
@@ -81,5 +81,81 @@ public class RegistroActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    private void comprobacionesCampos(){
+        if (edtxt_nombre.getText().toString().length() <= 0){
+            new AlertDialog.Builder(activity).setMessage("¡Necisitamos conocer cómo te llamas!")
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            edtxt_nombre.requestFocus();
+                            HalpFuncs.showKeyboard(activity);
+                        }
+                    }).show();
+
+        }else if (edtxt_apellido.getText().toString().length() <= 0){
+            new AlertDialog.Builder(activity).setMessage("¡Necisitamos conocer al menos uno de tus " +
+                    "apellidos!")
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            edtxt_apellido.requestFocus();
+                            HalpFuncs.showKeyboard(activity);
+                        }
+                    }).show();
+
+        }else if (edtxt_correo.getText().toString().length() <= 0){
+            new AlertDialog.Builder(activity).setMessage("¡Necisitamos conocer tu correo electrónico!")
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            edtxt_correo.requestFocus();
+                            HalpFuncs.showKeyboard(activity);
+                        }
+                    }).show();
+
+        }else if (edtxt_pass.getText().toString().length() <= 0){
+            new AlertDialog.Builder(activity).setMessage("¡Necesitas una contraseña para tu cuenta!")
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            edtxt_pass.requestFocus();
+                            HalpFuncs.showKeyboard(activity);
+                        }
+                    }).show();
+
+        }else if (!edtxt_pass.getText().toString().equals(edtxt_pass2.getText().toString())){
+            new AlertDialog.Builder(activity).setMessage("¡Las contraseñas deben ser iguales!")
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            edtxt_pass.requestFocus();
+                            HalpFuncs.showKeyboard(activity);
+                        }
+                    }).show();
+
+        }else{
+            crearUsuario();
+            finish();
+        }
+    }
+
+    private void crearUsuario(){
+        Usuario u = new Usuario();
+        u.setNombre(edtxt_nombre.getText().toString());
+        u.setApellido(edtxt_apellido.getText().toString());
+        u.setContrasena(edtxt_pass.getText().toString());
+        u.setMail(edtxt_correo.getText().toString());
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("halp.me");
+        DatabaseReference usersRef = ref.child("usuarios");
+
+
+        usersRef.setValue(u);
+
+
+
     }
 }

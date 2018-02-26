@@ -1,0 +1,420 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 00f81a41f1cebabad3c78d0d0ee0c044029ae178)
++++ app/src/main/AndroidManifest.xml	(revision )
+@@ -13,7 +13,8 @@
+         android:roundIcon="@drawable/logo_relleno"
+         android:supportsRtl="true"
+         android:theme="@style/AppTheme">
+-        <activity android:name=".Login.SplashActivity">
++        <activity android:name=".Login.SplashActivity"
++            android:screenOrientation="portrait">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+ 
+@@ -22,12 +23,18 @@
+         </activity>
+         <activity
+             android:name=".PantallaPrincipal"
+-            android:theme="@style/StyleATheme_Toolbar_statusTrans" />
+-        <activity android:name=".Login.RegistroActivity" />
+-        <activity android:name=".EditUser" />
+-        <activity android:name=".NuevoEvento" />
+-        <activity android:name=".PantallaPerfil" />
+-        <activity android:name=".InfoElemeneto"></activity>
++            android:theme="@style/StyleATheme_Toolbar_statusTrans"
++            android:screenOrientation="portrait"/>
++        <activity android:name=".Login.RegistroActivity"
++            android:screenOrientation="portrait"/>
++        <activity android:name=".EditUser"
++            android:screenOrientation="portrait"/>
++        <activity android:name=".NuevoEvento"
++            android:screenOrientation="portrait"/>
++        <activity android:name=".PantallaPerfil"
++            android:screenOrientation="portrait"/>
++        <activity android:name=".InfoElemeneto"
++            android:screenOrientation="portrait"/>
+     </application>
+ 
+ </manifest>
+\ No newline at end of file
+Index: app/src/main/java/com/software/dafepa/proyectolaescalera/Login/RegistroActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/software/dafepa/proyectolaescalera/Login/RegistroActivity.java	(revision 00f81a41f1cebabad3c78d0d0ee0c044029ae178)
++++ app/src/main/java/com/software/dafepa/proyectolaescalera/Login/RegistroActivity.java	(revision )
+@@ -1,8 +1,10 @@
+ package com.software.dafepa.proyectolaescalera.Login;
+ 
+ import android.app.Activity;
++import android.content.DialogInterface;
+ import android.content.Intent;
+ import android.os.Build;
++import android.support.v7.app.AlertDialog;
+ import android.support.v7.app.AppCompatActivity;
+ import android.os.Bundle;
+ import android.view.View;
+@@ -10,6 +12,7 @@
+ import android.view.WindowManager;
+ import android.widget.Button;
+ import android.widget.EditText;
++import android.widget.TextView;
+ import android.widget.Toast;
+ 
+ import com.software.dafepa.proyectolaescalera.HalpFuncs;
+@@ -38,6 +41,18 @@
+         btn_registrarse =  (Button) findViewById(R.id.btn_registrame);
+         contrasena1 = (EditText) findViewById(R.id.et_contrasena1);
+ 
++        (findViewById(R.id.btn_terminos)).setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                new AlertDialog.Builder(activity).setMessage("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis ligula pharetra odio varius posuere sit amet non ligula. Donec eu efficitur nisi. Ut risus massa, tincidunt vel urna eget, gravida venenatis justo. Ut pulvinar porttitor mi non luctus. Nullam rutrum odio at purus fermentum dictum. In sagittis metus lectus, id volutpat quam venenatis at. Phasellus id tristique urna, sed fermentum felis. Suspendisse luctus, sapien nec volutpat condimentum, eros libero ultrices ex, nec porta urna lacus a sapien. Integer rutrum eu neque tincidunt pulvinar. Quisque consectetur, ex dictum dictum tincidunt, metus risus eleifend elit, a luctus sapien diam ut enim. Cras condimentum, velit sed convallis tincidunt, magna nulla porttitor quam, vel cursus nunc sem sit amet neque. Nullam pulvinar dolor lacinia enim mollis, vitae mollis justo pellentesque. Quisque vel metus a tortor congue aliquet sit amet non mauris.\n" +
++                        "\n" +
++                        "Suspendisse eu faucibus sapien, at pulvinar mi. Duis diam diam, faucibus sed massa et, ullamcorper facilisis lectus. Duis ut nulla vel odio imperdiet consectetur. Mauris et ante congue, varius justo eget, maximus felis. Curabitur eu eros ante. Sed tempus metus in erat sagittis, a luctus nulla imperdiet. Fusce nibh neque, efficitur nec sem quis, placerat pretium lorem. Fusce condimentum gravida ipsum, vel mattis ante luctus id. Cras tincidunt enim sit amet ligula luctus pretium.\n" +
++                        "\n" +
++                        "In placerat, magna sed tempus tempus, nisi dui luctus nisi, ac porta tellus quam eget magna. Nullam vitae tellus dui. Fusce egestas finibus purus ut placerat. Sed tincidunt pretium luctus. Nam consequat eu felis eu ornare. Duis efficitur auctor quam ac egestas. Fusce pellentesque ex magna, a posuere mauris sollicitudin vel. In condimentum nulla ante. " +
++                        "se enviarán").setPositiveButton("Aceptar", null).show();
++            }
++        });
++
+         //TODO hacer funcionalidad
+         /*btn_registrarse.setOnClickListener(new View.OnClickListener() {
+             @Override
+Index: app/src/main/res/layout/activity_registro.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_registro.xml	(revision 00f81a41f1cebabad3c78d0d0ee0c044029ae178)
++++ app/src/main/res/layout/activity_registro.xml	(revision )
+@@ -21,153 +21,165 @@
+             android:src="@drawable/recortebueno" />
+ 
+ 
+-        <LinearLayout
+-            android:layout_width="match_parent"
+-            android:layout_height="match_parent"
+-            android:layout_weight="1"
+-            android:background="#40FFFFFF"
+-            android:orientation="vertical">
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:layout_weight="1"
++        android:orientation="vertical">
+ 
+-            <LinearLayout
+-                android:layout_width="match_parent"
+-                android:layout_height="match_parent"
+-                android:layout_marginBottom="20dp"
+-                android:layout_marginLeft="20dp"
+-                android:layout_marginRight="20dp"
+-                android:layout_marginTop="20dp"
+-                android:layout_weight="1"
+-                android:background="#30FFFFFF"
+-                android:gravity="left|center"
+-                android:orientation="vertical"
+-                android:paddingBottom="20dp">
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            android:layout_marginBottom="20dp"
++            android:layout_marginLeft="20dp"
++            android:layout_marginRight="20dp"
++            android:layout_marginTop="20dp"
++            android:layout_weight="1"
++            android:gravity="left|center"
++            android:orientation="vertical"
++            android:paddingBottom="20dp">
+ 
+ 
+-                <LinearLayout
+-                    android:layout_width="match_parent"
+-                    android:layout_height="match_parent"
+-                    android:layout_weight="3"
+-                    android:gravity="top|left"
+-                    android:orientation="vertical">
++            <LinearLayout
++                android:layout_width="match_parent"
++                android:layout_height="match_parent"
++                android:layout_weight="3"
++                android:gravity="top|left"
++                android:orientation="vertical">
+ 
+-                    <TextView
+-                        android:layout_width="match_parent"
+-                        android:layout_height="wrap_content"
+-                        android:layout_marginLeft="20dp"
+-                        android:layout_marginTop="25dp"
+-                        android:text="Get Started"
+-                        android:textColor="@color/blanco"
+-                        android:textSize="20dp"
+-                        android:textStyle="bold" />
++                <TextView
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:layout_marginLeft="20dp"
++                    android:layout_marginTop="25dp"
++                    android:text="Get Started"
++                    android:textAlignment="center"
++                    android:textColor="@color/blanco"
++                    android:textSize="20dp"
++                    android:textStyle="bold" />
+ 
+-                    <TextView
+-                        android:layout_width="match_parent"
+-                        android:layout_height="wrap_content"
+-                        android:layout_marginLeft="20dp"
+-                        android:layout_marginTop="5dp"
+-                        android:text="Juts a few detail to get you started"
+-                        android:textColor="@color/blanco"
+-                        android:textSize="12dp" />
+-                </LinearLayout>
++                <TextView
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:layout_marginLeft="20dp"
++                    android:layout_marginTop="5dp"
++                    android:text="Juts a few detail to get you started"
++                    android:textAlignment="center"
++                    android:textColor="@color/blanco"
++                    android:textSize="12dp" />
++            </LinearLayout>
+ 
+ 
+-                <LinearLayout
+-                    android:layout_width="match_parent"
+-                    android:layout_height="match_parent"
+-                    android:layout_weight="1"
+-                    android:gravity="center"
+-                    android:orientation="vertical">
++            <LinearLayout
++                android:layout_width="match_parent"
++                android:layout_height="match_parent"
++                android:layout_weight="1"
++                android:gravity="center"
++                android:orientation="vertical">
+ 
+-                    <EditText
+-                        android:layout_width="match_parent"
+-                        android:layout_height="wrap_content"
+-                        android:layout_marginLeft="20dp"
+-                        android:layout_marginRight="20dp"
+-                        android:layout_marginTop="10dp"
+-                        android:background="@drawable/edittextstyle"
+-                        android:drawableLeft="@drawable/user"
+-                        android:drawablePadding="6dp"
+-                        android:hint="Memepolice"
+-                        android:paddingLeft="10dp" />
++                <EditText
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:layout_marginBottom="5dp"
++                    android:layout_marginLeft="20dp"
++                    android:layout_marginRight="20dp"
++                    android:layout_marginTop="10dp"
++                    android:background="@drawable/edittextstyle"
++                    android:drawableLeft="@drawable/user"
++                    android:drawablePadding="6dp"
++                    android:hint="Memepolice"
++                    android:paddingLeft="10dp" />
+ 
+-                    <EditText
+-                        android:layout_width="match_parent"
+-                        android:layout_height="wrap_content"
+-                        android:layout_marginLeft="20dp"
+-                        android:layout_marginRight="20dp"
+-                        android:layout_marginTop="10dp"
+-                        android:background="@drawable/edittextstyle"
+-                        android:drawableLeft="@drawable/mail"
+-                        android:drawablePadding="6dp"
+-                        android:hint="halfonso@pipo.com"
+-                        android:paddingLeft="10dp" />
++                <EditText
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:layout_marginBottom="5dp"
++                    android:layout_marginLeft="20dp"
++                    android:layout_marginRight="20dp"
++                    android:layout_marginTop="10dp"
++                    android:background="@drawable/edittextstyle"
++                    android:drawableLeft="@drawable/mail"
++                    android:drawablePadding="6dp"
++                    android:hint="halfonso@pipo.com"
++                    android:paddingLeft="10dp" />
+ 
+-                    <EditText
+-                        android:id="@+id/contrasena1"
+-                        android:layout_width="match_parent"
+-                        android:layout_height="wrap_content"
+-                        android:layout_marginLeft="20dp"
+-                        android:layout_marginRight="20dp"
+-                        android:layout_marginTop="10dp"
+-                        android:background="@drawable/edittextstyle"
+-                        android:drawableLeft="@drawable/password"
+-                        android:drawablePadding="6dp"
+-                        android:hint="********"
+-                        android:inputType="textPassword"
+-                        android:paddingLeft="10dp" />
++                <EditText
++                    android:id="@+id/contrasena1"
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:layout_marginBottom="5dp"
++                    android:layout_marginLeft="20dp"
++                    android:layout_marginRight="20dp"
++                    android:layout_marginTop="10dp"
++                    android:background="@drawable/edittextstyle"
++                    android:drawableLeft="@drawable/password"
++                    android:drawablePadding="6dp"
++                    android:hint="********"
++                    android:inputType="textPassword"
++                    android:paddingLeft="10dp" />
+ 
+-                    <EditText
+-                        android:id="@+id/et_contrasena1"
+-                        android:layout_width="match_parent"
+-                        android:layout_height="wrap_content"
+-                        android:layout_marginLeft="20dp"
+-                        android:layout_marginRight="20dp"
+-                        android:layout_marginTop="10dp"
+-                        android:background="@drawable/edittextstyle"
+-                        android:drawableLeft="@drawable/password"
+-                        android:drawablePadding="6dp"
+-                        android:hint="********"
+-                        android:inputType="textPassword"
+-
+-                        android:paddingLeft="10dp" />
++                <EditText
++                    android:id="@+id/et_contrasena1"
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:layout_marginBottom="5dp"
++                    android:layout_marginLeft="20dp"
++                    android:layout_marginRight="20dp"
++                    android:layout_marginTop="10dp"
++                    android:background="@drawable/edittextstyle"
++                    android:drawableLeft="@drawable/password"
++                    android:drawablePadding="6dp"
++                    android:hint="********"
++
++                    android:inputType="textPassword"
++                    android:paddingLeft="10dp" />
+ 
+-                    <Button
+-                        android:id="@+id/btn_registrame"
+-                        android:layout_width="wrap_content"
+-                        android:layout_height="wrap_content"
+-                        android:layout_gravity="center"
+-                        android:layout_marginTop="20dp"
+-                        android:background="@drawable/buttonstyle"
+-                        android:text="Register"
+-                        android:textColor="@color/blanco" />
++                <Button
++                    android:id="@+id/btn_registrame"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:layout_gravity="center"
++                    android:layout_marginTop="20dp"
++                    android:background="@drawable/buttonstyle"
++                    android:text="Register"
++                    android:textColor="@color/blanco" />
+ 
+-                    <TextView
+-                        android:layout_width="wrap_content"
+-                        android:layout_height="wrap_content"
+-                        android:layout_gravity="center"
+-                        android:layout_marginTop="20dp"
+-                        android:text="I agree to the Term and Conditions"
+-                        android:textColor="@color/blanco"
+-                        android:textSize="10dp"
+-                        android:textStyle="bold" />
+-                </LinearLayout>
++                <TextView
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:layout_gravity="center"
++                    android:layout_marginTop="20dp"
++                    android:text="Al registrarme acepto los términos y condiciones"
++                    android:textColor="@color/blanco"
++                    android:textSize="10dp"
++                    android:textStyle="bold" />
++            </LinearLayout>
+ 
+ 
+-            </LinearLayout>
++        </LinearLayout>
+ 
+-            <TextView
+-                android:layout_width="match_parent"
+-                android:layout_height="match_parent"
+-                android:layout_marginBottom="20dp"
+-                android:layout_marginLeft="20dp"
+-                android:layout_marginRight="20dp"
+-                android:layout_weight="4"
+-                android:gravity="center"
+-                android:text="Click here to read the Termns and Conditions about the use of this Dafepa Software's application"
++        <LinearLayout
++            android:id="@+id/ly_terminos"
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            android:layout_marginBottom="25dp"
++            android:layout_weight="6"
++            android:gravity="center"
++            android:orientation="vertical">
++
++            <Button
++                android:id="@+id/btn_terminos"
++                style="@style/Widget.AppCompat.Button.Borderless"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="Pulsa aquí para leer los términos y condiciones sobre esta aplicación propiedad de Dafepa Software"
++                android:textAllCaps="false"
+                 android:textColor="@color/blanco"
+-                android:textSize="10dp" />
++                android:textSize="8sp" />
++        </LinearLayout>
+ 
+ 
+-        </LinearLayout>
++    </LinearLayout>
+ 
+ 
+ </LinearLayout>
+Index: app/src/main/res/layout/activity_pantalla_principal.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_pantalla_principal.xml	(revision 00f81a41f1cebabad3c78d0d0ee0c044029ae178)
++++ app/src/main/res/layout/activity_pantalla_principal.xml	(revision )
+@@ -48,13 +48,22 @@
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content" />
+ 
++            <Button
++                android:id="@+id/btn_pene"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_weight="1"
++                android:text="PENE DE CABALLO" />
++
+         </android.support.design.widget.AppBarLayout>
+ 
+             <android.support.v4.view.ViewPager
+                 android:id="@+id/container"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
++                app:layout_behavior="@string/appbar_scrolling_view_behavior" >
++
++            </android.support.v4.view.ViewPager>
+ 
+         </LinearLayout>
+ 

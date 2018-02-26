@@ -5,11 +5,13 @@ package com.software.dafepa.proyectolaescalera.Objects;
  */
 
 public class Evento {
-    String titulo;
-    String descripcion;
-    String mail;
-    Boolean busco;
 
+    private String titulo;
+    private String descripcion;
+    private String mail;
+    private Boolean busco;
+
+    public Evento(){}
     public Evento(String titulo, String descripcion, String mail, Boolean busco) {
         this.titulo = titulo;
         this.descripcion = descripcion;

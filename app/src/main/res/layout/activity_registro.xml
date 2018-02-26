@@ -78,6 +78,7 @@
                 android:orientation="vertical">
 
                 <EditText
+                    android:id="@+id/edtxt_nombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -87,10 +88,25 @@
                     android:background="@drawable/edittextstyle"
                     android:drawableLeft="@drawable/user"
                     android:drawablePadding="6dp"
-                    android:hint="Memepolice"
+                    android:hint="Nombre"
                     android:paddingLeft="10dp" />
 
                 <EditText
+                    android:id="@+id/edtxt_apellido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittextstyle"
+                    android:drawableLeft="@drawable/user"
+                    android:drawablePadding="6dp"
+                    android:hint="Apellidos"
+                    android:paddingLeft="10dp" />
+
+                <EditText
+                    android:id="@+id/edtxt_correo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -100,11 +116,11 @@
                     android:background="@drawable/edittextstyle"
                     android:drawableLeft="@drawable/mail"
                     android:drawablePadding="6dp"
-                    android:hint="halfonso@pipo.com"
+                    android:hint="Correo electrónico"
                     android:paddingLeft="10dp" />
 
                 <EditText
-                    android:id="@+id/contrasena1"
+                    android:id="@+id/edtxt_pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -119,7 +135,7 @@
                     android:paddingLeft="10dp" />
 
                 <EditText
-                    android:id="@+id/et_contrasena1"
+                    android:id="@+id/edtxt_pass2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"

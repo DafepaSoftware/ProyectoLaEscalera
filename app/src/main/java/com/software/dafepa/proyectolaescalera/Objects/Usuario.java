@@ -1,30 +1,28 @@
 package com.software.dafepa.proyectolaescalera.Objects;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 /**
  * Created by Fer on 23/2/18.
  */
 
+@IgnoreExtraProperties
 public class Usuario {
-    int id;
-    String mail;
-    String nombre;
-    String apellido;
-    String contrasena;
 
-    public Usuario(int id, String mail, String nombre, String apellido, String contrasena) {
-        this.id = id;
+
+    private String mail;
+    private String nombre;
+    private String apellido;
+    private String contrasena;
+
+    public Usuario(){}
+
+    public Usuario(String mail, String nombre, String apellido, String contrasena) {
+
         this.mail = mail;
         this.nombre = nombre;
         this.apellido = apellido;
         this.contrasena = contrasena;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getMail() {
