@@ -1,58 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.software.dafepa.proyectolaescalera.NuevoEvento">
+    android:orientation="vertical">
 
-    <FrameLayout
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar"
+        app:layout_scrollFlags="scroll|enterAlways" />
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:background="@color/color_fondo">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1.0in"
-            android:background="@color/moradeteClaro"
-            tools:ignore="Suspicious0dp">
+            android:layout_height="match_parent"
+            android:background="@color/color_fondo"
+            android:orientation="vertical"
+            tools:context="com.software.dafepa.proyectolaescalera.NuevoEvento">
 
-            <ImageButton
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/moradeteClaro"
-                android:src="@drawable/cruz" />
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="15dp">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="¿Buscas u Ofreces ayuda?"
+                    android:textAlignment="center"
+                    android:textSize="24sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp">
+
+                <LinearLayout
+                    android:id="@+id/ly_busco"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/color_fondo_oscurito"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_busco"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:text="¡Busco ayuda!"
+                        android:textAlignment="center"
+                        android:textColor="@color/texto_destacado"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:id="@+id/ly_busco_rayica"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"
+                        android:background="@color/colorAccent"
+                        android:orientation="vertical"></LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ly_necesito"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_necesito"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:text="¡Necesito ayuda!"
+                        android:textAlignment="center"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:id="@+id/ly_necesito_rayica"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:visibility="visible"></LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@color/moradeteClaro"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/textView52"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="¡Describe brevemente qué necesitas!"
+                    android:textAlignment="center"
+                    android:textSize="24sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edtxt_titulo"
+                    style="@style/Widget.AppCompat.AutoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:gravity="top|left"
+                    android:hint="Escribe aquí que necesitas"
+
+                    android:inputType="textMultiLine"
+                    android:maxLength="500"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp" />
+
+                <TextView
+                    android:id="@+id/txt_caracteres"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="8dp"
+                    android:text="0 / 50 caracteres."
+                    android:textAlignment="textEnd"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@color/moradeteClaro"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/textView53"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="¡Añade una descripción más detallada!"
+                    android:textAlignment="center"
+                    android:textSize="24sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edtxt_descripcion"
+                    style="@style/Widget.AppCompat.AutoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:gravity="top|left"
+                    android:hint="Escribe aquí  una descripción lo más detallada posible"
+
+                    android:inputType="textMultiLine"
+                    android:maxLength="500"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp" />
+
+                <TextView
+                    android:id="@+id/txt_caracteres2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="8dp"
+                    android:text="0 / 500 caracteres."
+                    android:textAlignment="textEnd"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttonstyle_cancel"
+                    android:drawableLeft="@drawable/cross"
+                    android:text="Cancelar"
+                    android:textColor="@color/blanco" />
+
+                <Button
+                    android:id="@+id/btn_create"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttonstyle"
+                    android:drawableLeft="@drawable/tick"
+                    android:text="Crear"
+                    android:textColor="@color/blanco" />
+            </LinearLayout>
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0.5in"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:background="@drawable/buttonstyle"
-                android:text="Publicar"
-                android:textColor="@color/blanco" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/buttonstyle"
-                android:text="Cancelar"
-                android:textColor="@color/blanco" />
-
-        </LinearLayout>
-
-
-    </FrameLayout>
-
-</android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

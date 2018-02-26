@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/toolbar_cancel"
+        app:showAsAction="ifRoom"
+        android:title="cancelar"
+        android:icon="@drawable/cross_toolbar"
+        />
+
+    <item
+        android:id="@+id/toolbar_acept"
+        app:showAsAction="ifRoom"
+        android:title="aceptar"
+        android:icon="@drawable/tick_toolbar"
+        />
+</menu>
