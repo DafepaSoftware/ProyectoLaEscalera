@@ -156,6 +156,7 @@ public class NuevoEvento extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_toolbar_nuevoelemento, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

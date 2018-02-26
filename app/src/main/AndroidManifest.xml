@@ -26,7 +26,7 @@
             android:theme="@style/StyleATheme_Toolbar_statusTrans"
             android:screenOrientation="portrait"/>
         <activity android:name=".Login.RegistroActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity android:name=".EditUser"
             android:screenOrientation="portrait"/>
         <activity android:name=".NuevoEvento"

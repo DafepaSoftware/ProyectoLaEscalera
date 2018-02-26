@@ -7,6 +7,9 @@ import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -25,8 +28,10 @@ import com.software.dafepa.proyectolaescalera.R;
 import java.util.HashMap;
 import java.util.Map;
 
-//TODO deberíamos limitar los campos de alguna manera y hacerla scrollable
+//TODO deberíamos limitar los campos de alguna manera
 public class RegistroActivity extends AppCompatActivity {
+
+    private Toolbar myToolbar;
 
     //interfaz
     private Button btn_registrarse;
@@ -45,7 +50,8 @@ public class RegistroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
         activity = this;
-        HalpFuncs.translucentStatusBar(activity);
+        //HalpFuncs.translucentStatusBar(activity);
+        toolbarCode();
 
         edtxt_nombre = findViewById(R.id.edtxt_nombre);
         edtxt_apellido = findViewById(R.id.edtxt_apellido);
@@ -57,12 +63,7 @@ public class RegistroActivity extends AppCompatActivity {
         (findViewById(R.id.btn_terminos)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AlertDialog.Builder(activity).setMessage("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis ligula pharetra odio varius posuere sit amet non ligula. Donec eu efficitur nisi. Ut risus massa, tincidunt vel urna eget, gravida venenatis justo. Ut pulvinar porttitor mi non luctus. Nullam rutrum odio at purus fermentum dictum. In sagittis metus lectus, id volutpat quam venenatis at. Phasellus id tristique urna, sed fermentum felis. Suspendisse luctus, sapien nec volutpat condimentum, eros libero ultrices ex, nec porta urna lacus a sapien. Integer rutrum eu neque tincidunt pulvinar. Quisque consectetur, ex dictum dictum tincidunt, metus risus eleifend elit, a luctus sapien diam ut enim. Cras condimentum, velit sed convallis tincidunt, magna nulla porttitor quam, vel cursus nunc sem sit amet neque. Nullam pulvinar dolor lacinia enim mollis, vitae mollis justo pellentesque. Quisque vel metus a tortor congue aliquet sit amet non mauris.\n" +
-                        "\n" +
-                        "Suspendisse eu faucibus sapien, at pulvinar mi. Duis diam diam, faucibus sed massa et, ullamcorper facilisis lectus. Duis ut nulla vel odio imperdiet consectetur. Mauris et ante congue, varius justo eget, maximus felis. Curabitur eu eros ante. Sed tempus metus in erat sagittis, a luctus nulla imperdiet. Fusce nibh neque, efficitur nec sem quis, placerat pretium lorem. Fusce condimentum gravida ipsum, vel mattis ante luctus id. Cras tincidunt enim sit amet ligula luctus pretium.\n" +
-                        "\n" +
-                        "In placerat, magna sed tempus tempus, nisi dui luctus nisi, ac porta tellus quam eget magna. Nullam vitae tellus dui. Fusce egestas finibus purus ut placerat. Sed tincidunt pretium luctus. Nam consequat eu felis eu ornare. Duis efficitur auctor quam ac egestas. Fusce pellentesque ex magna, a posuere mauris sollicitudin vel. In condimentum nulla ante. " +
-                        "se enviarán").setPositiveButton("Aceptar", null).show();
+                terminosyCondiciones();
             }
         });
 
@@ -76,11 +77,45 @@ public class RegistroActivity extends AppCompatActivity {
 
     }
 
+    private void toolbarCode(){
+        myToolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+        myToolbar.setElevation(0.0f);
+        setSupportActionBar(myToolbar);
+        myToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                cancelarRegistro();
+                return true;
+            }
+            case R.id.toolbar_terminos: {
+                terminosyCondiciones();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     //Botón atrás de Android
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        cancelarRegistro();
         finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_toolbar_registro, menu);
+        return true;
     }
 
     private void comprobacionesCampos(){
@@ -157,5 +192,24 @@ public class RegistroActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void cancelarRegistro(){
+        new AlertDialog.Builder(activity).setMessage("¿Deseas salir?\n\nLos datos introducidos no " +
+                "se enviarán").setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        }).setNegativeButton("No", null).show();
+    }
+
+    private void terminosyCondiciones(){
+        new AlertDialog.Builder(activity).setMessage("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis ligula pharetra odio varius posuere sit amet non ligula. Donec eu efficitur nisi. Ut risus massa, tincidunt vel urna eget, gravida venenatis justo. Ut pulvinar porttitor mi non luctus. Nullam rutrum odio at purus fermentum dictum. In sagittis metus lectus, id volutpat quam venenatis at. Phasellus id tristique urna, sed fermentum felis. Suspendisse luctus, sapien nec volutpat condimentum, eros libero ultrices ex, nec porta urna lacus a sapien. Integer rutrum eu neque tincidunt pulvinar. Quisque consectetur, ex dictum dictum tincidunt, metus risus eleifend elit, a luctus sapien diam ut enim. Cras condimentum, velit sed convallis tincidunt, magna nulla porttitor quam, vel cursus nunc sem sit amet neque. Nullam pulvinar dolor lacinia enim mollis, vitae mollis justo pellentesque. Quisque vel metus a tortor congue aliquet sit amet non mauris.\n" +
+                "\n" +
+                "Suspendisse eu faucibus sapien, at pulvinar mi. Duis diam diam, faucibus sed massa et, ullamcorper facilisis lectus. Duis ut nulla vel odio imperdiet consectetur. Mauris et ante congue, varius justo eget, maximus felis. Curabitur eu eros ante. Sed tempus metus in erat sagittis, a luctus nulla imperdiet. Fusce nibh neque, efficitur nec sem quis, placerat pretium lorem. Fusce condimentum gravida ipsum, vel mattis ante luctus id. Cras tincidunt enim sit amet ligula luctus pretium.\n" +
+                "\n" +
+                "In placerat, magna sed tempus tempus, nisi dui luctus nisi, ac porta tellus quam eget magna. Nullam vitae tellus dui. Fusce egestas finibus purus ut placerat. Sed tincidunt pretium luctus. Nam consequat eu felis eu ornare. Duis efficitur auctor quam ac egestas. Fusce pellentesque ex magna, a posuere mauris sollicitudin vel. In condimentum nulla ante. " +
+                "se enviarán").setPositiveButton("Aceptar", null).show();
     }
 }
