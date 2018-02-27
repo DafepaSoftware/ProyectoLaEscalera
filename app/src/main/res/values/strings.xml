@@ -3,8 +3,8 @@
     <string name="usuario">Usuario</string>
     <string name="contrasena">Contraseña</string>
     <string name="slogan">Contigo pipo</string>
-    <string name="registrate">No estas registrado? Registrate!</string>
-    <string name="btnEntrar">Entrar!</string>
+    <string name="registrate">¿No estas registrado? ¡Registrate!</string>
+    <string name="btnEntrar">¡Entrar!</string>
     <string name="Abrir">Abrir</string>
     <string name="Cerrar">Cerrar</string>
     <string name="editarusuario">Editar Usuario</string>
