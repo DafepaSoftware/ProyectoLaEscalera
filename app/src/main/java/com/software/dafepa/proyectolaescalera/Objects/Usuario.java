@@ -15,6 +15,7 @@ public class Usuario {
     private String apellido;
     private String contrasena;
     private String nick;
+    private String fecha_naci;
 
     public Usuario(){}
 
@@ -56,5 +57,13 @@ public class Usuario {
 
     public void setNick(String nick) {
         this.nick = nick;
+    }
+
+    public String getFecha_naci() {
+        return fecha_naci;
+    }
+
+    public void setFecha_naci(String fecha_naci) {
+        this.fecha_naci = fecha_naci;
     }
 }

@@ -22,7 +22,18 @@ import com.software.dafepa.proyectolaescalera.PantallaPrincipal;
 import com.software.dafepa.proyectolaescalera.R;
 import com.software.dafepa.proyectolaescalera.Singletones.AplicacionManager;
 
-
+/*TODO COSAS QUE HACER AJAJ LOL
+* Marcar un número de teléfono
+* Abrir una localización GPS
+* Mostrar notificaciones en Android mediante NotificacionManager
+* Traducción a varios idiomas
+* Visualización en diferentes dispositivos(tablet/movil)
+* Persistencia de datos de la app.
+* Añadir imágenes a Firebase cloud Storage
+* Swipe Refresh Layout para actualizar contenidos
+* Realización de pruebas y documentación
+* Subir app a Play Store
+* */
 
 public class SplashActivity extends AppCompatActivity {
 

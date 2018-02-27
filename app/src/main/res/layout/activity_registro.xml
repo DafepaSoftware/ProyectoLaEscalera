@@ -162,7 +162,7 @@
                             android:drawablePadding="6dp"
                             android:onClick="showDatePickerDialog"
                             android:paddingLeft="10dp"
-                            android:text="Pulsa para seleccionar"
+                            android:text="FECHA DE NACIMIENTO"
                             android:textAlignment="viewStart"
                             android:textSize="15sp" />
 

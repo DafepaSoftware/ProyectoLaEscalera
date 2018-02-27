@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-//TODO deberíamos limitar los campos de alguna manera
 public class RegistroActivity extends AppCompatActivity {
 
     private Toolbar myToolbar;
@@ -198,6 +197,23 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     private void comprobacionesCampos(){
+
+        boolean usuario_espacio = false;
+        for (int i = 0; i < edtxt_nick.getText().toString().length(); ++i){
+            if (edtxt_nick.getText().toString().toCharArray()[i] == ' '){
+                usuario_espacio = true;
+                i = edtxt_nick.getText().toString().length();
+            }
+        }
+
+        boolean contrasena_espacios = false;
+        for (int i = 0; i < edtxt_pass.getText().toString().length(); ++i){
+            if (edtxt_pass.getText().toString().toCharArray()[i] == ' '){
+                contrasena_espacios = true;
+                i = edtxt_pass.getText().toString().length();
+            }
+        }
+
         if (edtxt_nick.getText().toString().length() <= 0){
             new AlertDialog.Builder(activity).setMessage("¡Necesitas tener un nombre de ususario!")
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
@@ -207,7 +223,15 @@ public class RegistroActivity extends AppCompatActivity {
                             HalpFuncs.showKeyboard(activity);
                         }
                     }).show();
-
+        }else if (usuario_espacio){
+            new AlertDialog.Builder(activity).setMessage("¡Tu nick no puede contener espacios!")
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            edtxt_nick.requestFocus();
+                            HalpFuncs.showKeyboard(activity);
+                        }
+                    }).show();
         }else if (edtxt_nombre.getText().toString().length() <= 0){
             new AlertDialog.Builder(activity).setMessage("¡Necisitamos conocer cómo te llamas!")
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
@@ -230,7 +254,7 @@ public class RegistroActivity extends AppCompatActivity {
                     }).show();
 
         }else if (edtxt_correo.getText().toString().length() <= 0){
-            new AlertDialog.Builder(activity).setMessage("¡Necisitamos conocer tu correo electrónico!")
+            new AlertDialog.Builder(activity).setMessage("¡Necesitamos tener tu correo de contacto!")
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -238,7 +262,23 @@ public class RegistroActivity extends AppCompatActivity {
                             HalpFuncs.showKeyboard(activity);
                         }
                     }).show();
-
+        }else if(!HalpFuncs.validateEmail(edtxt_correo.getText().toString())){
+            new AlertDialog.Builder(activity).setMessage("¡Parece que no es un correo electrónico válido!")
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            edtxt_correo.requestFocus();
+                            HalpFuncs.showKeyboard(activity);
+                        }
+                    }).show();
+        }else if(btn_fecha.getText().toString().equals("FECHA DE NACIMIENTO")){
+            new AlertDialog.Builder(activity).setMessage("¡Necisitamos conocer cuando nacistes!")
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            btn_fecha.requestFocus();
+                        }
+                    }).show();
         }else if (edtxt_pass.getText().toString().length() <= 0){
             new AlertDialog.Builder(activity).setMessage("¡Necesitas una contraseña para tu cuenta!")
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
@@ -248,7 +288,24 @@ public class RegistroActivity extends AppCompatActivity {
                             HalpFuncs.showKeyboard(activity);
                         }
                     }).show();
-
+        }else if(edtxt_pass.getText().toString().length() <= 3){
+            new AlertDialog.Builder(activity).setMessage("¡Tu contraseña debe contener al menos cuatro caracteres!")
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            edtxt_pass.requestFocus();
+                            HalpFuncs.showKeyboard(activity);
+                        }
+                    }).show();
+        }else if(contrasena_espacios){
+            new AlertDialog.Builder(activity).setMessage("¡Tu contraseña no puede contener espacios!")
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            edtxt_pass.requestFocus();
+                            HalpFuncs.showKeyboard(activity);
+                        }
+                    }).show();
         }else if (!edtxt_pass.getText().toString().equals(edtxt_pass2.getText().toString())){
             new AlertDialog.Builder(activity).setMessage("¡Las contraseñas deben ser iguales!")
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
@@ -271,6 +328,7 @@ public class RegistroActivity extends AppCompatActivity {
         u.setContrasena(edtxt_pass.getText().toString());
         u.setMail(edtxt_correo.getText().toString());
         u.setNick(edtxt_nick.getText().toString());
+        u.setFecha_naci(btn_fecha.getText().toString());
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("halpme/usuarios");
