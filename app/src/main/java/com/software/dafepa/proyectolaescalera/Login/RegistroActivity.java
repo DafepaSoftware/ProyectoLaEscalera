@@ -1,8 +1,11 @@
 package com.software.dafepa.proyectolaescalera.Login;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +30,7 @@ import com.software.dafepa.proyectolaescalera.PantallaPrincipal;
 import com.software.dafepa.proyectolaescalera.R;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 //TODO deberíamos limitar los campos de alguna manera
@@ -40,6 +45,8 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText edtxt_correo;
     private EditText edtxt_pass;
     private EditText edtxt_pass2;
+    private EditText edtxt_nick;
+    private Button btn_fecha;
 
 
     //Copia de activity para su fácil uso
@@ -59,11 +66,84 @@ public class RegistroActivity extends AppCompatActivity {
         edtxt_pass = (EditText) findViewById(R.id.edtxt_pass);
         edtxt_pass2 = (EditText) findViewById(R.id.edtxt_pass2);
         btn_registrarse =  (Button) findViewById(R.id.btn_registrame);
+        edtxt_nick = findViewById(R.id.edtxt_nick);
+        btn_fecha = (Button) findViewById(R.id.btn_fecha);
 
         (findViewById(R.id.btn_terminos)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 terminosyCondiciones();
+            }
+        });
+
+
+        //Funcionalidad calendario
+        final Calendar myCalendar = Calendar.getInstance();
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener()
+        {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                // myCalendar.add(Calendar.DATE, 0);
+                String myFormat = "yyyy-MM-dd"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
+                //textView.setText(sdf.format(myCalendar.getTime()));
+            }
+
+
+        };
+
+        btn_fecha.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                final Calendar c = Calendar.getInstance();
+                final int mYear = c.get(Calendar.YEAR);
+                final int mMonth = c.get(Calendar.MONTH);
+                final int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                // Launch Date Picker Dialog
+                DatePickerDialog dpd = new DatePickerDialog(activity,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // Display Selected date in textbox
+
+                                if (year < mYear)
+                                    view.updateDate(mYear,mMonth,mDay);
+
+                                if (monthOfYear < mMonth && year == mYear)
+                                    view.updateDate(mYear,mMonth,mDay);
+
+                                if (dayOfMonth < mDay && year == mYear && monthOfYear == mMonth)
+                                    view.updateDate(mYear,mMonth,mDay);
+                                String day = "";
+                                String month = "";
+                                if(dayOfMonth < 10){
+                                    day = "0"+dayOfMonth;
+                                }else{
+                                    day = Integer.toString(dayOfMonth);
+                                }
+                                if((monthOfYear+1) < 10){
+                                    month = "0"+(monthOfYear+1);
+                                }else{
+                                    month = Integer.toString(monthOfYear+1);
+                                }
+
+                                btn_fecha.setText(day + "/"
+                                        + month + "/" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                //dpd.getDatePicker().setMinDate(System.currentTimeMillis());
+                dpd.show();
             }
         });
 
@@ -108,7 +188,6 @@ public class RegistroActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         cancelarRegistro();
-        finish();
     }
 
     @Override
@@ -119,7 +198,17 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     private void comprobacionesCampos(){
-        if (edtxt_nombre.getText().toString().length() <= 0){
+        if (edtxt_nick.getText().toString().length() <= 0){
+            new AlertDialog.Builder(activity).setMessage("¡Necesitas tener un nombre de ususario!")
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            edtxt_nick.requestFocus();
+                            HalpFuncs.showKeyboard(activity);
+                        }
+                    }).show();
+
+        }else if (edtxt_nombre.getText().toString().length() <= 0){
             new AlertDialog.Builder(activity).setMessage("¡Necisitamos conocer cómo te llamas!")
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override
@@ -172,7 +261,6 @@ public class RegistroActivity extends AppCompatActivity {
 
         }else{
             crearUsuario();
-            finish();
         }
     }
 
@@ -182,14 +270,22 @@ public class RegistroActivity extends AppCompatActivity {
         u.setApellido(edtxt_apellido.getText().toString());
         u.setContrasena(edtxt_pass.getText().toString());
         u.setMail(edtxt_correo.getText().toString());
+        u.setNick(edtxt_nick.getText().toString());
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("halp.me");
-        DatabaseReference usersRef = ref.child("usuarios");
+        DatabaseReference ref = database.getReference("halpme/usuarios");
+        DatabaseReference usersRef = ref.child(u.getNick());
 
 
         usersRef.setValue(u);
 
+        new AlertDialog.Builder(activity).setMessage("¡Tu usuario se ha creado satisfactoriamente!")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        }).show();
 
 
     }

@@ -14,16 +14,9 @@ public class Usuario {
     private String nombre;
     private String apellido;
     private String contrasena;
+    private String nick;
 
     public Usuario(){}
-
-    public Usuario(String mail, String nombre, String apellido, String contrasena) {
-
-        this.mail = mail;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.contrasena = contrasena;
-    }
 
     public String getMail() {
         return mail;
@@ -55,5 +48,13 @@ public class Usuario {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
     }
 }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bcklogin"
     android:orientation="vertical"
     tools:layout_editor_absoluteX="8dp"
     tools:layout_editor_absoluteY="8dp">
@@ -15,8 +16,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/bcklogin">
+        android:layout_gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,6 +89,21 @@
                         android:orientation="vertical">
 
                         <EditText
+                            android:id="@+id/edtxt_nick"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/edittextstyle"
+                            android:drawableLeft="@drawable/user"
+                            android:drawablePadding="6dp"
+                            android:hint="Nombre de usuario*"
+                            android:paddingLeft="10dp"
+                            android:singleLine="true" />
+
+                        <EditText
                             android:id="@+id/edtxt_nombre"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -99,8 +114,9 @@
                             android:background="@drawable/edittextstyle"
                             android:drawableLeft="@drawable/user"
                             android:drawablePadding="6dp"
-                            android:hint="Nombre"
-                            android:paddingLeft="10dp" />
+                            android:hint="Nombre*"
+                            android:paddingLeft="10dp"
+                            android:singleLine="true" />
 
                         <EditText
                             android:id="@+id/edtxt_apellido"
@@ -113,8 +129,9 @@
                             android:background="@drawable/edittextstyle"
                             android:drawableLeft="@drawable/user"
                             android:drawablePadding="6dp"
-                            android:hint="Apellidos"
-                            android:paddingLeft="10dp" />
+                            android:hint="Apellidos*"
+                            android:paddingLeft="10dp"
+                            android:singleLine="true" />
 
                         <EditText
                             android:id="@+id/edtxt_correo"
@@ -127,8 +144,27 @@
                             android:background="@drawable/edittextstyle"
                             android:drawableLeft="@drawable/mail"
                             android:drawablePadding="6dp"
-                            android:hint="Correo electrónico"
-                            android:paddingLeft="10dp" />
+                            android:hint="Correo electrónico*"
+                            android:paddingLeft="10dp"
+                            android:singleLine="true" />
+
+                        <Button
+                            android:id="@+id/btn_fecha"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/edittextstyle"
+                            android:drawableLeft="@drawable/calendario"
+                            android:drawablePadding="6dp"
+                            android:onClick="showDatePickerDialog"
+                            android:paddingLeft="10dp"
+                            android:text="Pulsa para seleccionar"
+                            android:textAlignment="viewStart"
+                            android:textSize="15sp" />
 
                         <EditText
                             android:id="@+id/edtxt_pass"
@@ -141,9 +177,10 @@
                             android:background="@drawable/edittextstyle"
                             android:drawableLeft="@drawable/password"
                             android:drawablePadding="6dp"
-                            android:hint="********"
+                            android:hint="contraseña*"
                             android:inputType="textPassword"
-                            android:paddingLeft="10dp" />
+                            android:paddingLeft="10dp"
+                            android:singleLine="true" />
 
                         <EditText
                             android:id="@+id/edtxt_pass2"
@@ -156,10 +193,11 @@
                             android:background="@drawable/edittextstyle"
                             android:drawableLeft="@drawable/password"
                             android:drawablePadding="6dp"
-                            android:hint="********"
+                            android:hint="comprobar contraseña*"
 
                             android:inputType="textPassword"
-                            android:paddingLeft="10dp" />
+                            android:paddingLeft="10dp"
+                            android:singleLine="true" />
 
                         <Button
                             android:id="@+id/btn_registrame"
