@@ -3,6 +3,8 @@ package com.software.dafepa.proyectolaescalera;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
@@ -64,5 +66,13 @@ public class HalpFuncs {
     public static boolean validateEmail(String emailStr) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
         return matcher.find();
+    }
+
+    //Comprueba si tiene internet
+    public static boolean isOnline(Activity a) {
+        ConnectivityManager cm =
+                (ConnectivityManager) a.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }

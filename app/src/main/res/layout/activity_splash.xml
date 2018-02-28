@@ -62,7 +62,7 @@
             android:textStyle="italic" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/edtxt_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"

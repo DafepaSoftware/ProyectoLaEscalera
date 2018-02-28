@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -29,6 +30,7 @@ import android.widget.ListView;
 
 import com.software.dafepa.proyectolaescalera.Adapters.Adapter_NavDrawer;
 import com.software.dafepa.proyectolaescalera.Login.RegistroActivity;
+import com.software.dafepa.proyectolaescalera.Login.SplashActivity;
 
 import java.util.ArrayList;
 
@@ -142,6 +144,19 @@ public class PantallaPrincipal extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(activity, PantallaPerfil.class);
                 startActivity(intent);
+            }
+        });
+
+        lv_navdrawer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i){
+                    case 3:{
+                        Intent intent = new Intent(activity, SplashActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
             }
         });
     }

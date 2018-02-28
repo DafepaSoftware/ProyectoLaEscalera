@@ -316,6 +316,16 @@ public class RegistroActivity extends AppCompatActivity {
                         }
                     }).show();
 
+        }else if(!HalpFuncs.isOnline(activity)){
+            new AlertDialog.Builder(activity).setMessage("¡Parece que no tienes internet, " +
+                    "comprueba tu conexión por favor!")
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            edtxt_pass.requestFocus();
+                            HalpFuncs.showKeyboard(activity);
+                        }
+                    }).show();
         }else{
             crearUsuario();
         }
