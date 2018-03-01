@@ -219,11 +219,87 @@
                     android:textSize="12sp" />
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@color/moradeteClaro"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/telefono"
+                    android:textAlignment="center"
+                    android:textSize="24sp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edtxt_telefono"
+                    style="@style/Widget.AppCompat.AutoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/escribeTelefono"
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/buttonstyle"
+                    android:drawableLeft="@drawable/tick"
+                    android:text="Localiseme"
+                    android:textColor="@color/blanco" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/buttonstyle"
+                    android:drawableLeft="@drawable/tick"
+                    android:text="Localisemedasdsadasdsadas"
+                    android:visibility="invisible"
+                    android:textColor="@color/blanco" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="25dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -252,6 +328,7 @@
                     android:text="@string/crear"
                     android:textColor="@color/blanco" />
             </LinearLayout>
+
 
         </LinearLayout>
 

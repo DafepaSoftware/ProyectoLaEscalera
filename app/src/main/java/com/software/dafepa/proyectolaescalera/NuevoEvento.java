@@ -28,6 +28,7 @@ public class NuevoEvento extends AppCompatActivity {
     private String last_descripcion_;
     private Activity activity;
     private boolean busco = true;
+    private Button btn_aceptar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

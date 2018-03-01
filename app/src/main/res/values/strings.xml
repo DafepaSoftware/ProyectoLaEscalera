@@ -32,5 +32,9 @@
     <string name="recuerdame">Recuerdame</string>
     <string name="busco">Busco</string>
     <string name="ofrezco">Ofrezco</string>
+    <string name="telefono">¡Añade un numero de telefono!</string>
+    <string name="escribeTelefono">Escribe aqui tu numero de telefono</string>
+    <string name="llamar">Llamar</string>
+    <string name="verGPS">Ver en GPS</string>
 
 </resources>

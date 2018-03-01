@@ -3,6 +3,7 @@ package com.software.dafepa.proyectolaescalera;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,10 @@ public class InfoElemeneto extends AppCompatActivity {
     private Toolbar myToolbar;
     private Button btnCancelar;
     private Activity activity;
+    private Button btnLlamar;
+    private Button btnLocalizar;
+    private String numTelefono;
+    private Uri  coordenadas;
 
 
 
@@ -23,6 +28,34 @@ public class InfoElemeneto extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_elemeneto);
+
+        btnLlamar = (Button) findViewById(R.id.btn_llamar);
+        btnLocalizar = (Button) findViewById(R.id.btn_localizar);
+
+
+        btnLocalizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coordenadas = Uri.parse("geo:40.350033, -3.833532");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, coordenadas);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(mapIntent);
+                }
+
+            }
+        });
+
+        btnLlamar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                numTelefono = "+34666777888";
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", numTelefono, null));
+                startActivity(intent);
+            }
+        });
+
 
 
 

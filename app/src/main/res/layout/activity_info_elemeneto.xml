@@ -107,8 +107,7 @@
             android:layout_marginLeft="10dp"
             android:text="Nombre usuario"
             android:textSize="15dp"
-            android:textColor="@color/moradete"
-            />
+            android:textColor="@color/moradete"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -119,6 +118,39 @@
             android:textColor="@color/texto_normal"
             />
     </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_localizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttonstyle"
+                    android:drawableLeft="@drawable/location"
+                    android:text="@string/verGPS"
+                    android:textColor="@color/blanco" />
+
+                <Button
+                    android:id="@+id/btn_llamar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttonstyle"
+                    android:drawableLeft="@drawable/phone"
+                    android:text="@string/llamar"
+                    android:textColor="@color/blanco" />
+            </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -137,7 +169,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttonstyle"
                 android:drawableLeft="@drawable/tick"
-                android:text="@string/crear"
+                android:text="@string/aceptar"
                 android:textColor="@color/blanco" />
         </LinearLayout>
 
