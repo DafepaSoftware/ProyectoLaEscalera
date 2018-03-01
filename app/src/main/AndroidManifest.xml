@@ -39,6 +39,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".InfoElemeneto"
             android:screenOrientation="portrait"/>
+        <activity android:name=".Utilidades.ZoomImageActivity"/>
     </application>
 
 </manifest>

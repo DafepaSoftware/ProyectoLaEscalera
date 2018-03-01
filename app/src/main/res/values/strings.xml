@@ -36,5 +36,8 @@
     <string name="escribeTelefono">Escribe aqui tu numero de telefono</string>
     <string name="llamar">Llamar</string>
     <string name="verGPS">Ver en GPS</string>
+    <string name="cargar_imagen">¡Escoge una imagen representativa!</string>
+    <string name="galeria">Galeria</string>
+    <string name="camara">Cámara</string>
 
 </resources>

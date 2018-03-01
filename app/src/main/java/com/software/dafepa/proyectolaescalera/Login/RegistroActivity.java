@@ -310,13 +310,7 @@ public class RegistroActivity extends AppCompatActivity {
         }else if(!HalpFuncs.isOnline(activity)){
             new AlertDialog.Builder(activity).setMessage("¡Parece que no tienes internet, " +
                     "comprueba tu conexión por favor!")
-                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            edtxt_pass.requestFocus();
-                            HalpFuncs.showKeyboard(activity);
-                        }
-                    }).show();
+                    .setPositiveButton("Aceptar", null).show();
         }else{
             crearUsuario();
         }
@@ -331,6 +325,7 @@ public class RegistroActivity extends AppCompatActivity {
         u.setNick(edtxt_nick.getText().toString());
         u.setFecha_naci(btn_fecha.getText().toString());
 
+        //TODO comprobar si el usuario existe
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("halpme/usuarios");
         DatabaseReference usersRef = ref.child(u.getNick());
