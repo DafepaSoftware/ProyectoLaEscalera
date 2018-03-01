@@ -3,10 +3,8 @@ package com.software.dafepa.proyectolaescalera.Login;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
-import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,24 +12,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.software.dafepa.proyectolaescalera.HalpFuncs;
+import com.software.dafepa.proyectolaescalera.Utilidades.HalpFuncs;
 import com.software.dafepa.proyectolaescalera.Objects.Usuario;
-import com.software.dafepa.proyectolaescalera.PantallaPrincipal;
 import com.software.dafepa.proyectolaescalera.R;
 
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 public class RegistroActivity extends AppCompatActivity {
 

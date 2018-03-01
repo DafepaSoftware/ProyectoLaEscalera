@@ -5,14 +5,20 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -25,7 +31,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.software.dafepa.proyectolaescalera.HalpFuncs;
+import com.software.dafepa.proyectolaescalera.Utilidades.HalpFuncs;
 import com.software.dafepa.proyectolaescalera.PantallaPrincipal;
 import com.software.dafepa.proyectolaescalera.R;
 import com.software.dafepa.proyectolaescalera.Singletones.AplicacionManager;
@@ -48,11 +54,14 @@ public class SplashActivity extends AppCompatActivity {
     //Interfaz
     private LinearLayout ly_logo_contenedor;
     private LinearLayout ly_menu;
+    private RelativeLayout ly_main;
     private TextView img_titulo;
     private TextView tvRegistrarse2;
     private Button btn_entrar2;
     private EditText edtxt_usuario;
     private EditText edtxt_pass;
+
+    private ProgressBar progressBar;
 
 
     //Si es verdadero sacará el menu de login en pantalla, si no pasará a PantallaPrincipal
@@ -80,6 +89,7 @@ public class SplashActivity extends AppCompatActivity {
         btn_entrar2 = (Button) findViewById(R.id.btn_entrar2);
         edtxt_usuario = findViewById(R.id.edtxt_usuario);
         edtxt_pass = findViewById(R.id.edtxt_pass);
+        ly_main = findViewById(R.id.ly_main);
 
         //oculta el menu de login
         ly_menu.setVisibility(View.GONE);
@@ -193,12 +203,26 @@ public class SplashActivity extends AppCompatActivity {
                     "comprueba tu conexión por favor!")
                     .setPositiveButton("Aceptar", null).show();
         }else{
+            //progressBar
+            progressBar = new ProgressBar(activity,null,android.R.attr.progressBarStyleLarge);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(300,300);
+            params.addRule(RelativeLayout.CENTER_IN_PARENT);
+            ly_main.addView(progressBar,params);
+            progressBar.setBackgroundColor(Color.parseColor("#33333333"));
+            progressBar.setVisibility(View.VISIBLE);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
             String usu = edtxt_usuario.getText().toString();
             final FirebaseDatabase database = FirebaseDatabase.getInstance();
             final DatabaseReference user_ref = database.getReference("halpme/usuarios");
             user_ref.orderByChild("nick").equalTo(usu).addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                    progressBar.setVisibility(View.GONE);
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
                     System.out.println(dataSnapshot.getKey());
                     String str = dataSnapshot.child("contrasena").getValue().toString();
                     if(str.equals(edtxt_pass.getText().toString())){
@@ -206,8 +230,7 @@ public class SplashActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }else{
-                        new AlertDialog.Builder(activity).setMessage("¡El nombre de usuario o contraseña son incorrectos!\n"
-                        + str + "\n" + edtxt_pass.getText().toString())
+                        new AlertDialog.Builder(activity).setMessage("¡El nombre de usuario o contraseña son incorrectos!")
                                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -216,6 +239,7 @@ public class SplashActivity extends AppCompatActivity {
                                     }
                                 }).show();
                     }
+
                 }
 
                 @Override
@@ -235,7 +259,17 @@ public class SplashActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
+                    progressBar.setVisibility(View.GONE);
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
+                    new AlertDialog.Builder(activity).setMessage("¡El nombre de usuario o contraseña son incorrectos!")
+                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    edtxt_usuario.requestFocus();
+                                    HalpFuncs.showKeyboard(activity);
+                                }
+                            }).show();
                 }
             });
         }
