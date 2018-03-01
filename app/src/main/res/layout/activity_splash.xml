@@ -84,7 +84,7 @@
             android:textStyle="italic" />
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/cbx_recuerdame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

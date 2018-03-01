@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -31,6 +32,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.software.dafepa.proyectolaescalera.Objects.Usuario;
+import com.software.dafepa.proyectolaescalera.Utilidades.ApplicationData;
 import com.software.dafepa.proyectolaescalera.Utilidades.HalpFuncs;
 import com.software.dafepa.proyectolaescalera.PantallaPrincipal;
 import com.software.dafepa.proyectolaescalera.R;
@@ -62,6 +65,7 @@ public class SplashActivity extends AppCompatActivity {
     private EditText edtxt_pass;
 
     private ProgressBar progressBar;
+    private CheckBox cbx_recuerdame;
 
 
     //Si es verdadero sacará el menu de login en pantalla, si no pasará a PantallaPrincipal
@@ -73,6 +77,8 @@ public class SplashActivity extends AppCompatActivity {
     //Copia de activity para su fácil uso
     private Activity activity;
 
+    private ApplicationData appdata;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +88,12 @@ public class SplashActivity extends AppCompatActivity {
 
         HalpFuncs.init(activity);
 
+        appdata = new ApplicationData();
+        appdata.cargarAplicacionDePreferencias(activity);
+        if(appdata.isRememberme()){
+            show_menu = false;
+        }
+
         ly_logo_contenedor = (LinearLayout) findViewById(R.id.ly_logo_contenedor);
         ly_menu = (LinearLayout) findViewById(R.id.ly_menu);
         img_titulo = (TextView) findViewById(R.id.img_titulo);
@@ -90,6 +102,7 @@ public class SplashActivity extends AppCompatActivity {
         edtxt_usuario = findViewById(R.id.edtxt_usuario);
         edtxt_pass = findViewById(R.id.edtxt_pass);
         ly_main = findViewById(R.id.ly_main);
+        cbx_recuerdame = findViewById(R.id.cbx_recuerdame);
 
         //oculta el menu de login
         ly_menu.setVisibility(View.GONE);
@@ -149,7 +162,6 @@ public class SplashActivity extends AppCompatActivity {
 
                     public void onFinish() {
 
-                        //TODO Comprobación si el usuario está logeado
                         if (show_menu) {
                             AnimatorSet set = new AnimatorSet();
                             set.playTogether(
@@ -162,7 +174,9 @@ public class SplashActivity extends AppCompatActivity {
                             set.start();
                             showMenu();
                         }else{
-                            //TODO iniciar PantallaPrincipal
+                            Intent intent = new Intent(activity, PantallaPrincipal.class);
+                            startActivity(intent);
+                            finish();
                         }
                     }
                 }.start();
@@ -228,6 +242,11 @@ public class SplashActivity extends AppCompatActivity {
                     if(str.equals(edtxt_pass.getText().toString())){
                         Intent intent = new Intent(activity, PantallaPrincipal.class);
                         startActivity(intent);
+                        if (cbx_recuerdame.isChecked()){
+                            appdata.setRememberme(true);
+                            cargarUsuarioEnPreferencias(dataSnapshot);
+                            appdata.guardarEnPreferencias(activity);
+                        }
                         finish();
                     }else{
                         new AlertDialog.Builder(activity).setMessage("¡El nombre de usuario o contraseña son incorrectos!")
@@ -273,6 +292,20 @@ public class SplashActivity extends AppCompatActivity {
                 }
             });
         }
+
+
+    }
+
+    private void cargarUsuarioEnPreferencias(DataSnapshot dataSnapshot){
+        Usuario user = new Usuario();
+
+        user.setNombre(dataSnapshot.child("nombre").getValue().toString());
+        user.setApellido(dataSnapshot.child("apellido").getValue().toString());
+        user.setFecha_naci(dataSnapshot.child("fecha_naci").getValue().toString());
+        user.setMail(dataSnapshot.child("mail").getValue().toString());
+        user.setNick(dataSnapshot.child("nick").getValue().toString());
+
+        appdata.setUser(user);
     }
 
 }

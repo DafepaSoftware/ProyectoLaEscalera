@@ -31,6 +31,8 @@ import android.widget.ListView;
 import com.software.dafepa.proyectolaescalera.Adapters.Adapter_NavDrawer;
 import com.software.dafepa.proyectolaescalera.Login.RegistroActivity;
 import com.software.dafepa.proyectolaescalera.Login.SplashActivity;
+import com.software.dafepa.proyectolaescalera.Objects.Usuario;
+import com.software.dafepa.proyectolaescalera.Utilidades.ApplicationData;
 
 import java.util.ArrayList;
 
@@ -154,6 +156,11 @@ public class PantallaPrincipal extends AppCompatActivity {
                     case 3:{
                         Intent intent = new Intent(activity, SplashActivity.class);
                         startActivity(intent);
+                        ApplicationData appdata = new ApplicationData();
+                        appdata.cargarAplicacionDePreferencias(activity);
+                        appdata.setUser(new Usuario());
+                        appdata.setRememberme(false);
+                        appdata.guardarEnPreferencias(activity);
                         finish();
                     }
                 }

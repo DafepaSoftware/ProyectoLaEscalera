@@ -42,14 +42,14 @@ public class ApplicationData {
         SharedPreferences preferences;
         preferences=  a.getSharedPreferences("Preferencias",Context.MODE_PRIVATE);
         String carga=preferences.getString("aplicacion", null);
-        ApplicationData aplicacion = null;
 
         Gson gson = new Gson();
         Type type = new TypeToken<ApplicationData>() {}.getType();
         ApplicationData obj = gson.fromJson(carga, type);
         if(obj!=null) {
-            aplicacion=obj;
 
+            rememberme = obj.isRememberme();
+            user = obj.getUser();
             /*this.usuario=obj.getUsuario();
             this.peticiones=obj.getPeticiones();
             this.contactosSoporte=obj.getContactosSoporte();
@@ -58,11 +58,24 @@ public class ApplicationData {
             this.numeroVecesMostrarValoracionApp=obj.getNumeroVecesMostrarValoracionApp();
             this.mostrarAvisoValoracionAPP=obj.isMostrarAvisoValoracionAPP();*/
 
-
-
-
         }
 
 
+    }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
+
+    public boolean isRememberme() {
+        return rememberme;
+    }
+
+    public void setRememberme(boolean rememberme) {
+        this.rememberme = rememberme;
     }
 }
