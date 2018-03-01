@@ -144,7 +144,7 @@ public class PantallaPrincipal extends AppCompatActivity {
         ly_perfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, PantallaPerfil.class);
+                Intent intent = new Intent(activity, EditUser.class);
                 startActivity(intent);
             }
         });
