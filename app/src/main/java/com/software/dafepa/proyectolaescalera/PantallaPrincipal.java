@@ -39,6 +39,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.software.dafepa.proyectolaescalera.Adapters.Adapter_NavDrawer;
+import com.software.dafepa.proyectolaescalera.Adapters.Adapter_eventos;
 import com.software.dafepa.proyectolaescalera.Login.RegistroActivity;
 import com.software.dafepa.proyectolaescalera.Login.SplashActivity;
 import com.software.dafepa.proyectolaescalera.Objects.Evento;
@@ -62,6 +63,8 @@ public class PantallaPrincipal extends AppCompatActivity {
     private RelativeLayout ly_main;*/
 
     private ArrayList<Evento> eventos;
+    private static Adapter_eventos busco_adapter;
+    private static Adapter_eventos ofrezco_adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +74,8 @@ public class PantallaPrincipal extends AppCompatActivity {
         activity=this;
 
         eventos = new ArrayList<>();
+        busco_adapter = new Adapter_eventos(activity);
+        ofrezco_adapter = new Adapter_eventos(activity);
 
         btn_caballo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -251,12 +256,15 @@ public class PantallaPrincipal extends AppCompatActivity {
             switch (getArguments().getInt(ARG_SECTION_NUMBER)){
                 case 1:{
                     rootView = inflater.inflate(R.layout.fragment_busco, container, false);
-
+                    ListView lv = rootView.findViewById(R.id.fragment_lv);
+                    lv.setAdapter(busco_adapter);
 
                     break;
                 }
                 case 2:{
                     rootView = inflater.inflate(R.layout.fragment_busco, container, false);
+                    ListView lv = rootView.findViewById(R.id.fragment_lv);
+                    lv.setAdapter(ofrezco_adapter);
 
                     break;
                 }
@@ -320,6 +328,15 @@ public class PantallaPrincipal extends AppCompatActivity {
                 Evento e = dataSnapshot.getValue(Evento.class);
 
                 eventos.add(0,e);
+
+                if(e.getBusco()){
+                    busco_adapter.getEventos().add(0,e);
+                    busco_adapter.notifyDataSetChanged();
+                }else{
+                    ofrezco_adapter.getEventos().add(0,e);
+                    ofrezco_adapter.notifyDataSetChanged();
+                }
+
             }
 
             @Override
@@ -344,7 +361,6 @@ public class PantallaPrincipal extends AppCompatActivity {
 
             @Override
             protected void finalize() throws Throwable {
-                super.finalize();
 
             }
         });
