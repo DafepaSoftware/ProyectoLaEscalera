@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -19,13 +20,19 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.vision.text.Line;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -72,6 +79,9 @@ public class NuevoEvento extends AppCompatActivity {
 
     private Uri imageuri;
 
+    private ProgressBar progressBar;
+    private RelativeLayout ly_main;
+    private boolean uploaded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +95,7 @@ public class NuevoEvento extends AppCompatActivity {
         edtxt_titulo_ = findViewById(R.id.edtxt_titulo);
         txt_caracteres_ = findViewById(R.id.txt_caracteres);
         edtxt_telefono = findViewById(R.id.edtxt_telefono);
+        ly_main = findViewById(R.id.ly_main);
 
         edtxt_titulo_.addTextChangedListener(new TextWatcher() {
             @Override
@@ -296,7 +307,7 @@ public class NuevoEvento extends AppCompatActivity {
                             HalpFuncs.showKeyboard(activity);
                         }
                     }).show();
-        }else if(ly_imagen.getVisibility() == View.GONE){
+        }/*else if(ly_imagen.getVisibility() == View.GONE){
             new AlertDialog.Builder(activity).setMessage("¡Necesitamos una imagen!")
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override
@@ -305,45 +316,12 @@ public class NuevoEvento extends AppCompatActivity {
                             HalpFuncs.showKeyboard(activity);
                         }
                     }).show();
-        }else if(!HalpFuncs.isOnline(activity)){
+        }*/else if(!HalpFuncs.isOnline(activity)){
             new AlertDialog.Builder(activity).setMessage("¡Parece que no tienes internet, " +
                     "comprueba tu conexión por favor!")
                     .setPositiveButton("Aceptar", null).show();
         }else{
-
-
-
-            ApplicationData appdata = new ApplicationData();
-            appdata.cargarAplicacionDePreferencias(activity);
-
-            Evento evento = new Evento();
-            evento.setTitulo(edtxt_titulo_.getText().toString());
-            evento.setDescripcion(edtxt_descripcion_.getText().toString());
-            evento.setTfno(Integer.parseInt(edtxt_telefono.getText().toString()));
-            evento.setBusco(busco);
-            evento.setNick_usuario(appdata.getUser().getNick());
-
-            //TODO hacer que autoincremente
-            evento.setID(1);
-
-
-            final FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference ref = database.getReference("halpme/eventos");
-            DatabaseReference usersRef = ref.child(String.valueOf(evento.getID()));
-
-            /*StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-            StorageReference ref2 = storageReference.child("images/"+ evento.getID());
-            ref2.putFile(img_evento)*/
-
-            usersRef.setValue(evento);
-
-            new AlertDialog.Builder(activity).setMessage("¡Tu petición se ha creado satisfactoriamente!")
-                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            finish();
-                        }
-                    }).show();
+            uploadEvento();
         }
 
     }
@@ -480,5 +458,89 @@ public class NuevoEvento extends AppCompatActivity {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+    }
+
+    private void uploadEvento(){
+
+        progressBar = new ProgressBar(activity,null,android.R.attr.progressBarStyleLarge);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(300,300);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+        ly_main.addView(progressBar,params);
+        progressBar.setBackgroundColor(Color.parseColor("#33333333"));
+        progressBar.setVisibility(View.VISIBLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference user_ref = database.getReference("halpme/eventos");
+        user_ref.orderByChild("id").limitToLast(1).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                if (!uploaded) {
+                    uploaded = true;
+                    progressBar.setVisibility(View.GONE);
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                    int id = Integer.parseInt(dataSnapshot.getKey());
+                    id++;
+                    ApplicationData appdata = new ApplicationData();
+                    appdata.cargarAplicacionDePreferencias(activity);
+
+
+                    Evento evento = new Evento();
+                    evento.setTitulo(edtxt_titulo_.getText().toString());
+                    evento.setDescripcion(edtxt_descripcion_.getText().toString());
+                    evento.setTfno(Integer.parseInt(edtxt_telefono.getText().toString()));
+                    evento.setBusco(busco);
+                    evento.setNick_usuario(appdata.getUser().getNick());
+
+
+                    evento.setID(id);
+
+
+                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference ref = database.getReference("halpme/eventos");
+                    DatabaseReference usersRef = ref.child(String.valueOf(evento.getID()));
+
+
+
+                    usersRef.setValue(evento);
+
+                    new AlertDialog.Builder(activity).setMessage("¡Tu petición se ha creado satisfactoriamente!")
+                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    finish();
+                                }
+                            }).show();
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
     }
 }
