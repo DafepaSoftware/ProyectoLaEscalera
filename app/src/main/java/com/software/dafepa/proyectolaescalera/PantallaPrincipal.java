@@ -1,6 +1,7 @@
 package com.software.dafepa.proyectolaescalera;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -21,16 +23,25 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.software.dafepa.proyectolaescalera.Adapters.Adapter_NavDrawer;
 import com.software.dafepa.proyectolaescalera.Login.RegistroActivity;
 import com.software.dafepa.proyectolaescalera.Login.SplashActivity;
+import com.software.dafepa.proyectolaescalera.Objects.Evento;
 import com.software.dafepa.proyectolaescalera.Objects.Usuario;
 import com.software.dafepa.proyectolaescalera.Utilidades.ApplicationData;
 
@@ -47,6 +58,10 @@ public class PantallaPrincipal extends AppCompatActivity {
     private ListView lv_navdrawer;
     private Button btn_caballo;
 
+    /*private ProgressBar progressBar;
+    private RelativeLayout ly_main;*/
+
+    private ArrayList<Evento> eventos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +70,8 @@ public class PantallaPrincipal extends AppCompatActivity {
         btn_caballo = (Button) findViewById(R.id.btn_pene);
         activity=this;
 
+        eventos = new ArrayList<>();
+
         btn_caballo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +79,7 @@ public class PantallaPrincipal extends AppCompatActivity {
                 startActivity(inte);
             }
         });
+
 
 
         //Botón flotante
@@ -78,6 +96,8 @@ public class PantallaPrincipal extends AppCompatActivity {
         toolbarCode();
         navDrawerCode();
         initViewPager();
+
+        cargarEventos();
     }
 
 
@@ -276,5 +296,58 @@ public class PantallaPrincipal extends AppCompatActivity {
         }
     }
 
+
+    private void cargarEventos(){
+        /*progressBar = new ProgressBar(activity,null,android.R.attr.progressBarStyleLarge);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(300,300);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+        ly_main.addView(progressBar,params);
+        progressBar.setBackgroundColor(Color.parseColor("#33333333"));
+        progressBar.setVisibility(View.VISIBLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);*/
+
+
+
+
+
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference event_ref = database.getReference("halpme/eventos");
+        event_ref.orderByKey().addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Evento e = dataSnapshot.getValue(Evento.class);
+
+                eventos.add(0,e);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+            @Override
+            protected void finalize() throws Throwable {
+                super.finalize();
+
+            }
+        });
+    }
 
 }
