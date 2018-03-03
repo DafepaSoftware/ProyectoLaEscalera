@@ -78,9 +78,9 @@ public class NuevoEvento extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevo_evento);
         activity = this;
+
         toolbarCode();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         edtxt_titulo_ = findViewById(R.id.edtxt_titulo);
         txt_caracteres_ = findViewById(R.id.txt_caracteres);
