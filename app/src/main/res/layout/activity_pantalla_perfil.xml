@@ -53,7 +53,8 @@
         android:layout_height="fill_parent">
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:background="@color/blanco">
 
             <TableLayout
                 android:layout_width="fill_parent"
@@ -65,12 +66,12 @@
                     android:layout_height="wrap_content"
                     android:text="Nombre usuario"
                     android:gravity="center"
-                    android:textColor="@color/blanco"
+                    android:textColor="@color/moradete"
                     android:layout_marginTop="10dp"
                     android:textSize="20dp"/>
                 <EditText
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/edit"
+                    android:drawableLeft="@drawable/pencil"
                     android:drawablePadding="-15dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -82,12 +83,12 @@
                     android:layout_height="wrap_content"
                     android:text="Nombre"
                     android:gravity="center"
-                    android:textColor="@color/blanco"
+                    android:textColor="@color/moradete"
                     android:layout_marginTop="10dp"
                     android:textSize="20dp"/>
                 <EditText
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/edit"
+                    android:drawableLeft="@drawable/pencil"
                     android:drawablePadding="-15dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -100,11 +101,11 @@
                     android:text="Apellidos"
                     android:gravity="center"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/blanco"
+                    android:textColor="@color/moradete"
                     android:textSize="20dp"/>
                 <EditText
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/edit"
+                    android:drawableLeft="@drawable/pencil"
                     android:drawablePadding="-15dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -116,12 +117,12 @@
                     android:layout_height="wrap_content"
                     android:text="Correo Electronico"
                     android:gravity="center"
-                    android:textColor="@color/blanco"
+                    android:textColor="@color/moradete"
                     android:layout_marginTop="10dp"
                     android:textSize="20dp"/>
                 <EditText
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/edit"
+                    android:drawableLeft="@drawable/pencil"
                     android:drawablePadding="-15dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -133,16 +134,17 @@
                     android:layout_height="wrap_content"
                     android:text="Contraseña"
                     android:gravity="center"
-                    android:textColor="@color/blanco"
+                    android:textColor="@color/moradete"
                     android:layout_marginTop="10dp"
                     android:textSize="20dp"/>
                 <EditText
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/edit"
+                    android:drawableLeft="@drawable/pencil"
                     android:drawablePadding="-15dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
+                    android:inputType="textPassword"
                     android:hint="********"
                     android:gravity="center"
                     android:textAlignment="center"/>
@@ -150,16 +152,17 @@
                     android:layout_height="wrap_content"
                     android:text="Repita contraseña"
                     android:gravity="center"
-                    android:textColor="@color/blanco"
+                    android:textColor="@color/moradete"
                     android:layout_marginTop="10dp"
                     android:textSize="20dp"/>
                 <EditText
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/edit"
+                    android:drawableLeft="@drawable/pencil"
                     android:drawablePadding="-15dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
+                    android:inputType="textPassword"
                     android:hint="********"
                     android:gravity="center"
                     android:textAlignment="center"/>
