@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.software.dafepa.proyectolaescalera.Objects.Evento;
@@ -30,14 +31,32 @@ public class InfoElemeneto extends AppCompatActivity {
     private Evento evento;
 
     private TextView txt_descripcion;
+    private TextView txt_titulo;
+    private TextView txt_usuario;
+    private TextView txt_titulo_titulo;
+    private TextView txt_titulo_usuario;
+    private ImageView imagenUsuario;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_elemeneto);
+
+
         evento = AplicacionManager.getInstance().getEvento();
 
+        imagenUsuario = findViewById(R.id.imagenUsuario);
+        txt_titulo_titulo = findViewById(R.id.titulo_titulo);
+        txt_titulo_usuario = findViewById(R.id.titulo_usuario);
+        txt_titulo = findViewById(R.id.txt_titulo);
         txt_descripcion = findViewById(R.id.txt_descripcion);
+
+        //Esto peta de momento puesto que no tenemos imagenes en el usuario subidas al firebase
+        //imagenUsuario.setImageDrawable(evento.getImg());
+        txt_titulo_titulo.setText(evento.getTitulo());
+        txt_titulo_usuario.setText(evento.getNick_usuario());
+        txt_titulo.setText(evento.getTitulo());
         txt_descripcion.setText(evento.getDescripcion());
 
 

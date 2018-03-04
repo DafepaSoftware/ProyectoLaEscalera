@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.software.dafepa.proyectolaescalera.PantallaPerfil">
+    tools:context="com.software.dafepa.proyectolaescalera.InfoElemeneto">
 
     <include
         android:id="@+id/tool_bar"
@@ -38,7 +38,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/imagenUsuario"
                 android:layout_marginTop="10dp"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
@@ -49,7 +49,7 @@
 
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/titulo_titulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -60,7 +60,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/titulo_usuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -73,6 +73,7 @@
     </LinearLayout>
     
     <TextView
+        android:id="@+id/txt_titulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -101,23 +102,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:text="Nombre usuario"
-            android:textSize="15dp"
-            android:textColor="@color/moradete"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:text="12/12/12"
-            android:textSize="15dp"
-            android:textColor="@color/texto_normal"
-            />
+
+
     </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
