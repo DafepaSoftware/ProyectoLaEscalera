@@ -33,6 +33,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -88,7 +89,12 @@ public class PantallaPrincipal extends AppCompatActivity {
         });
 
 
-
+        ApplicationData appdata = new ApplicationData();
+        appdata.cargarAplicacionDePreferencias(activity);
+        TextView txt_nombre = findViewById(R.id.txt_nombre);
+        txt_nombre.setText(appdata.getUser().getNick());
+        TextView txt_correo = findViewById(R.id.txt_correo);
+        txt_correo.setText(appdata.getUser().getMail());
         //Botón flotante
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -180,6 +186,10 @@ public class PantallaPrincipal extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i){
+                    case 0:{
+                        Intent intent = new Intent(activity, NuevoEvento.class);
+                        startActivity(intent);
+                    }
                     case 3:{
                         Intent intent = new Intent(activity, SplashActivity.class);
                         startActivity(intent);

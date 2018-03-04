@@ -242,11 +242,11 @@ public class SplashActivity extends AppCompatActivity {
                     if(str.equals(edtxt_pass.getText().toString())){
                         Intent intent = new Intent(activity, PantallaPrincipal.class);
                         startActivity(intent);
-                        if (cbx_recuerdame.isChecked()){
-                            appdata.setRememberme(true);
-                            cargarUsuarioEnPreferencias(dataSnapshot);
-                            appdata.guardarEnPreferencias(activity);
-                        }
+
+                        appdata.setRememberme(cbx_recuerdame.isChecked());
+                        cargarUsuarioEnPreferencias(dataSnapshot);
+                        appdata.guardarEnPreferencias(activity);
+
                         finish();
                     }else{
                         new AlertDialog.Builder(activity).setMessage("¡El nombre de usuario o contraseña son incorrectos!")

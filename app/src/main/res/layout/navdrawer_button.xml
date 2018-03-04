@@ -4,6 +4,8 @@
     android:id="@+id/ly_main"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="8dp"
     android:gravity="left|center"
     android:orientation="horizontal"
     android:paddingBottom="8dp"
@@ -11,17 +13,17 @@
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginLeft="15dp"
         android:layout_weight="1"
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <TextView
         android:id="@+id/txt"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="12dp"
         android:layout_weight="12"
         android:text="TextView"
         android:textSize="18sp" />
