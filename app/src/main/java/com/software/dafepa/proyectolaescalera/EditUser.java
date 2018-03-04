@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.software.dafepa.proyectolaescalera.Objects.Usuario;
+import com.software.dafepa.proyectolaescalera.Utilidades.ApplicationData;
 
 public class EditUser extends AppCompatActivity {
 
@@ -20,6 +22,7 @@ public class EditUser extends AppCompatActivity {
     Uri imageUri;
     CircularImageView foto_gallery;
     Toolbar myToolbar;
+    Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,10 @@ public class EditUser extends AppCompatActivity {
                 openGallery();
             }
         });
+
+        ApplicationData appdata = new ApplicationData();
+        appdata.cargarAplicacionDePreferencias(this);
+        usuario = appdata.getUser();
 
         toolbarCode();
     }

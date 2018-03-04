@@ -3,7 +3,10 @@ package com.software.dafepa.proyectolaescalera;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -35,11 +38,16 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.software.dafepa.proyectolaescalera.Adapters.Adapter_NavDrawer;
 import com.software.dafepa.proyectolaescalera.Adapters.Adapter_eventos;
 import com.software.dafepa.proyectolaescalera.Login.RegistroActivity;
@@ -49,7 +57,12 @@ import com.software.dafepa.proyectolaescalera.Objects.Usuario;
 import com.software.dafepa.proyectolaescalera.Singletones.AplicacionManager;
 import com.software.dafepa.proyectolaescalera.Utilidades.ApplicationData;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 import java.util.zip.Inflater;
 
 public class PantallaPrincipal extends AppCompatActivity {
@@ -360,15 +373,38 @@ public class PantallaPrincipal extends AppCompatActivity {
         event_ref.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Evento e = dataSnapshot.getValue(Evento.class);
 
-                if(e.getBusco()){
-                    busco_adapter.getEventos().add(0,e);
-                    busco_adapter.notifyDataSetChanged();
-                }else{
-                    ofrezco_adapter.getEventos().add(0,e);
-                    ofrezco_adapter.notifyDataSetChanged();
+                final Evento e = dataSnapshot.getValue(Evento.class);
+
+                FirebaseStorage storage;
+                StorageTask<FileDownloadTask.TaskSnapshot> storageReference;
+                storage = FirebaseStorage.getInstance();
+                final File localFile;
+                try {
+                    Random r = new Random();
+                    String path = "tmp" +r.nextInt(999999) + "_" + e.getID();
+                    localFile = File.createTempFile(path, "jpg");
+                    storageReference = storage.getReference("images/eventos/" + e.getID()).
+                            getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                            e.setImg(bitmap);
+                            if(e.getBusco()){
+                                busco_adapter.getEventos().add(0,e);
+                                busco_adapter.notifyDataSetChanged();
+                            }else{
+                                ofrezco_adapter.getEventos().add(0,e);
+                                ofrezco_adapter.notifyDataSetChanged();
+                            }
+                        }
+                    });
+
+
+                } catch (IOException e1) {
+                    e1.printStackTrace();
                 }
+
 
             }
 

@@ -1,11 +1,16 @@
 package com.software.dafepa.proyectolaescalera.Adapters;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.vision.text.Line;
@@ -23,10 +28,12 @@ public class Adapter_eventos extends BaseAdapter {
 
     private ArrayList<Evento> eventos;
     private LayoutInflater inflater;
+    private Activity activity;
 
     public Adapter_eventos(Activity activity){
         eventos = new ArrayList<>();
         inflater = LayoutInflater.from(activity);
+        this.activity = activity;
 
     }
 
@@ -66,6 +73,10 @@ public class Adapter_eventos extends BaseAdapter {
         holder.tipo.setText(tipo);
         holder.descripcion.setText(e.getDescripcion());
 
+        holder.ly_img = view.findViewById(R.id.ly_image_body);
+        Drawable img = new BitmapDrawable(activity.getResources(), e.getImg());
+        holder.ly_img.setBackground(img);
+
         if (eventos.size() >= i){
             holder.ly_main = (LinearLayout) view.findViewById(R.id.ly_main);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -90,5 +101,6 @@ public class Adapter_eventos extends BaseAdapter {
         TextView descripcion;
 
         LinearLayout ly_main;
+        RelativeLayout ly_img;
     }
 }

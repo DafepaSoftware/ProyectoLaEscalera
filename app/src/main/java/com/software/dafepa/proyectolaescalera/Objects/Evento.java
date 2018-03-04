@@ -1,5 +1,6 @@
 package com.software.dafepa.proyectolaescalera.Objects;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 
@@ -16,7 +17,7 @@ public class Evento {
     private Boolean busco;
     private int tfno;
     private String nick_usuario;
-    private Drawable img;
+    private Bitmap img;
     private int ID;
 
 
@@ -62,11 +63,11 @@ public class Evento {
         this.nick_usuario = nick_usuario;
     }
 
-    public Drawable getImg() {
+    public Bitmap getImg() {
         return img;
     }
 
-    public void setImg(Drawable img) {
+    public void setImg(Bitmap img) {
         this.img = img;
     }
 

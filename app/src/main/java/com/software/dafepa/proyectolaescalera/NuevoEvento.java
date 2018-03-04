@@ -492,7 +492,7 @@ public class NuevoEvento extends AppCompatActivity {
 
 
                     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-                    StorageReference ref2 = storageReference.child("images/eventos"+ id);
+                    StorageReference ref2 = storageReference.child("images/eventos/"+ id);
                     ref2.putFile(imageuri)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
