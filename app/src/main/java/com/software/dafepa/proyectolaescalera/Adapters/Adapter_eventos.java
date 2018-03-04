@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.vision.text.Line;
 import com.software.dafepa.proyectolaescalera.Objects.Evento;
 import com.software.dafepa.proyectolaescalera.R;
 
@@ -63,6 +65,14 @@ public class Adapter_eventos extends BaseAdapter {
         }
         holder.tipo.setText(tipo);
         holder.descripcion.setText(e.getDescripcion());
+
+        if (eventos.size() >= i){
+            holder.ly_main = (LinearLayout) view.findViewById(R.id.ly_main);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            params.setMargins(0,0,0,65);
+            holder.ly_main.setLayoutParams(params);
+        }
         return view;
     }
 
@@ -78,5 +88,7 @@ public class Adapter_eventos extends BaseAdapter {
         TextView titulo;
         TextView tipo;
         TextView descripcion;
+
+        LinearLayout ly_main;
     }
 }

@@ -81,21 +81,22 @@
         android:textSize="20dp"
         android:textColor="@color/moradete"
         />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/moradeteClaro"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:text="Esto es una descripcion mazo de adskjnsfdhgusfugydahiusjoafsgushdijaoskjfshiguhdajoskojfhsighdjoasofshgisidjoaifoshgidsdjoakjosghisjdakfjosghiddifsjdakjosghifsjdakjshgisdjakfoshgidjailarga para que sirva de ejemplo y ver como se ve el coso este siendo mazo de largo y si es posobile meter una movida para que la oantalla suba y baje conforme sea de largo el texto este. blablabalbalbalbalalbalbalbalbalblablablalbalbalbalblablalbalbalblablablalbalblabla"
-        android:textSize="15dp"
-        android:textColor="@color/blanco"
-        />
+
+            <TextView
+                android:id="@+id/txt_descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/moradeteClaro"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                android:text="Esto es una descripcion mazo de adskjnsfdhgusfugydahiusjoafsgushdijaoskjfshiguhdajoskojfhsighdjoasofshgisidjoaifoshgidsdjoakjosghisjdakfjosghiddifsjdakjosghifsjdakjshgisdjakfoshgidjailarga para que sirva de ejemplo y ver como se ve el coso este siendo mazo de largo y si es posobile meter una movida para que la oantalla suba y baje conforme sea de largo el texto este. blablabalbalbalbalalbalbalbalbalblablablalbalbalbalblablalbalbalblablablalbalblabla"
+                android:textColor="@color/blanco"
+                android:textSize="15dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

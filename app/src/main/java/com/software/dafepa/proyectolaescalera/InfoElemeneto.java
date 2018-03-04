@@ -11,6 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.software.dafepa.proyectolaescalera.Objects.Evento;
+import com.software.dafepa.proyectolaescalera.Singletones.AplicacionManager;
 
 public class InfoElemeneto extends AppCompatActivity {
 
@@ -22,12 +26,20 @@ public class InfoElemeneto extends AppCompatActivity {
     private String numTelefono;
     private Uri  coordenadas;
 
+    //Contiene toda la info del evento;
+    private Evento evento;
 
+    private TextView txt_descripcion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_elemeneto);
+        evento = AplicacionManager.getInstance().getEvento();
+
+        txt_descripcion = findViewById(R.id.txt_descripcion);
+        txt_descripcion.setText(evento.getDescripcion());
+
 
         btnLlamar = (Button) findViewById(R.id.btn_llamar);
         btnLocalizar = (Button) findViewById(R.id.btn_localizar);

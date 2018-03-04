@@ -5,6 +5,7 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.view.Display;
 
+import com.software.dafepa.proyectolaescalera.Objects.Evento;
 
 
 public class AplicacionManager {
@@ -18,6 +19,8 @@ public class AplicacionManager {
 
     private Activity a_init_screen_ = null;
     private Boolean show_dialog_ = true;
+
+    private Evento evento;
 
     private AplicacionManager() {
         // Exists only to defeat instantiation.
@@ -72,7 +75,11 @@ public class AplicacionManager {
         return neuropool_;
     }*/
 
+    public Evento getEvento() {
+        return evento;
+    }
 
-
-
+    public void setEvento(Evento evento) {
+        this.evento = evento;
+    }
 }

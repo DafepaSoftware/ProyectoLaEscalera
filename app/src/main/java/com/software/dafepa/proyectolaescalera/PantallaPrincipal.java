@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -44,15 +45,17 @@ import com.software.dafepa.proyectolaescalera.Login.RegistroActivity;
 import com.software.dafepa.proyectolaescalera.Login.SplashActivity;
 import com.software.dafepa.proyectolaescalera.Objects.Evento;
 import com.software.dafepa.proyectolaescalera.Objects.Usuario;
+import com.software.dafepa.proyectolaescalera.Singletones.AplicacionManager;
 import com.software.dafepa.proyectolaescalera.Utilidades.ApplicationData;
 
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 public class PantallaPrincipal extends AppCompatActivity {
 
     private Toolbar myToolbar;
     private DrawerLayout myDrawer;
-    private Activity activity;
+    private static Activity activity;
     private static int tabstart = 0;
     private ViewPager mViewPager;
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -62,7 +65,7 @@ public class PantallaPrincipal extends AppCompatActivity {
     /*private ProgressBar progressBar;
     private RelativeLayout ly_main;*/
 
-    private ArrayList<Evento> eventos;
+
     private static Adapter_eventos busco_adapter;
     private static Adapter_eventos ofrezco_adapter;
     @Override
@@ -73,7 +76,6 @@ public class PantallaPrincipal extends AppCompatActivity {
         btn_caballo = (Button) findViewById(R.id.btn_pene);
         activity=this;
 
-        eventos = new ArrayList<>();
         busco_adapter = new Adapter_eventos(activity);
         ofrezco_adapter = new Adapter_eventos(activity);
 
@@ -259,12 +261,47 @@ public class PantallaPrincipal extends AppCompatActivity {
                     ListView lv = rootView.findViewById(R.id.fragment_lv);
                     lv.setAdapter(busco_adapter);
 
+                    final SwipeRefreshLayout ly = rootView.findViewById(R.id.ly_refresh);
+                    ly.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                        @Override
+                        public void onRefresh() {
+                            reloadItems();
+                            ly.setRefreshing(false);
+                        }
+                    });
+
+                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            Intent intent = new Intent(activity, InfoElemeneto.class);
+                            startActivity(intent);
+                            AplicacionManager.getInstance().setEvento(busco_adapter.getEventos().get(i));
+                        }
+                    });
                     break;
                 }
                 case 2:{
                     rootView = inflater.inflate(R.layout.fragment_busco, container, false);
                     ListView lv = rootView.findViewById(R.id.fragment_lv);
                     lv.setAdapter(ofrezco_adapter);
+
+                    final SwipeRefreshLayout ly = rootView.findViewById(R.id.ly_refresh);
+                    ly.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                        @Override
+                        public void onRefresh() {
+                            reloadItems();
+                            ly.setRefreshing(false);
+                        }
+                    });
+
+                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            Intent intent = new Intent(activity, InfoElemeneto.class);
+                            startActivity(intent);
+                            AplicacionManager.getInstance().setEvento(ofrezco_adapter.getEventos().get(i));
+                        }
+                    });
 
                     break;
                 }
@@ -305,29 +342,13 @@ public class PantallaPrincipal extends AppCompatActivity {
     }
 
 
-    private void cargarEventos(){
-        /*progressBar = new ProgressBar(activity,null,android.R.attr.progressBarStyleLarge);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(300,300);
-        params.addRule(RelativeLayout.CENTER_IN_PARENT);
-        ly_main.addView(progressBar,params);
-        progressBar.setBackgroundColor(Color.parseColor("#33333333"));
-        progressBar.setVisibility(View.VISIBLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);*/
-
-
-
-
-
-
+    private static void cargarEventos(){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference event_ref = database.getReference("halpme/eventos");
         event_ref.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Evento e = dataSnapshot.getValue(Evento.class);
-
-                eventos.add(0,e);
 
                 if(e.getBusco()){
                     busco_adapter.getEventos().add(0,e);
@@ -364,6 +385,13 @@ public class PantallaPrincipal extends AppCompatActivity {
 
             }
         });
+    }
+
+    private static void reloadItems(){
+        busco_adapter.getEventos().clear();
+        ofrezco_adapter.getEventos().clear();
+        cargarEventos();
+
     }
 
 }
