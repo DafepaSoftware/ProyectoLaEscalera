@@ -189,6 +189,7 @@ public class PantallaPrincipal extends AppCompatActivity {
                     case 0:{
                         Intent intent = new Intent(activity, NuevoEvento.class);
                         startActivity(intent);
+                        break;
                     }
                     case 3:{
                         Intent intent = new Intent(activity, SplashActivity.class);
@@ -199,6 +200,7 @@ public class PantallaPrincipal extends AppCompatActivity {
                         appdata.setRememberme(false);
                         appdata.guardarEnPreferencias(activity);
                         finish();
+                        break;
                     }
                 }
             }
