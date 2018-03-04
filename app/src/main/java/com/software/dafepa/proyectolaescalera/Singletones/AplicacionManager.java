@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.view.Display;
 
 import com.software.dafepa.proyectolaescalera.Objects.Evento;
+import com.software.dafepa.proyectolaescalera.Objects.Usuario;
 
 
 public class AplicacionManager {
@@ -21,6 +22,7 @@ public class AplicacionManager {
     private Boolean show_dialog_ = true;
 
     private Evento evento;
+    private Usuario usuario;
 
     private AplicacionManager() {
         // Exists only to defeat instantiation.
@@ -82,4 +84,9 @@ public class AplicacionManager {
     public void setEvento(Evento evento) {
         this.evento = evento;
     }
-}
+
+    public void setUsuario(Usuario usuario){this.usuario = usuario;}
+
+    public Usuario getUsuario() { return usuario;}
+    }
+

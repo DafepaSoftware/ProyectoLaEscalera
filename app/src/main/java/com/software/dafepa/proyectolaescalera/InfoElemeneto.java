@@ -53,6 +53,7 @@ public class InfoElemeneto extends AppCompatActivity {
         txt_descripcion = findViewById(R.id.txt_descripcion);
 
         //Esto peta de momento puesto que no tenemos imagenes en el usuario subidas al firebase
+
         //imagenUsuario.setImageDrawable(evento.getImg());
         txt_titulo_titulo.setText(evento.getTitulo());
         txt_titulo_usuario.setText(evento.getNick_usuario());

@@ -70,6 +70,7 @@
                     android:layout_marginTop="10dp"
                     android:textSize="20dp"/>
                 <EditText
+                    android:id="@+id/et_nickusuario"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/pencil"
                     android:drawablePadding="-25dp"
@@ -87,6 +88,7 @@
                     android:layout_marginTop="10dp"
                     android:textSize="20dp"/>
                 <EditText
+                    android:id="@+id/et_nombreusuario"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/pencil"
                     android:drawablePadding="-25dp"
@@ -104,6 +106,7 @@
                     android:textColor="@color/moradete"
                     android:textSize="20dp"/>
                 <EditText
+                    android:id="@+id/et_apellidos"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/pencil"
                     android:drawablePadding="-25dp"
@@ -121,6 +124,7 @@
                     android:layout_marginTop="10dp"
                     android:textSize="20dp"/>
                 <EditText
+                    android:id="@+id/et_correo"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/pencil"
                     android:drawablePadding="-25dp"
