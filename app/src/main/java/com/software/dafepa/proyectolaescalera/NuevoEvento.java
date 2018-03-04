@@ -11,6 +11,7 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +30,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.vision.text.Line;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +40,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.software.dafepa.proyectolaescalera.Objects.Evento;
 import com.software.dafepa.proyectolaescalera.Utilidades.ApplicationData;
 import com.software.dafepa.proyectolaescalera.Utilidades.HalpFuncs;
@@ -307,7 +311,7 @@ public class NuevoEvento extends AppCompatActivity {
                             HalpFuncs.showKeyboard(activity);
                         }
                     }).show();
-        }/*else if(ly_imagen.getVisibility() == View.GONE){
+        }else if(ly_imagen.getVisibility() == View.GONE){
             new AlertDialog.Builder(activity).setMessage("¡Necesitamos una imagen!")
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override
@@ -316,7 +320,7 @@ public class NuevoEvento extends AppCompatActivity {
                             HalpFuncs.showKeyboard(activity);
                         }
                     }).show();
-        }*/else if(!HalpFuncs.isOnline(activity)){
+        }else if(!HalpFuncs.isOnline(activity)){
             new AlertDialog.Builder(activity).setMessage("¡Parece que no tienes internet, " +
                     "comprueba tu conexión por favor!")
                     .setPositiveButton("Aceptar", null).show();
@@ -430,6 +434,8 @@ public class NuevoEvento extends AppCompatActivity {
             img_evento.setImageBitmap(rotatedBitmap);
             ly_imagen.setVisibility(View.VISIBLE);
 
+            imageuri = Uri.fromFile(image);
+
 
         }
         if ( requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK) {
@@ -439,6 +445,7 @@ public class NuevoEvento extends AppCompatActivity {
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 img_evento.setImageBitmap(selectedImage);
                 ly_imagen.setVisibility(View.VISIBLE);
+                imageuri = imageUri;
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -479,41 +486,60 @@ public class NuevoEvento extends AppCompatActivity {
 
                 if (!uploaded) {
                     uploaded = true;
-                    progressBar.setVisibility(View.GONE);
-                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-
-                    int id = Integer.parseInt(dataSnapshot.getKey());
-                    id++;
-                    ApplicationData appdata = new ApplicationData();
-                    appdata.cargarAplicacionDePreferencias(activity);
 
 
-                    Evento evento = new Evento();
-                    evento.setTitulo(edtxt_titulo_.getText().toString());
-                    evento.setDescripcion(edtxt_descripcion_.getText().toString());
-                    evento.setTfno(Integer.parseInt(edtxt_telefono.getText().toString()));
-                    evento.setBusco(busco);
-                    evento.setNick_usuario(appdata.getUser().getNick());
+                    final int id = Integer.parseInt(dataSnapshot.getKey()) + 1;
 
 
-                    evento.setID(id);
-
-
-                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference ref = database.getReference("halpme/eventos");
-                    DatabaseReference usersRef = ref.child(String.valueOf(evento.getID()));
-
-
-
-                    usersRef.setValue(evento);
-
-                    new AlertDialog.Builder(activity).setMessage("¡Tu petición se ha creado satisfactoriamente!")
-                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+                    StorageReference ref2 = storageReference.child("images/"+ id);
+                    ref2.putFile(imageuri)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    finish();
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    progressBar.setVisibility(View.GONE);
+                                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                    ApplicationData appdata = new ApplicationData();
+                                    appdata.cargarAplicacionDePreferencias(activity);
+
+
+                                    Evento evento = new Evento();
+                                    evento.setTitulo(edtxt_titulo_.getText().toString());
+                                    evento.setDescripcion(edtxt_descripcion_.getText().toString());
+                                    evento.setTfno(Integer.parseInt(edtxt_telefono.getText().toString()));
+                                    evento.setBusco(busco);
+                                    evento.setNick_usuario(appdata.getUser().getNick());
+
+
+                                    evento.setID(id);
+
+
+                                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    DatabaseReference ref = database.getReference("halpme/eventos");
+                                    DatabaseReference usersRef = ref.child(String.valueOf(evento.getID()));
+
+
+
+                                    usersRef.setValue(evento);
+
+                                    new AlertDialog.Builder(activity).setMessage("¡Tu petición se ha creado satisfactoriamente!")
+                                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    finish();
+                                                }
+                                            }).show();
                                 }
-                            }).show();
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            new AlertDialog.Builder(activity).setMessage("¡Ha habido un problema con tu petición, intentalo otra vez!")
+                                    .setPositiveButton("Aceptar", null).show();
+                        }
+                    });
+
+
+
                 }
             }
 

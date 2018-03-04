@@ -121,12 +121,12 @@
                 android:textSize="18sp" />
 
         </LinearLayout>
-       <ListView
-           android:id="@+id/lv_navdrawer"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:divider="@null">
-       </ListView>
+
+        <ListView
+            android:id="@+id/lv_navdrawer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"></ListView>
 
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>
