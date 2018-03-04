@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.software.dafepa.proyectolaescalera.Objects.Usuario;
 import com.software.dafepa.proyectolaescalera.Singletones.AplicacionManager;
+import com.software.dafepa.proyectolaescalera.Utilidades.ApplicationData;
 
 public class EditUser extends AppCompatActivity {
 
@@ -53,7 +54,9 @@ public class EditUser extends AppCompatActivity {
         et_nombre.setHint(usuario.getNombre());
         et_apellidos.setHint(usuario.getApellido());
         et_correo.setHint(usuario.getMail());
-
+        ApplicationData appdata = new ApplicationData();
+        appdata.cargarAplicacionDePreferencias(this);
+        usuario = appdata.getUser();
 
 
 
