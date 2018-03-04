@@ -357,6 +357,8 @@ public class PantallaPrincipal extends AppCompatActivity {
     private static void cargarEventos(){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference event_ref = database.getReference("halpme/eventos");
+
+
         event_ref.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
