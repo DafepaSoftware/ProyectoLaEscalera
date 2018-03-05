@@ -172,6 +172,7 @@ public class PantallaPrincipal extends AppCompatActivity {
 
 
         title.add("Ayuda");
+        title.add("Sobre nosotros");
         title.add("Desconectar");
 
 
@@ -180,6 +181,7 @@ public class PantallaPrincipal extends AppCompatActivity {
         img_id.add(R.drawable.verdehalpp);
         img_id.add(R.drawable.map);
         img_id.add(R.drawable.information);
+        img_id.add(R.drawable.quienes_somos);
         img_id.add(R.drawable.powerbutton);
 
         Adapter_NavDrawer adpter = new Adapter_NavDrawer(activity, title, img_id );
@@ -205,6 +207,11 @@ public class PantallaPrincipal extends AppCompatActivity {
                         break;
                     }
                     case 3:{
+                        Intent intent = new Intent(activity, AboutActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    case 4:{
                         Intent intent = new Intent(activity, SplashActivity.class);
                         startActivity(intent);
                         ApplicationData appdata = new ApplicationData();
