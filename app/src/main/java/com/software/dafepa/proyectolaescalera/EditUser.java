@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -28,6 +29,7 @@ public class EditUser extends AppCompatActivity {
     private EditText et_nombre;
     private EditText et_apellidos;
     private EditText et_correo;
+    private Button btn_guardar;
 
     
 
@@ -40,9 +42,13 @@ public class EditUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_perfil);
 
-        
+        ApplicationData appdata = new ApplicationData();
+        appdata.cargarAplicacionDePreferencias(this);
+        Usuario usr = appdata.getUser();
+
         usuario = AplicacionManager.getInstance().getUsuario();
 
+        btn_guardar = (Button) findViewById(R.id.btn_guardar);
         fotoperfil = (CircularImageView) findViewById(R.id.imagenUsuario);
         et_nick = (EditText) findViewById(R.id.et_nickusuario);
         et_nombre = (EditText) findViewById(R.id.et_nombreusuario);
@@ -50,15 +56,10 @@ public class EditUser extends AppCompatActivity {
         et_correo = (EditText) findViewById(R.id.et_correo);
 
 
-        et_nick.setHint(usuario.getNick());
-        et_nombre.setHint(usuario.getNombre());
-        et_apellidos.setHint(usuario.getApellido());
-        et_correo.setHint(usuario.getMail());
-        ApplicationData appdata = new ApplicationData();
-        appdata.cargarAplicacionDePreferencias(this);
-        usuario = appdata.getUser();
-
-
+        et_nick.setHint(usr.getNick());
+        et_nombre.setHint(usr.getNombre());
+        et_apellidos.setHint(usr.getApellido());
+        et_correo.setHint(usr.getMail());
 
 
         foto_gallery = (CircularImageView) findViewById(R.id.imagenUsuario);
@@ -71,6 +72,13 @@ public class EditUser extends AppCompatActivity {
         });
 
         toolbarCode();
+
+        btn_guardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guardarCambios(usuario);
+            }
+        });
     }
 
     private void openGallery(){
@@ -91,6 +99,17 @@ public class EditUser extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         myToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    private void guardarCambios(Usuario u){
+        ApplicationData appdata = new ApplicationData();
+        appdata.cargarAplicacionDePreferencias(this);
+        appdata.setUser(u);
+        appdata.guardarEnPreferencias(this);
+    }
+
+    private void subirFirebase(){
 
     }
 }

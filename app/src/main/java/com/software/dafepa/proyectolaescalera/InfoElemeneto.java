@@ -68,7 +68,10 @@ public class InfoElemeneto extends AppCompatActivity {
         btnLocalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                coordenadas = Uri.parse("geo:40.350033, -3.833532");
+
+                //Aqui el codigo postal
+                int cod_postal= 10001;
+                coordenadas = Uri.parse("geo:0,0?q="+cod_postal+"\n");
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, coordenadas);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 if (mapIntent.resolveActivity(getPackageManager()) != null) {
@@ -82,6 +85,7 @@ public class InfoElemeneto extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //Aqui va el numero de telefono
                 numTelefono = "+34666777888";
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", numTelefono, null));
                 startActivity(intent);

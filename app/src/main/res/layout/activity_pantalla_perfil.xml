@@ -171,6 +171,7 @@
                     android:gravity="center"
                     android:textAlignment="center"/>
                 <Button
+                    android:id="@+id/btn_guardar"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="10dp"
