@@ -3,6 +3,7 @@ package com.software.dafepa.proyectolaescalera;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,9 @@ import android.widget.TextView;
 
 import com.software.dafepa.proyectolaescalera.Objects.Evento;
 import com.software.dafepa.proyectolaescalera.Singletones.AplicacionManager;
+import com.software.dafepa.proyectolaescalera.Utilidades.ZoomImageActivity;
+
+import java.io.ByteArrayOutputStream;
 
 public class InfoElemeneto extends AppCompatActivity {
 
@@ -31,17 +35,19 @@ public class InfoElemeneto extends AppCompatActivity {
     private Evento evento;
 
     private TextView txt_descripcion;
-    private TextView txt_titulo;
+    private TextView txt_tipo;
     private TextView txt_usuario;
     private TextView txt_titulo_titulo;
     private TextView txt_titulo_usuario;
     private ImageView imagenUsuario;
+    private ImageView img_evento;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_elemeneto);
+        activity = this;
 
 
         evento = AplicacionManager.getInstance().getEvento();
@@ -49,17 +55,42 @@ public class InfoElemeneto extends AppCompatActivity {
         imagenUsuario = findViewById(R.id.imagenUsuario);
         txt_titulo_titulo = findViewById(R.id.titulo_titulo);
         txt_titulo_usuario = findViewById(R.id.titulo_usuario);
-        txt_titulo = findViewById(R.id.txt_titulo);
+        txt_tipo = findViewById(R.id.txt_tipo);
         txt_descripcion = findViewById(R.id.txt_descripcion);
+        img_evento = findViewById(R.id.img_evento);
 
         //Esto peta de momento puesto que no tenemos imagenes en el usuario subidas al firebase
 
         //imagenUsuario.setImageDrawable(evento.getImg());
         txt_titulo_titulo.setText(evento.getTitulo());
         txt_titulo_usuario.setText(evento.getNick_usuario());
-        txt_titulo.setText(evento.getTitulo());
+        if (evento.getBusco()){
+            txt_tipo.setText("Busco");
+        }else{
+            txt_tipo.setText("Ofrezco");
+        }
         txt_descripcion.setText(evento.getDescripcion());
+        img_evento.setImageBitmap(evento.getImg());
 
+        img_evento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                img_evento.buildDrawingCache();
+
+                //Obtenemos el bitmap
+                Bitmap bmap = img_evento.getDrawingCache();
+
+                //Lo convertimos a array de bytes
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                byte[] byteArray = stream.toByteArray();
+
+                //Lo pasamos como parametro a la otra activity de Zoom
+                Intent mainIntent = new Intent().setClass(activity, ZoomImageActivity.class);
+                mainIntent.putExtra("BitmapImage", byteArray);
+                startActivity(mainIntent);
+            }
+        });
 
         btnLlamar = (Button) findViewById(R.id.btn_llamar);
         btnLocalizar = (Button) findViewById(R.id.btn_localizar);
