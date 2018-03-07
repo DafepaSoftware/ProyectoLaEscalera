@@ -148,6 +148,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ly_twitter_pablo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -172,6 +173,7 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/ly_facebook_pablo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -196,6 +198,7 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/ly_linkedin_pablo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -259,6 +262,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ly_gmail_fer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
@@ -311,6 +315,7 @@
                         android:textSize="18sp" />
 
                     <LinearLayout
+
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginEnd="10dp"
@@ -321,6 +326,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ly_gmail_dani"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
@@ -346,6 +352,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ly_linkedin_dani"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
