@@ -87,6 +87,8 @@ public class NuevoEvento extends AppCompatActivity {
     private RelativeLayout ly_main;
     private boolean uploaded = false;
 
+    private EditText edtxt_cpost;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +101,7 @@ public class NuevoEvento extends AppCompatActivity {
         edtxt_titulo_ = findViewById(R.id.edtxt_titulo);
         txt_caracteres_ = findViewById(R.id.txt_caracteres);
         edtxt_telefono = findViewById(R.id.edtxt_telefono);
+        edtxt_cpost = findViewById(R.id.edtxt_cpost);
         ly_main = findViewById(R.id.ly_main);
 
         edtxt_titulo_.addTextChangedListener(new TextWatcher() {
@@ -311,6 +314,15 @@ public class NuevoEvento extends AppCompatActivity {
                             HalpFuncs.showKeyboard(activity);
                         }
                     }).show();
+        }else if(edtxt_cpost.getText().toString().length()<5){
+            new AlertDialog.Builder(activity).setMessage("¡Necesitamos un codigo postal!")
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            edtxt_cpost.requestFocus();
+                            HalpFuncs.showKeyboard(activity);
+                        }
+                    }).show();
         }else if(ly_imagen.getVisibility() == View.GONE){
             new AlertDialog.Builder(activity).setMessage("¡Necesitamos una imagen!")
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
@@ -507,6 +519,7 @@ public class NuevoEvento extends AppCompatActivity {
                                     evento.setTitulo(edtxt_titulo_.getText().toString());
                                     evento.setDescripcion(edtxt_descripcion_.getText().toString());
                                     evento.setTfno(Integer.parseInt(edtxt_telefono.getText().toString()));
+                                    evento.setCodigo_postal(Integer.parseInt(edtxt_cpost.getText().toString()));
                                     evento.setBusco(busco);
                                     evento.setNick_usuario(appdata.getUser().getNick());
 

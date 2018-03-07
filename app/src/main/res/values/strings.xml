@@ -42,4 +42,6 @@
     <string name="q_que_es_esta_aplicacion">¿Qué es esta aplicación?</string>
     <string name="a_que_es_esta_aplicacion">Esta aplicación es un trabajo de fin de ciclo de tres alumnos de Desarrollo de Interfaces Multiplataforma, la app a pesar de ser funcional no está orientada a su uso ni está hecha como ánimo de lucro.\nRecomendamos que no se introduzca ningún dato real importante</string>
     <string name="q_quienes_semos">¿Quiénes son los desarrolladores?</string>
+    <string name="escribeCPost">Escribe aqui tu codigo postal</string>
+    <string name="CPost">¡Escribe el código postal de la zona!</string>
 </resources>
