@@ -123,9 +123,15 @@ public class PantallaPrincipal extends AppCompatActivity {
         navDrawerCode();
         initViewPager();
 
-        cargarEventos();
+        //cargarEventos();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reloadItems();
+
+    }
 
     //Función para cargar la toolbar personalizada
     private void toolbarCode(){

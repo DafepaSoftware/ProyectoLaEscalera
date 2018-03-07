@@ -61,28 +61,31 @@ public class Adapter_eventos extends BaseAdapter {
         holder.tipo = view.findViewById(R.id.txt_tipo);
         holder.descripcion = view.findViewById(R.id.txt_description);
 
-        Evento e = eventos.get(i);
+        Evento e;
+        if (i < eventos.size()) {
+            e = eventos.get(i);
 
-        holder.titulo.setText(e.getTitulo());
-        String tipo;
-        if (e.getBusco()){
-            tipo = "Busco";
-        }else{
-            tipo = "Ofrezco";
-        }
-        holder.tipo.setText(tipo);
-        holder.descripcion.setText(e.getDescripcion());
+            holder.titulo.setText(e.getTitulo());
+            String tipo;
+            if (e.getBusco()) {
+                tipo = "Busco";
+            } else {
+                tipo = "Ofrezco";
+            }
+            holder.tipo.setText(tipo);
+            holder.descripcion.setText(e.getDescripcion());
 
-        holder.ly_img = view.findViewById(R.id.ly_image_body);
-        Drawable img = new BitmapDrawable(activity.getResources(), e.getImg());
-        holder.ly_img.setBackground(img);
+            holder.ly_img = view.findViewById(R.id.ly_image_body);
+            Drawable img = new BitmapDrawable(activity.getResources(), e.getImg());
+            holder.ly_img.setBackground(img);
 
-        if (eventos.size() >= i){
-            holder.ly_main = (LinearLayout) view.findViewById(R.id.ly_main);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            params.setMargins(0,0,0,65);
-            holder.ly_main.setLayoutParams(params);
+            if (eventos.size() >= i) {
+                holder.ly_main = (LinearLayout) view.findViewById(R.id.ly_main);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                params.setMargins(0, 0, 0, 65);
+                holder.ly_main.setLayoutParams(params);
+            }
         }
         return view;
     }
