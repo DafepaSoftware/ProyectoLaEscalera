@@ -5,6 +5,8 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.constraint.ConstraintLayout;
@@ -27,17 +29,25 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.daimajia.easing.Glider;
 import com.daimajia.easing.Skill;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.software.dafepa.proyectolaescalera.Objects.Evento;
 import com.software.dafepa.proyectolaescalera.Objects.Usuario;
 import com.software.dafepa.proyectolaescalera.Utilidades.ApplicationData;
 import com.software.dafepa.proyectolaescalera.Utilidades.HalpFuncs;
 import com.software.dafepa.proyectolaescalera.PantallaPrincipal;
 import com.software.dafepa.proyectolaescalera.R;
 import com.software.dafepa.proyectolaescalera.Singletones.AplicacionManager;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Random;
 
 /*TODO COSAS QUE HACER AJAJ LOL
 * Marcar un número de teléfono
@@ -174,9 +184,7 @@ public class SplashActivity extends AppCompatActivity {
                             set.start();
                             showMenu();
                         }else{
-                            Intent intent = new Intent(activity, PantallaPrincipal.class);
-                            startActivity(intent);
-                            finish();
+                            usuarioRecuerdame();
                         }
                     }
                 }.start();
@@ -227,27 +235,48 @@ public class SplashActivity extends AppCompatActivity {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
-            String usu = edtxt_usuario.getText().toString();
+            final String usu = edtxt_usuario.getText().toString();
             final FirebaseDatabase database = FirebaseDatabase.getInstance();
             final DatabaseReference user_ref = database.getReference("halpme/usuarios");
             user_ref.orderByChild("nick").equalTo(usu).addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    final Usuario u = dataSnapshot.getValue(Usuario.class);
 
-                    progressBar.setVisibility(View.GONE);
-                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
-                    System.out.println(dataSnapshot.getKey());
-                    String str = dataSnapshot.child("contrasena").getValue().toString();
-                    if(str.equals(edtxt_pass.getText().toString())){
-                        Intent intent = new Intent(activity, PantallaPrincipal.class);
-                        startActivity(intent);
+                    if(u.getContrasena().equals(edtxt_pass.getText().toString())){
+                        final File localFile;
+                        try {
+                            Random r = new Random();
+                            String path = "tmp" + r.nextInt(999999) + "_" + usu;
+                            localFile = File.createTempFile(path, "jpg");
 
-                        appdata.setRememberme(cbx_recuerdame.isChecked());
-                        cargarUsuarioEnPreferencias(dataSnapshot);
-                        appdata.guardarEnPreferencias(activity);
+                            FirebaseStorage storage = FirebaseStorage.getInstance();
+                            storage.getReference("images/usuarios/" + usu).
+                                    getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                    progressBar.setVisibility(View.GONE);
+                                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                    u.setImg(bitmap);
+                                    Intent intent = new Intent(activity, PantallaPrincipal.class);
+                                    startActivity(intent);
 
-                        finish();
+                                    appdata.setRememberme(cbx_recuerdame.isChecked());
+                                    appdata.setUsuario_nick(u.getNick());
+                                    appdata.guardarEnPreferencias(activity);
+                                    AplicacionManager.getInstance().setUsuario(u);
+
+                                    finish();
+                                }
+                            });
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+
                     }else{
                         new AlertDialog.Builder(activity).setMessage("¡El nombre de usuario o contraseña son incorrectos!")
                                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
@@ -296,16 +325,93 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    private void cargarUsuarioEnPreferencias(DataSnapshot dataSnapshot){
-        Usuario user = new Usuario();
+    private void usuarioRecuerdame(){
+        //progressBar
+        progressBar = new ProgressBar(activity,null,android.R.attr.progressBarStyleLarge);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(300,300);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+        ly_main.addView(progressBar,params);
+        progressBar.setBackgroundColor(Color.parseColor("#33333333"));
+        progressBar.setVisibility(View.VISIBLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
-        user.setNombre(dataSnapshot.child("nombre").getValue().toString());
-        user.setApellido(dataSnapshot.child("apellido").getValue().toString());
-        user.setFecha_naci(dataSnapshot.child("fecha_naci").getValue().toString());
-        user.setMail(dataSnapshot.child("mail").getValue().toString());
-        user.setNick(dataSnapshot.child("nick").getValue().toString());
+        final String usu = appdata.getUsuario_nick();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference user_ref = database.getReference("halpme/usuarios");
+        user_ref.orderByChild("nick").equalTo(usu).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                final Usuario u = dataSnapshot.getValue(Usuario.class);
+                    final File localFile;
+                    try {
+                        Random r = new Random();
+                        String path = "tmp" + r.nextInt(999999) + "_" + usu;
+                        localFile = File.createTempFile(path, "jpg");
 
-        appdata.setUser(user);
-    }
+                        FirebaseStorage storage = FirebaseStorage.getInstance();
+                        storage.getReference("images/usuarios/" + usu).
+                                getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                progressBar.setVisibility(View.GONE);
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                u.setImg(bitmap);
+                                Intent intent = new Intent(activity, PantallaPrincipal.class);
+                                startActivity(intent);
+
+                                appdata.setRememberme(cbx_recuerdame.isChecked());
+                                appdata.setUsuario_nick(u.getNick());
+                                appdata.guardarEnPreferencias(activity);
+                                AplicacionManager.getInstance().setUsuario(u);
+
+                                finish();
+                            }
+                        });
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                progressBar.setVisibility(View.GONE);
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                new AlertDialog.Builder(activity).setMessage("¡El nombre de usuario o contraseña son incorrectos!")
+                        .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                edtxt_usuario.requestFocus();
+                                HalpFuncs.showKeyboard(activity);
+                            }
+                        }).show();
+            }
+        });
+
+
+}
+
 
 }

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.google.android.gms.vision.text.Line;
 import com.software.dafepa.proyectolaescalera.Objects.Evento;
 import com.software.dafepa.proyectolaescalera.R;
+import com.software.dafepa.proyectolaescalera.Utilidades.ApplicationData;
 
 import java.util.ArrayList;
 import java.util.zip.Inflater;
@@ -76,7 +77,9 @@ public class Adapter_eventos extends BaseAdapter {
             holder.descripcion.setText(e.getDescripcion());
 
             holder.ly_img = view.findViewById(R.id.ly_image_body);
+            holder.img_perfil = view.findViewById(R.id.img_perfil);
             Drawable img = new BitmapDrawable(activity.getResources(), e.getImg());
+            Drawable img_perfil = new BitmapDrawable(activity.getResources(), e.getImg_usuario());
             holder.ly_img.setBackground(img);
 
             if (eventos.size() >= i) {
@@ -105,5 +108,6 @@ public class Adapter_eventos extends BaseAdapter {
 
         LinearLayout ly_main;
         RelativeLayout ly_img;
+        ImageView img_perfil;
     }
 }

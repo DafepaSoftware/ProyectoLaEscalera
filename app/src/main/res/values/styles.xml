@@ -37,6 +37,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
+
     <style name="AppTheme.AppBarOverlay">
         <![CDATA[<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />]]></style>
 

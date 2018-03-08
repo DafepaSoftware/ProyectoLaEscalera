@@ -42,6 +42,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.software.dafepa.proyectolaescalera.Objects.Evento;
+import com.software.dafepa.proyectolaescalera.Singletones.AplicacionManager;
 import com.software.dafepa.proyectolaescalera.Utilidades.ApplicationData;
 import com.software.dafepa.proyectolaescalera.Utilidades.HalpFuncs;
 import com.software.dafepa.proyectolaescalera.Utilidades.ZoomImageActivity;
@@ -514,7 +515,7 @@ public class NuevoEvento extends AppCompatActivity {
                                     evento.setTfno(Integer.parseInt(edtxt_telefono.getText().toString()));
                                     evento.setCodigo_postal(Integer.parseInt(edtxt_cpost.getText().toString()));
                                     evento.setBusco(busco);
-                                    evento.setNick_usuario(appdata.getUser().getNick());
+                                    evento.setNick_usuario(AplicacionManager.getInstance().getUsuario().getNick());
 
 
                                     evento.setID(id);

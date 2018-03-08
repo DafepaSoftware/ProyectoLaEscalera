@@ -79,25 +79,31 @@
         android:orientation="vertical"
         android:scrollbars="vertical">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <LinearLayout
             android:id="@+id/ly_perfil"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:background="@drawable/bg_profile"
+            android:gravity="center"
             android:orientation="vertical"
             android:paddingBottom="20dp"
             android:paddingTop="25dp">
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/img_user"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/user_sample" />
+                android:src="@drawable/user_sample"
+                app:civ_border_color="#EEEEEE"
+                app:civ_border_width="4dp"
+                app:civ_shadow="true"
+                app:civ_shadow_color="@color/moradete"
+                app:civ_shadow_radius="15" />
 
             <TextView
                 android:id="@+id/txt_nombre"

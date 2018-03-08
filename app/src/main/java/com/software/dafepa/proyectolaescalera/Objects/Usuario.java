@@ -1,5 +1,7 @@
 package com.software.dafepa.proyectolaescalera.Objects;
 
+import android.graphics.Bitmap;
+
 import com.google.firebase.database.IgnoreExtraProperties;
 
 /**
@@ -16,6 +18,7 @@ public class Usuario {
     private String contrasena;
     private String nick;
     private String fecha_naci;
+    private Bitmap img;
 
     public Usuario(){}
 
@@ -66,4 +69,14 @@ public class Usuario {
     public void setFecha_naci(String fecha_naci) {
         this.fecha_naci = fecha_naci;
     }
+
+    public Bitmap getImg() {
+        return img;
+    }
+
+    public void setImg(Bitmap img) {
+        this.img = img;
+    }
+
+
 }

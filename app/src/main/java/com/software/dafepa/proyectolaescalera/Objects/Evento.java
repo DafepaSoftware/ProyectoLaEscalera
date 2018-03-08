@@ -17,6 +17,7 @@ public class Evento {
     private Boolean busco;
     private int tfno;
     private String nick_usuario;
+    private Bitmap img_usuario;
     private Bitmap img;
     private int ID;
     private int codigo_postal;
@@ -85,6 +86,14 @@ public class Evento {
 
     public void setCodigo_postal(int codigo_postal) {
         this.codigo_postal = codigo_postal;
+    }
+
+    public Bitmap getImg_usuario() {
+        return img_usuario;
+    }
+
+    public void setImg_usuario(Bitmap img_usuario) {
+        this.img_usuario = img_usuario;
     }
 }
 

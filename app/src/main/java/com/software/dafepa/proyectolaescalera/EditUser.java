@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.software.dafepa.proyectolaescalera.Objects.Usuario;
@@ -25,11 +26,12 @@ public class EditUser extends AppCompatActivity {
     private Usuario usuario;
 
     private CircularImageView fotoperfil;
-    private EditText et_nick;
     private EditText et_nombre;
     private EditText et_apellidos;
     private EditText et_correo;
     private Button btn_guardar;
+    private Button btn_fecha;
+
 
     
 
@@ -44,19 +46,22 @@ public class EditUser extends AppCompatActivity {
 
         ApplicationData appdata = new ApplicationData();
         appdata.cargarAplicacionDePreferencias(this);
-        Usuario usr = appdata.getUser();
+        Usuario usr = AplicacionManager.getInstance().getUsuario();
+
+        TextView usu = findViewById(R.id.txt_nombre);
 
         usuario = AplicacionManager.getInstance().getUsuario();
 
         btn_guardar = (Button) findViewById(R.id.btn_guardar);
-        fotoperfil = (CircularImageView) findViewById(R.id.imagenUsuario);
-        et_nick = (EditText) findViewById(R.id.et_nickusuario);
-        et_nombre = (EditText) findViewById(R.id.et_nombreusuario);
-        et_apellidos = (EditText) findViewById(R.id.et_apellidos);
-        et_correo = (EditText) findViewById(R.id.et_correo);
+
+        et_nombre = (EditText) findViewById(R.id.edtxt_nombre);
+        et_apellidos = (EditText) findViewById(R.id.edtxt_apellido);
+        et_correo = (EditText) findViewById(R.id.edtxt_correo);
+        btn_fecha = findViewById(R.id.btn_fecha);
 
 
-        et_nick.setHint(usr.getNick());
+
+        usu.setText(usr.getNick());
         et_nombre.setHint(usr.getNombre());
         et_apellidos.setHint(usr.getApellido());
         et_correo.setHint(usr.getMail());
@@ -77,6 +82,7 @@ public class EditUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 guardarCambios(usuario);
+                comprobarCampos();
             }
         });
     }
@@ -105,10 +111,13 @@ public class EditUser extends AppCompatActivity {
     private void guardarCambios(Usuario u){
         ApplicationData appdata = new ApplicationData();
         appdata.cargarAplicacionDePreferencias(this);
-        appdata.setUser(u);
+        //appdata.setUser(u);
         appdata.guardarEnPreferencias(this);
     }
 
+    private void comprobarCampos(){
+        subirFirebase();
+    }
     private void subirFirebase(){
 
     }

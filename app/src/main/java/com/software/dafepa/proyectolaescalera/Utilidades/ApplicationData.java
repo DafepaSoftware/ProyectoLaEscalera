@@ -16,12 +16,12 @@ import java.lang.reflect.Type;
 
 public class ApplicationData {
 
-    private Usuario user;
     private boolean rememberme;
+    private String usuario_nick;
 
     public ApplicationData(){
-        user = new Usuario();
         rememberme = false;
+        usuario_nick = "";
     }
 
     public void guardarEnPreferencias(Activity a)
@@ -49,7 +49,8 @@ public class ApplicationData {
         if(obj!=null) {
 
             rememberme = obj.isRememberme();
-            user = obj.getUser();
+            usuario_nick = obj.getUsuario_nick();
+
             /*this.usuario=obj.getUsuario();
             this.peticiones=obj.getPeticiones();
             this.contactosSoporte=obj.getContactosSoporte();
@@ -63,13 +64,6 @@ public class ApplicationData {
 
     }
 
-    public Usuario getUser() {
-        return user;
-    }
-
-    public void setUser(Usuario user) {
-        this.user = user;
-    }
 
     public boolean isRememberme() {
         return rememberme;
@@ -77,5 +71,13 @@ public class ApplicationData {
 
     public void setRememberme(boolean rememberme) {
         this.rememberme = rememberme;
+    }
+
+    public String getUsuario_nick() {
+        return usuario_nick;
+    }
+
+    public void setUsuario_nick(String usuario_nick) {
+        this.usuario_nick = usuario_nick;
     }
 }

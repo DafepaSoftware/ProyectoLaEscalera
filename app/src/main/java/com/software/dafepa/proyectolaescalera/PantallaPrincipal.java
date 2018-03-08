@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -32,6 +33,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -48,6 +50,7 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.software.dafepa.proyectolaescalera.Adapters.Adapter_NavDrawer;
 import com.software.dafepa.proyectolaescalera.Adapters.Adapter_eventos;
 import com.software.dafepa.proyectolaescalera.Login.RegistroActivity;
@@ -75,6 +78,7 @@ public class PantallaPrincipal extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ListView lv_navdrawer;
     private Button btn_caballo;
+    private CircularImageView img_user;
 
     /*private ProgressBar progressBar;
     private RelativeLayout ly_main;*/
@@ -102,12 +106,11 @@ public class PantallaPrincipal extends AppCompatActivity {
         });
 
 
-        ApplicationData appdata = new ApplicationData();
-        appdata.cargarAplicacionDePreferencias(activity);
+        Usuario usu = AplicacionManager.getInstance().getUsuario();
         TextView txt_nombre = findViewById(R.id.txt_nombre);
-        txt_nombre.setText(appdata.getUser().getNick());
+        txt_nombre.setText(usu.getNick());
         TextView txt_correo = findViewById(R.id.txt_correo);
-        txt_correo.setText(appdata.getUser().getMail());
+        txt_correo.setText(usu.getMail());
         //Botón flotante
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +121,8 @@ public class PantallaPrincipal extends AppCompatActivity {
             }
         });
 
+        img_user = findViewById(R.id.img_user);
+        img_user.setImageDrawable(new BitmapDrawable(getResources(), usu.getImg()));
 
         toolbarCode();
         navDrawerCode();
@@ -227,7 +232,7 @@ public class PantallaPrincipal extends AppCompatActivity {
                         startActivity(intent);
                         ApplicationData appdata = new ApplicationData();
                         appdata.cargarAplicacionDePreferencias(activity);
-                        appdata.setUser(new Usuario());
+                        appdata.setUsuario_nick("");
                         appdata.setRememberme(false);
                         appdata.guardarEnPreferencias(activity);
                         finish();
