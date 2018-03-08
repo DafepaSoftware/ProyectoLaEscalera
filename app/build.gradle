@@ -25,6 +25,9 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.google.code.gson:gson:2.7'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.robertlevonyan.view:MaterialExpansionPanel:1.2.0'
+
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
@@ -32,9 +35,9 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:9.6.1'
     compile 'com.google.android.gms:play-services:9.6.1'
 
+
     compile 'com.android.support:design:26.1.0'
     compile 'com.mikhaellopez:circularimageview:3.0.2'
-
 
     //Animations
     //noinspection GradleCompatible
