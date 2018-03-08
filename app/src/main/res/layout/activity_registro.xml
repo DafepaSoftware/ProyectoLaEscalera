@@ -70,7 +70,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20dp"
                                 android:layout_marginTop="25dp"
-                                android:text="Get Started"
+                                android:text="Empecemos"
                                 android:textAlignment="center"
                                 android:textColor="@color/blanco"
                                 android:textSize="20dp"
@@ -81,7 +81,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20dp"
                                 android:layout_marginTop="5dp"
-                                android:text="Juts a few detail to get you started"
+                                android:text="Unete a la comunidad Halp.me"
                                 android:textAlignment="center"
                                 android:textColor="@color/blanco"
                                 android:textSize="12dp" />
@@ -314,7 +314,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="20dp"
                                 android:background="@drawable/buttonstyle"
-                                android:text="Register"
+                                android:text="Registarme"
                                 android:textColor="@color/blanco" />
 
                             <TextView
