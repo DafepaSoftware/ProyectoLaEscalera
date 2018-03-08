@@ -288,7 +288,7 @@ public class NuevoEvento extends AppCompatActivity {
 
     private void crearEvento(){
         if (edtxt_titulo_.getText().toString().length() <= 0){
-            new AlertDialog.Builder(activity).setMessage("¡Necesitamos saber brevemente qué necesitas!")
+            new AlertDialog.Builder(activity).setMessage(getResources().getString(R.string.quenitas))
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -297,7 +297,7 @@ public class NuevoEvento extends AppCompatActivity {
                         }
                     }).show();
         }else if(edtxt_descripcion_.getText().toString().length() <= 0){
-            new AlertDialog.Builder(activity).setMessage("¡Necesitamos una descripción detallada de lo que necesitas!")
+            new AlertDialog.Builder(activity).setMessage(getResources().getString(R.string.quedescripcion))
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -306,7 +306,7 @@ public class NuevoEvento extends AppCompatActivity {
                         }
                     }).show();
         }else if(edtxt_telefono.getText().toString().length()<9){
-            new AlertDialog.Builder(activity).setMessage("¡Necesitamos un número de teléfono válido!")
+            new AlertDialog.Builder(activity).setMessage(getResources().getString(R.string.quetelefono))
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -315,7 +315,7 @@ public class NuevoEvento extends AppCompatActivity {
                         }
                     }).show();
         }else if(edtxt_cpost.getText().toString().length()<5){
-            new AlertDialog.Builder(activity).setMessage("¡Necesitamos un codigo postal!")
+            new AlertDialog.Builder(activity).setMessage(getResources().getString(R.string.necesitpostal))
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -324,11 +324,10 @@ public class NuevoEvento extends AppCompatActivity {
                         }
                     }).show();
         }else if(ly_imagen.getVisibility() == View.GONE){
-            new AlertDialog.Builder(activity).setMessage("¡Necesitamos una imagen!")
+            new AlertDialog.Builder(activity).setMessage(getResources().getString(R.string.necesitaimagen))
                     .setPositiveButton("Aceptar", null).show();
         }else if(!HalpFuncs.isOnline(activity)){
-            new AlertDialog.Builder(activity).setMessage("¡Parece que no tienes internet, " +
-                    "comprueba tu conexión por favor!")
+            new AlertDialog.Builder(activity).setMessage(getResources().getString(R.string.nohayinternet))
                     .setPositiveButton("Aceptar", null).show();
         }else{
             uploadEvento();
@@ -337,13 +336,12 @@ public class NuevoEvento extends AppCompatActivity {
     }
 
     private void cancelarEvento(){
-        new AlertDialog.Builder(activity).setMessage("¿Deseas salir?\n\nLos datos introducidos no " +
-                "se enviarán").setPositiveButton("Si", new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(activity).setMessage(getResources().getString(R.string.datosnoenciaran)).setPositiveButton(getResources().getString(R.string.si), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 finish();
             }
-        }).setNegativeButton("No", null).show();
+        }).setNegativeButton(getResources().getString(R.string.no), null).show();
     }
 
 
@@ -529,8 +527,8 @@ public class NuevoEvento extends AppCompatActivity {
 
                                     usersRef.setValue(evento);
 
-                                    new AlertDialog.Builder(activity).setMessage("¡Tu petición se ha creado satisfactoriamente!")
-                                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                    new AlertDialog.Builder(activity).setMessage(getResources().getString(R.string.peticionsatisfactoria))
+                                            .setPositiveButton(getResources().getString(R.string.aceptar), new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
                                                     finish();
@@ -540,8 +538,8 @@ public class NuevoEvento extends AppCompatActivity {
                             }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            new AlertDialog.Builder(activity).setMessage("¡Ha habido un problema con tu petición, intentalo otra vez!")
-                                    .setPositiveButton("Aceptar", null).show();
+                            new AlertDialog.Builder(activity).setMessage(getResources().getString(R.string.problemapeticion))
+                                    .setPositiveButton(getResources().getString(R.string.aceptar), null).show();
                         }
                     });
 

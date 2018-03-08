@@ -212,6 +212,11 @@ public class PantallaPrincipal extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     }
+                    case 2:{
+                        Intent intent = new Intent(activity,Tutorial_Activity.class);
+                        startActivity(intent);
+                        break;
+                    }
                     case 3:{
                         Intent intent = new Intent(activity, AboutActivity.class);
                         startActivity(intent);
