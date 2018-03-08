@@ -3,8 +3,18 @@ package com.software.dafepa.proyectolaescalera.Login;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.Matrix;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
+import android.media.ExifInterface;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,16 +22,35 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.software.dafepa.proyectolaescalera.Objects.Evento;
+import com.software.dafepa.proyectolaescalera.Utilidades.ApplicationData;
 import com.software.dafepa.proyectolaescalera.Utilidades.HalpFuncs;
 import com.software.dafepa.proyectolaescalera.Objects.Usuario;
 import com.software.dafepa.proyectolaescalera.R;
+import com.software.dafepa.proyectolaescalera.Utilidades.ZoomImageActivity;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Date;
 import java.util.Locale;
 
 public class RegistroActivity extends AppCompatActivity {
@@ -38,6 +67,18 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText edtxt_nick;
     private Button btn_fecha;
 
+    private LinearLayout ly_galeria;
+    private LinearLayout ly_camara;
+    private LinearLayout ly_imagen;
+    private ImageView img;
+    private Uri imageuri;
+    private String mCurrentPhotoPath;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int RESULT_LOAD_IMG = 2;
+
+    private ProgressBar progressBar;
+    private boolean uploaded = false;
+    private RelativeLayout ly_main;
 
     //Copia de activity para su fácil uso
     private Activity activity;
@@ -58,6 +99,7 @@ public class RegistroActivity extends AppCompatActivity {
         btn_registrarse =  (Button) findViewById(R.id.btn_registrame);
         edtxt_nick = findViewById(R.id.edtxt_nick);
         btn_fecha = (Button) findViewById(R.id.btn_fecha);
+        ly_main = findViewById(R.id.ly_main);
 
         (findViewById(R.id.btn_terminos)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,6 +184,47 @@ public class RegistroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 comprobacionesCampos();
 
+            }
+        });
+
+
+
+        ly_galeria = findViewById(R.id.ly_galeria);
+        ly_camara = findViewById(R.id.ly_camara);
+        ly_imagen = findViewById(R.id.ly_imagen);
+        img = findViewById(R.id.img);
+
+        ly_galeria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                galeria();
+            }
+        });
+
+        ly_camara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                camara();
+            }
+        });
+
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                img.buildDrawingCache();
+
+                //Obtenemos el bitmap
+                Bitmap bmap = img.getDrawingCache();
+
+                //Lo convertimos a array de bytes
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                byte[] byteArray = stream.toByteArray();
+
+                //Lo pasamos como parametro a la otra activity de Zoom
+                Intent mainIntent = new Intent().setClass(activity, ZoomImageActivity.class);
+                mainIntent.putExtra("BitmapImage", byteArray);
+                startActivity(mainIntent);
             }
         });
 
@@ -307,6 +390,9 @@ public class RegistroActivity extends AppCompatActivity {
                         }
                     }).show();
 
+        }else if(ly_imagen.getVisibility() == View.GONE){
+            new AlertDialog.Builder(activity).setMessage("¡Necesitamos una imagen!")
+                    .setPositiveButton("Aceptar", null).show();
         }else if(!HalpFuncs.isOnline(activity)){
             new AlertDialog.Builder(activity).setMessage("¡Parece que no tienes internet, " +
                     "comprueba tu conexión por favor!")
@@ -317,29 +403,65 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     private void crearUsuario(){
-        Usuario u = new Usuario();
-        u.setNombre(edtxt_nombre.getText().toString());
-        u.setApellido(edtxt_apellido.getText().toString());
-        u.setContrasena(edtxt_pass.getText().toString());
-        u.setMail(edtxt_correo.getText().toString());
-        u.setNick(edtxt_nick.getText().toString());
-        u.setFecha_naci(btn_fecha.getText().toString());
-
-        //TODO comprobar si el usuario existe
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("halpme/usuarios");
-        DatabaseReference usersRef = ref.child(u.getNick());
+        progressBar = new ProgressBar(activity,null,android.R.attr.progressBarStyleLarge);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(300,300);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+        ly_main.addView(progressBar,params);
+        progressBar.setBackgroundColor(Color.parseColor("#33333333"));
+        progressBar.setVisibility(View.VISIBLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
 
-        usersRef.setValue(u);
 
-        new AlertDialog.Builder(activity).setMessage("¡Tu usuario se ha creado satisfactoriamente!")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+        StorageReference ref2 = storageReference.child("images/usuarios/"+ edtxt_nick.getText().toString());
+        ref2.putFile(imageuri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        progressBar.setVisibility(View.GONE);
+                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                        ApplicationData appdata = new ApplicationData();
+                        appdata.cargarAplicacionDePreferencias(activity);
+
+                        Usuario u = new Usuario();
+                        u.setNombre(edtxt_nombre.getText().toString());
+                        u.setApellido(edtxt_apellido.getText().toString());
+                        u.setContrasena(edtxt_pass.getText().toString());
+                        u.setMail(edtxt_correo.getText().toString());
+                        u.setNick(edtxt_nick.getText().toString());
+                        u.setFecha_naci(btn_fecha.getText().toString());
+
+                        //TODO comprobar si el usuario existe
+                        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference ref = database.getReference("halpme/usuarios");
+                        DatabaseReference usersRef = ref.child(u.getNick());
+
+
+                        usersRef.setValue(u);
+
+                        new AlertDialog.Builder(activity).setMessage("¡Tu usuario se ha creado satisfactoriamente!")
+                                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                    }
+                                }).show();
+
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                finish();
+            public void onFailure(@NonNull Exception e) {
+                new AlertDialog.Builder(activity).setMessage("¡Ha habido un problema con tu petición, intentalo otra vez!")
+                        .setPositiveButton("Aceptar", null).show();
             }
-        }).show();
+        });
+
+
+
+
 
 
     }
@@ -355,11 +477,132 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     private void terminosyCondiciones(){
-        new AlertDialog.Builder(activity).setMessage("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis ligula pharetra odio varius posuere sit amet non ligula. Donec eu efficitur nisi. Ut risus massa, tincidunt vel urna eget, gravida venenatis justo. Ut pulvinar porttitor mi non luctus. Nullam rutrum odio at purus fermentum dictum. In sagittis metus lectus, id volutpat quam venenatis at. Phasellus id tristique urna, sed fermentum felis. Suspendisse luctus, sapien nec volutpat condimentum, eros libero ultrices ex, nec porta urna lacus a sapien. Integer rutrum eu neque tincidunt pulvinar. Quisque consectetur, ex dictum dictum tincidunt, metus risus eleifend elit, a luctus sapien diam ut enim. Cras condimentum, velit sed convallis tincidunt, magna nulla porttitor quam, vel cursus nunc sem sit amet neque. Nullam pulvinar dolor lacinia enim mollis, vitae mollis justo pellentesque. Quisque vel metus a tortor congue aliquet sit amet non mauris.\n" +
-                "\n" +
-                "Suspendisse eu faucibus sapien, at pulvinar mi. Duis diam diam, faucibus sed massa et, ullamcorper facilisis lectus. Duis ut nulla vel odio imperdiet consectetur. Mauris et ante congue, varius justo eget, maximus felis. Curabitur eu eros ante. Sed tempus metus in erat sagittis, a luctus nulla imperdiet. Fusce nibh neque, efficitur nec sem quis, placerat pretium lorem. Fusce condimentum gravida ipsum, vel mattis ante luctus id. Cras tincidunt enim sit amet ligula luctus pretium.\n" +
-                "\n" +
-                "In placerat, magna sed tempus tempus, nisi dui luctus nisi, ac porta tellus quam eget magna. Nullam vitae tellus dui. Fusce egestas finibus purus ut placerat. Sed tincidunt pretium luctus. Nam consequat eu felis eu ornare. Duis efficitur auctor quam ac egestas. Fusce pellentesque ex magna, a posuere mauris sollicitudin vel. In condimentum nulla ante. " +
-                "se enviarán").setPositiveButton("Aceptar", null).show();
+        new AlertDialog.Builder(activity).setMessage(getResources().getString(R.string.terminos_condiciones)).setPositiveButton("Aceptar", null).show();
     }
+
+    private void camara()
+    {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                // Create the File where the photo should go
+                File photoFile = null;
+                try {
+                    photoFile = createImageFile();
+                } catch (IOException ex) {
+                    // Error occurred while creating the File
+
+                }
+                // Continue only if the File was successfully created
+                if (photoFile != null) {
+                    Uri photoURI = Uri.fromFile(photoFile);/*FileProvider.getUriForFile(a,
+                            BuildConfig.APPLICATION_ID,
+                            photoFile);*/
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    public static Bitmap rotateImage(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                matrix, true);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
+            File image = new File(mCurrentPhotoPath);
+            Bitmap myBitmap = BitmapFactory.decodeFile(image.getAbsolutePath());
+
+            ExifInterface ei = null;
+            try {
+                ei = new ExifInterface(image.getAbsolutePath());
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+            int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_UNDEFINED);
+
+            Bitmap rotatedBitmap = null;
+            switch(orientation) {
+
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotatedBitmap = rotateImage(myBitmap, 90);
+                    break;
+
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotatedBitmap = rotateImage(myBitmap, 180);
+                    break;
+
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotatedBitmap = rotateImage(myBitmap, 270);
+                    break;
+
+                case ExifInterface.ORIENTATION_NORMAL:
+                default:
+                    rotatedBitmap = myBitmap;
+            }
+
+
+
+
+            img.setImageBitmap(rotatedBitmap);
+            ly_imagen.setVisibility(View.VISIBLE);
+
+            imageuri = Uri.fromFile(image);
+
+
+        }
+        if ( requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK) {
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                img.setImageBitmap(selectedImage);
+                ly_imagen.setVisibility(View.VISIBLE);
+                imageuri = imageUri;
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+
+            }
+
+        }
+        if(requestCode==234) //Aqui es cuando no ha seleccionado archivo...
+        {
+
+        }
+
+    }
+
+    private void galeria()
+    {
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+    }
+
 }

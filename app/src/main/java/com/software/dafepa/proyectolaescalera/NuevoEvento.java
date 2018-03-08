@@ -325,13 +325,7 @@ public class NuevoEvento extends AppCompatActivity {
                     }).show();
         }else if(ly_imagen.getVisibility() == View.GONE){
             new AlertDialog.Builder(activity).setMessage("¡Necesitamos una imagen!")
-                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            edtxt_telefono.requestFocus();
-                            HalpFuncs.showKeyboard(activity);
-                        }
-                    }).show();
+                    .setPositiveButton("Aceptar", null).show();
         }else if(!HalpFuncs.isOnline(activity)){
             new AlertDialog.Builder(activity).setMessage("¡Parece que no tienes internet, " +
                     "comprueba tu conexión por favor!")
