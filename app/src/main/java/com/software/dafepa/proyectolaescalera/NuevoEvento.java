@@ -252,6 +252,7 @@ public class NuevoEvento extends AppCompatActivity {
     private void toolbarCode(){
         myToolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         myToolbar.setElevation(0.0f);
+        myToolbar.setTitle(getResources().getString(R.string.nuevohalp));
         setSupportActionBar(myToolbar);
         myToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
     }
