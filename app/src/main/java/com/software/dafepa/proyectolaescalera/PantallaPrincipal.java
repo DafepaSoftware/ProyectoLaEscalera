@@ -401,27 +401,48 @@ public class PantallaPrincipal extends AppCompatActivity {
 
                 final Evento e = dataSnapshot.getValue(Evento.class);
 
-                FirebaseStorage storage;
+                final FirebaseStorage storage;
                 StorageTask<FileDownloadTask.TaskSnapshot> storageReference;
                 storage = FirebaseStorage.getInstance();
                 final File localFile;
+
                 try {
                     Random r = new Random();
                     String path = "tmp" +r.nextInt(999999) + "_" + e.getID();
                     localFile = File.createTempFile(path, "jpg");
-                    storageReference = storage.getReference("images/eventos/" + e.getID()).
+                    storage.getReference("images/eventos/" + e.getID()).
                             getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                             Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                             e.setImg(bitmap);
-                            if(e.getBusco()){
-                                busco_adapter.getEventos().add(0,e);
-                                busco_adapter.notifyDataSetChanged();
-                            }else{
-                                ofrezco_adapter.getEventos().add(0,e);
-                                ofrezco_adapter.notifyDataSetChanged();
+                            Random r = new Random();
+                            String path = "tmp" +r.nextInt(999999) + "_" + e.getNick_usuario();
+                            final File localFile2;
+                            try {
+                                localFile2 = File.createTempFile(path, "jpg");
+                                storage.getReference("images/usuarios/" + e.getNick_usuario()).
+                                        getFile(localFile2).addOnSuccessListener(
+                                                new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                        Bitmap bitmap = BitmapFactory.decodeFile(localFile2.getAbsolutePath());
+                                        e.setImg_usuario(bitmap);
+                                        if(e.getBusco()){
+                                            busco_adapter.getEventos().add(0,e);
+                                            busco_adapter.notifyDataSetChanged();
+
+                                        }else{
+                                            ofrezco_adapter.getEventos().add(0,e);
+                                            ofrezco_adapter.notifyDataSetChanged();
+                                        }
+                                    }
+                                });
+
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
                             }
+
                         }
                     });
 

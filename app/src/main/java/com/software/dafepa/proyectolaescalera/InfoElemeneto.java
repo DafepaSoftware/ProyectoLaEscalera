@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -61,7 +62,7 @@ public class InfoElemeneto extends AppCompatActivity {
 
         //Esto peta de momento puesto que no tenemos imagenes en el usuario subidas al firebase
 
-        //imagenUsuario.setImageDrawable(evento.getImg());
+        imagenUsuario.setImageDrawable(new BitmapDrawable(getResources(), evento.getImg_usuario()));
         txt_titulo_titulo.setText(evento.getTitulo());
         txt_titulo_usuario.setText(evento.getNick_usuario());
         if (evento.getBusco()){

@@ -81,6 +81,7 @@ public class Adapter_eventos extends BaseAdapter {
             Drawable img = new BitmapDrawable(activity.getResources(), e.getImg());
             Drawable img_perfil = new BitmapDrawable(activity.getResources(), e.getImg_usuario());
             holder.ly_img.setBackground(img);
+            holder.img_perfil.setImageDrawable(img_perfil);
 
             if (eventos.size() >= i) {
                 holder.ly_main = (LinearLayout) view.findViewById(R.id.ly_main);
