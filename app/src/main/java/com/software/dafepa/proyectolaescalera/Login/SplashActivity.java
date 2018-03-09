@@ -278,6 +278,8 @@ public class SplashActivity extends AppCompatActivity {
 
 
                     }else{
+                        progressBar.setVisibility(View.GONE);
+                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                         new AlertDialog.Builder(activity).setMessage("¡El nombre de usuario o contraseña son incorrectos!")
                                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                                     @Override
@@ -319,6 +321,7 @@ public class SplashActivity extends AppCompatActivity {
                                 }
                             }).show();
                 }
+
             });
         }
 

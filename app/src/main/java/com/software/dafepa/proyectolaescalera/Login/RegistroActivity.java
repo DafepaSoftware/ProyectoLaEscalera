@@ -259,7 +259,6 @@ public class RegistroActivity extends AppCompatActivity {
     //Botón atrás de Android
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         cancelarRegistro();
     }
 

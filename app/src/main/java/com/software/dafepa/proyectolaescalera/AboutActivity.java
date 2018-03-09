@@ -171,6 +171,8 @@ public class AboutActivity extends AppCompatActivity {
         myToolbar.setElevation(0.0f);
         setSupportActionBar(myToolbar);
         myToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     @Override

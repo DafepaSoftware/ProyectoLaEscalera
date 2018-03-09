@@ -178,8 +178,8 @@ public class PantallaPrincipal extends AppCompatActivity {
         ArrayList<String> title = new ArrayList<>();
         ArrayList<Integer> img_id = new ArrayList<>();
 
-        title.add("Nuevo evento");
-        title.add("Mis eventos");
+        title.add("Nuevo Halp");
+        title.add("Mis Halps");
 
 
         title.add("Ayuda");
@@ -205,6 +205,7 @@ public class PantallaPrincipal extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(activity, EditUser.class);
                 startActivity(intent);
+                finish();
             }
         });
 
