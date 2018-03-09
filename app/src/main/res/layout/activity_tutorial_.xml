@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.software.dafepa.proyectolaescalera.Tutorial_Activity"
-    android:background="@color/moradete">
+    android:background="@color/moradeteClaro">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:background="@color/moradeteClaro"
         android:layout_width="match_parent"
@@ -36,16 +39,14 @@
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Como creo un nuevo Halp?"
+                    android:text="¿Como creo un nuevo Halp?"
                     android:textStyle="bold"
                     android:textSize="20dp"
                     android:textColor="@color/moradete"/>
 
             </LinearLayout>
 
-            <ScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+
                 <LinearLayout
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
@@ -73,7 +74,6 @@
                         android:src="@drawable/crearevento"/>
 
                 </LinearLayout>
-            </ScrollView>
 
 
         </com.robertlevonyan.views.expandable.Expandable>
@@ -94,7 +94,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Como edito mi perfil?"
+                android:text="¿Como edito mi perfil?"
                 android:textStyle="bold"
                 android:textSize="20dp"
                 android:textColor="@color/moradete"/>
@@ -119,7 +119,14 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
                 android:textColor="@color/moradeteClaro"
-                android:text="dsamfdklsamdsamdmsamdlkm"/>
+                android:text="Para modificar tu perfil basta con pulsar sobre tu foto en el menu lateral:"/>
+
+            <ImageView
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/editarusuario"/>
         </LinearLayout>
     </com.robertlevonyan.views.expandable.Expandable>
         <com.robertlevonyan.views.expandable.Expandable
@@ -139,7 +146,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Contactar con desarrolladores?"
+                    android:text="¿Contactar con desarrolladores?"
                     android:textStyle="bold"
                     android:textSize="20dp"
                     android:textColor="@color/moradete"/>
@@ -164,13 +171,75 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp"
                     android:textColor="@color/moradeteClaro"
-                    android:text="dsamfdklsamdsamdmsamdlkm"/>
+                    android:text="Para contactar con nosotros pulse sobre la via que le resulte mas facil :D "/>
+
+                <ImageView
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/pantallanosotros"/>
+            </LinearLayout>
+        </com.robertlevonyan.views.expandable.Expandable>
+        <com.robertlevonyan.views.expandable.Expandable
+            android:background="@color/moradete"
+            app:exp_animateExpand="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="¿Contacatar con un usuario?"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:textColor="@color/moradete"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorAccent"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textColor="@color/moradeteClaro"
+                    android:text="Si desea llamar a un usuario cuya Halp le interesa simplemente deberá pulsar sobre LLAMAR: "/>
+
+                <ImageView
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/llamar"/>
+
             </LinearLayout>
         </com.robertlevonyan.views.expandable.Expandable>
 
 
 
+
     </LinearLayout>
 
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
