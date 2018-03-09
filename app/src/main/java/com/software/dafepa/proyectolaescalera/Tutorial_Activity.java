@@ -38,6 +38,7 @@ public class Tutorial_Activity extends AppCompatActivity {
             public void onCollapsed() {
                 espantable_que_asusta.changeBackgroundColor(getColor(R.color.moradete)); // Set a custom background color for layout
             }
+
         });
 
 
