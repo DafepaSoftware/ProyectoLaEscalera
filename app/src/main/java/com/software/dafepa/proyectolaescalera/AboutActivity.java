@@ -169,6 +169,7 @@ public class AboutActivity extends AppCompatActivity {
     private void toolbarCode(){
         myToolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         myToolbar.setElevation(0.0f);
+        myToolbar.setTitle("Sobre nosotros");
         setSupportActionBar(myToolbar);
         myToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
