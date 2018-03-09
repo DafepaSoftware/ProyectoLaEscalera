@@ -43,26 +43,38 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="vertical">
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/colorAccent"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:textColor="@color/moradeteClaro"
-                    android:text="Para crear un Halp, basta con pulsar el boton flotante verde de la esquina inferior derecha: "/>
-            </LinearLayout>
+                    android:layout_width="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/colorAccent"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:textColor="@color/moradeteClaro"
+                        android:text="Para crear un Halp, basta con pulsar el boton flotante verde de la esquina inferior derecha: "/>
+                    <ImageView
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/crearevento"/>
+
+                </LinearLayout>
+            </ScrollView>
+
 
         </com.robertlevonyan.views.expandable.Expandable>
         <com.robertlevonyan.views.expandable.Expandable

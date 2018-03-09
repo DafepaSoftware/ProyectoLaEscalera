@@ -9,7 +9,7 @@
     <include
         android:id="@+id/tool_bar"
         layout="@layout/tool_bar"
-        android:layout_weight="1" />
+         />
 
     <RelativeLayout
         android:id="@+id/ly_main"
@@ -68,8 +68,6 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginTop="25dp"
                                 android:text="Empecemos"
                                 android:textAlignment="center"
                                 android:textColor="@color/blanco"
@@ -79,12 +77,11 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
                                 android:layout_marginTop="5dp"
                                 android:text="Unete a la comunidad Halp.me"
                                 android:textAlignment="center"
                                 android:textColor="@color/blanco"
-                                android:textSize="12dp" />
+                                android:textSize="14dp" />
                         </LinearLayout>
 
 
