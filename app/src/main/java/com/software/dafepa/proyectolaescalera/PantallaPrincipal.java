@@ -179,7 +179,6 @@ public class PantallaPrincipal extends AppCompatActivity {
         ArrayList<Integer> img_id = new ArrayList<>();
 
         title.add("Nuevo Halp");
-        title.add("Mis Halps");
 
 
         title.add("Ayuda");
@@ -190,7 +189,6 @@ public class PantallaPrincipal extends AppCompatActivity {
 
 
         img_id.add(R.drawable.verdehalpp);
-        img_id.add(R.drawable.map);
         img_id.add(R.drawable.information);
         img_id.add(R.drawable.quienes_somos);
         img_id.add(R.drawable.powerbutton);
@@ -218,17 +216,17 @@ public class PantallaPrincipal extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     }
-                    case 2:{
+                    case 1:{
                         Intent intent = new Intent(activity,Tutorial_Activity.class);
                         startActivity(intent);
                         break;
                     }
-                    case 3:{
+                    case 2:{
                         Intent intent = new Intent(activity, AboutActivity.class);
                         startActivity(intent);
                         break;
                     }
-                    case 4:{
+                    case 3:{
                         Intent intent = new Intent(activity, SplashActivity.class);
                         startActivity(intent);
                         ApplicationData appdata = new ApplicationData();
