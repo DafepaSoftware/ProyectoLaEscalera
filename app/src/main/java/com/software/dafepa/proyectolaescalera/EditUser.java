@@ -537,11 +537,15 @@ public class EditUser extends AppCompatActivity {
                             DatabaseReference ref = database.getReference("halpme/usuarios");
                             DatabaseReference usersRef = ref.child(u.getNick());
 
+                            Bitmap bitmap = ((BitmapDrawable)foto_gallery.getDrawable()).getBitmap();
+
+
                             AplicacionManager.getInstance().getUsuario().setNombre(u.getNombre());
                             AplicacionManager.getInstance().getUsuario().setApellido(u.getApellido());
                             AplicacionManager.getInstance().getUsuario().setContrasena(u.getContrasena());
                             AplicacionManager.getInstance().getUsuario().setMail(u.getMail());
                             AplicacionManager.getInstance().getUsuario().setFecha_naci(u.getFecha_naci());
+                            AplicacionManager.getInstance().getUsuario().setImg(bitmap);
                             usersRef.setValue(u);
 
                             new AlertDialog.Builder(activity).setMessage("¡Tu usuario se ha creado satisfactoriamente!")
